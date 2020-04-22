@@ -1,6 +1,0 @@
-module.exports = {
-	PREFIX: '+',
-	VERSION: '2.0.0',
-	TOKEN: 'MzAwOTU1MTc0MjI1MDUxNjUw.Dfn2zA.LPL0PiZGhOE6ZXmHNMFDY2Q3eLM',
-	DEVELOPMENT: true,
-}
