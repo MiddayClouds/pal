@@ -8,5 +8,6 @@ jspm_packages/
 .DS_Store
 
 # Project Files
+confis.js
 config.json
 package-lock.json
