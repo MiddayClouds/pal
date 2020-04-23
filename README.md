@@ -6,7 +6,7 @@
 </p>
 
 
-<p align="center">This is Pal, a discord bot based off <a href="https://github.com/hydrabolt/discord.js/">discord.js</a> and <a href="https://gist.github.com/eslachance/3349734a98d30011bb202f47342601d3">this</a> as an example.</p>
+<p align="center">This is Pal, a discord bot based off <a href="https://github.com/hydrabolt/discord.js/">discord.js</a> and <a href="https://gist.github.com/eslachance/3349734a98d30011bb202f47342601d3">Perfect lil bot</a> along with <a href="https://github.com/julianYaman/wikipedia-bot">wikipedia bot</a> as an example.</p>
 
 
 ## Features:
@@ -29,9 +29,8 @@ Here is a list of known issues and planned features where you could help us too!
 
 _Italic list items have a high priority._
 
-- [ ] **Planned:** Adding more direct message commands.
-- [ ] **Planned:** Enhance already existing direct message commands.
-- [ ] **Planned:** Enhance direct message communication with the bot with AI (Dialogflow).
+- [X] **Planned:** Rewrite bot into a more suitable managable architechture.
+- [ ] **Planned:** Port the bot to usethe new Dialogflow API.
 - [ ] **Planned:** Adding more and enhance discord server related commands.
 - [ ] **_Planned:_** Categorize commands (especially in [COMMANDS.md](COMMANDS.md) and in the help command) in categories.
 
