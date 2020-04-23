@@ -18,6 +18,20 @@ const { PREFIX, VERSION, DEVELOPMENT, TOKEN } = require('./config')
 const config = require('./config.json')
 const bans = require('./bans.json')
 const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
+const games = [
+	'Pineapple should not go on pizza.',
+	'Use +help to get help.',
+	'+help me.',
+	'Robots are forever on life support.',
+	'I no longer find Cards Against Humanity funny.',
+	'Vine was never funny.',
+	'I committed tax fraud for respect to yoshi.',
+	'Waluigi is the best.',
+	'biagios.github.io/porn',
+	'gradientforest.com',
+	'iconic.',
+	'${PREFIX}help | ${client.guilds.cache.size} servers'
+]
 
 // Modules
 const Util = require('./modules/util')
@@ -48,8 +62,8 @@ client.on('error', console.error)
 
 client.on('ready', async () => {
 
-	Logger.info('\nStarting Bot...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
-	Logger.info('\nThis Bot is online! Running on version: ' + VERSION + '\n')
+	Logger.info('\nStarting Pal...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
+	Logger.info('\nPal is online! Running on version: ' + VERSION + '\n')
 
 	// Different user presences for different development stages
 	// TRUE -> Active development / debugging
@@ -76,6 +90,18 @@ client.on('ready', async () => {
 		}).catch(e => {
 			console.error(e)
 		})
+		setInterval(function () {
+				const rangame = games[Math.floor(Math.random() * games.length)]
+				client.user.setPresence({
+					status: 'online',
+					activity: {
+						name: rangame,
+					},
+				}).catch(e => {
+					//console.error(e)
+				})
+		}, 60000 * 5)
+
 
 		// Creating a new updater
 		const updater = new BotListUpdater()
@@ -120,7 +146,7 @@ client.on('guildCreate', guild => {
 		console.error(e)
 	})
 	// Sending a "Thank you" message to the owner of the guild
-	guild.owner.send('Thank you for using Wikipedia Bot. :) Please help promoting the bot by voting. Write **' + PREFIX + 'vote** in this channel.')
+	//guild.owner.send('Thank you for using Pal. :) Please help promoting the bot with voting. Write **' + PREFIX + 'vote** in this channel.')
 
 
 })

@@ -19,7 +19,9 @@ module.exports = {
 			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 
-    const paction = args.join(' ')
+    const command = args[0].slice(config.PREFIX.length,)
+    const argument = args.join(' ')
+    const paction = argument.replace(config.PREFIX + command + ' ', '')
     const bactions = ['rock', 'scissors', 'paper']
     const ranbaction = bactions[Math.floor(Math.random() * bactions.length)]
     if (!args[0]) {
