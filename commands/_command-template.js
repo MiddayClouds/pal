@@ -1,5 +1,6 @@
 // Any module required will be written up here
 const Util = require('./../modules/util')
+const Logger = new Util.Logger();
 
 /**
  * Command: NAME

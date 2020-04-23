@@ -26,7 +26,7 @@ module.exports = {
 					url: 'https://github.com/MiddayClouds',
 				},
 				description: `*If you need help, type **${config.PREFIX}help***`,
-				color: 3447003,
+				color: 15448698,
 				fields: [
 					{
 						name: 'Website:',
