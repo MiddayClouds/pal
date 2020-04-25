@@ -79,4 +79,4 @@ If you want to contact me you can use one of my contacts below some might be slo
 - Email: I don't think this is the fastest but worth a try, my email is biagio.santori@gmail.com .
 - Steam: This option is if your real edgy, this can be done [here](http://steamcommunity.com/id/biagios).
 
-<h6 align="center">  © Midday 2020 | <a href="https://github.com/MiddayClouds/pal/tree/master/LICENSES">Licenses</a> </h6>
+<h6 align="center">  © Midday 2020 | <a href="https://feen.us/">Images hosted by: feen.us</a> | <a href="https://github.com/MiddayClouds/pal/tree/master/LICENSES">Licenses</a> </h6>
