@@ -24,13 +24,13 @@ Here is a list of commands Pal offers:
 - ### +clap (message)
     __Description:__ Will output the message replacing the spaces with clapping emojis.
 
-    > Example:
+    > Example:    
     > ![alt text](https://feen.us/1n49s9kngek9qkvb7zdwjz74oewgo4qs6d7ehi8nxic653ujz5.png "Logo Title Text 1")
 
 - ### +embarrass @user
     __Description:__ This command creates a webhook that impersonates a user. It changes the webhook image and name to the tagged user's. Once this has been done it sends a random message through the webhook. **PLEASE NOTE: THE WEBHOOK RECEIVES A BOT TAG, THIS COMMAND IS CLEARLY MEANT AS A JOKE AND DOES NOT ACTUALLY ATTEMPT TO IMPERSONATE A USER.**
 
-    > Example:
+    > Example:     
     > ![alt text](https://feen.us/3b6kbc6b9fyb70due4hobdoy3gnyfg0usqo3cagmtkfatu2oya.png "Logo Title Text 1")
 
 - ### +http
@@ -40,7 +40,7 @@ Here is a list of commands Pal offers:
 
 - ### +inspire
     __Description:__ Outputs an embed image from inspirobot.
-    > Example:
+    > Example:   
     > ![alt text](https://feen.us/i55x59nmbcvwu439azry04tuj7umr3du2jt5plrdbx3z6baran.png "Logo Title Text 1")
 
 - ### +invite
@@ -55,7 +55,7 @@ Here is a list of commands Pal offers:
 
 - ### +rps (argument)
     __Description:__ Plays rock, paper, scissors with you.
-    > Example:
+    > Example:    
     > ![alt text](https://feen.us/yzb1uf5szgz6korl1mgk6soyw5zxw674qj8kxkr2qpoyqs5tpn.png "Logo Title Text 1")
 
 - ### +user @user
