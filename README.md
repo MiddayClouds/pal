@@ -18,7 +18,7 @@ Here is a list of commands Pal offers:
 
 - ### +botinfo
     __Description:__ Outputs an embed containing information about the bot.
-    > Example:
+    > Example:   
     > ![alt text](https://feen.us/vna8g77il4qumy5dny6lnikzpghx387ozvrtfg67u8bw88p4s9.png "Logo Title Text 1")
 
 - ### +clap (message)
