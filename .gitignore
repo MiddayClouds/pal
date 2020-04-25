@@ -11,3 +11,4 @@ jspm_packages/
 config.js
 config.json
 package-lock.json
+modules/dialog-auth.json

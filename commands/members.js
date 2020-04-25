@@ -1,7 +1,7 @@
 // Any module required will be written up here
 const Util = require('./../modules/util')
 const Logger = new Util.Logger();
-const noname = require('./../modules/helper');
+const util = require('./../modules/util');
 
 /**
  * Command: NAME
@@ -29,7 +29,7 @@ module.exports = {
             Util.betterError(message, `server-members -> msg.react (10) -> catch e: ${e}`)
         })
     } else {
-        noname.loop(0, lengthNumber, memberAmount.toString(), message)
+        util.loop(0, lengthNumber, memberAmount.toString(), message)
     }
     message.channel.send('On this discord server there are **' + memberAmount + '** members including yourself (bots included).')
 

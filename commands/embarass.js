@@ -36,7 +36,7 @@ module.exports = {
             webhook.send(randActions)
           ).then(webhook => {
             setTimeout(function () {
-              webhook.delete()
+              webhook.delete(['Auto delete after 1 minute'])
               console.log("Webhook should be deleted.")
             }, 60000)
           }).catch(console.error)

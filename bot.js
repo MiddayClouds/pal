@@ -17,7 +17,9 @@ const client = new Discord.Client({ disableMentions: 'everyone' });
 const { PREFIX, VERSION, DEVELOPMENT, TOKEN } = require('./config')
 const config = require('./config.json')
 const bans = require('./bans.json')
-const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
+//const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
+const runSample = require('./modules/dialog.js').runSample
+const talkedRecently = new Set();
 const games = [
 	'Pineapple should not go on pizza.',
 	'Use +help to get help.',
@@ -37,6 +39,17 @@ const games = [
 const Util = require('./modules/util')
 const Logger = new Util.Logger();
 const fs = require('fs');
+
+
+// Imports the Google Cloud client library.
+const {Storage} = require('@google-cloud/storage');
+
+// Instantiates a client. If you don't specify credentials when constructing
+// the client, the client library will look for credentials in the
+// environment.
+const storage = new Storage();
+
+
 
 // Creating a collection for the commands
 client.commands = new Discord.Collection();
@@ -66,7 +79,7 @@ client.on('ready', async () => {
 	Logger.info('\nPal is online! Running on version: ' + VERSION + '\n')
 
 	// Different user presences for different development stages
-	// TRUE -> Active development / debugging
+	// TRUE -> debugging
 	// FALSE -> Production usage
 
 	if (DEVELOPMENT === true) {
@@ -88,7 +101,7 @@ client.on('ready', async () => {
 				name: `${PREFIX}help | ${client.guilds.cache.size} servers`,
 			},
 		}).catch(e => {
-			console.error(e)
+			//console.error(e)
 		})
 		setInterval(function () {
 				const rangame = games[Math.floor(Math.random() * games.length)]
@@ -108,17 +121,17 @@ client.on('ready', async () => {
 
 		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
 		setInterval(() => {
-			updater.updateTopGg(client.guilds.cache.size)
+			//updater.updateTopGg(client.guilds.cache.size)
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
 		setInterval(() => {
-			updater.updateBotsXyz(client.guilds.cache.size)
+		//	updater.updateBotsXyz(client.guilds.cache.size)
 		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
 		setInterval(() => {
-			updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
+			//updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
 		}, 300000);
 
 	}
@@ -189,7 +202,14 @@ exports.totalMembers = () => {
 client.on('message', async message => {
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
 		// Send the message of the help command as a response to the user
-		client.commands.get('help').execute(message, null, { PREFIX, VERSION })
+		//client.commands.get('help').execute(message, null, { PREFIX, VERSION })
+		//message.reply('message here');
+		//console.log(client.user)
+		let askedValue = message.content
+		//console.log(message.content)
+		askedValue = askedValue.replace("<@!300955174225051650>","")
+		console.log("Dialogflow Query")
+		runSample(message,"pal-bot",askedValue)
 	}
 
 	if (message.author.bot) return
@@ -202,6 +222,12 @@ client.on('message', async message => {
 
 	// What should the bot do with an unknown command?
 	if (!client.commands.has(command)) return;
+
+	/// Spam Protection
+	if (talkedRecently.has(message.author.id)) { return }
+	talkedRecently.add(message.author.id)
+	setTimeout(() => { talkedRecently.delete(message.author.id) }, 2500);
+
 
 	try {
 		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
