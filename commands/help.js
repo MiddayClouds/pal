@@ -17,7 +17,7 @@ module.exports = {
     // Put command here...
 
 
-    client.getTotalCommands = new Discord.Collection();
+    getTotalCommands = new collection
     const totalCommands = fs.readdirSync('./commands').filter(file => file.endsWith('.js'))
     for (const file of totalCommands) {
     	const command = require(`./commands/${file}`);
@@ -32,7 +32,7 @@ module.exports = {
       }
     }
 
-    console.log(client.getTotalCommands)
+    console.log(getTotalCommands)
 
 
 
