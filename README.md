@@ -6,8 +6,8 @@
     <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal.svg?type=shield"/></a>
 </p>
 
-Pal is a fun discord bot with many different commands. The official changelogs can be found [here](https://github.com/MiddayClouds/pal/releases).
-> Pal runs on <a href="">discord.js</a> and is based off these bots:
+Pal is a fun discord bot with many different commands. The official change logs can be found [here](https://github.com/MiddayClouds/pal/releases).
+> Pal runs on <a href="">discord.js</a> hosted on <a href="https://m.do.co/c/47c40acc6cf7">DigitalOcean</a>. Pal is based off these bots:
 > - <a href="https://gist.github.com/eslachance/3349734a98d30011bb202f47342601d3">The Perfect Lil' Bot</a>
 > - <a href="https://github.com/julianYaman/wikipedia-bot">Wikipedia-Bot</a>
 > - <a href="https://github.com/biagios/pal">Former versions of Pal</a>
@@ -34,12 +34,12 @@ Here is a list of commands Pal offers:
     > ![alt text](https://feen.us/3b6kbc6b9fyb70due4hobdoy3gnyfg0usqo3cagmtkfatu2oya.png "Logo Title Text 1")
 
 - ### +http
-    __Description:__ Outputs an embed image from http.cat
+    __Description:__ Outputs a random embed image from http.cat
     > Example:
     > ![alt text](https://feen.us/2wj5wynz7ujvlh1suq0ac90awqhat14zqb0ba8ihkuuuxqobj2.png "Logo Title Text 1")
 
 - ### +inspire
-    __Description:__ Outputs an embed image from inspirobot.
+    __Description:__ Outputs a random embed image from inspirobot.
     > Example:   
     > ![alt text](https://feen.us/i55x59nmbcvwu439azry04tuj7umr3du2jt5plrdbx3z6baran.png "Logo Title Text 1")
 

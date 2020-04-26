@@ -1,24 +1,18 @@
 // Any module required will be written up here
 const Util = require('./../modules/util')
-const Logger = new Util.Logger();
 const dateTime = require('date-time')
 
 /**
  * Command: user
- * Description: info about user
+ * Description: Outputs an embed containing information about the specified user.
  * */
 
 module.exports = {
 	name: 'user',
-	description: 'Info about user',
+	description: 'Outputs an embed containing information about the specified user.',
 	execute(message, args, config) {
-    // Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+    // Start of command:
+
     // Made a try-catch because if someone is funny and tries to get data from a user which he cannot mention but still tries lmao.
     try {
       const member = message.guild.member(message.mentions.members.first())

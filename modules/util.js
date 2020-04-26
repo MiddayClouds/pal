@@ -80,7 +80,7 @@ exports.Logger = class {
  *
  * @public
  */
- 
+
 exports.loop = (/** Number */statement, /** Number */lengthNumber, /** String */memberAmountString, /** Message */msg) => {
   let newStatement = statement + 1
   setTimeout(function () {

@@ -1,24 +1,17 @@
 // Any module required will be written up here
 const Util = require('./../modules/util')
-const Logger = new Util.Logger();
 
 /**
  * Command: embarrass
- * Description: Makes fun of tagged user
+ * Description: This command creates a webhook that impersonates a user. It changes the webhook image and name to the tagged user's. Once this has been done it sends a random message through the webhook.
  * */
 
 module.exports = {
 	name: 'embarrass',
   alias: ['embarrass','embarass','embarras','shame','embaras'],
-	description: 'Makes fun of tagged user',
+	description: 'This command creates a webhook that impersonates a user. It changes the webhook image and name to the tagged user`s. Once this has been done it sends a random message through the webhook.',
 	execute(message, args, config) {
-    // Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+    // Start of command:
 
     if (message.channel.permissionsFor(message.guild.me).has('MANAGE_WEBHOOKS')) {
       try {

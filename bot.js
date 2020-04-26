@@ -17,7 +17,6 @@ const client = new Discord.Client({ disableMentions: 'everyone' });
 const { PREFIX, VERSION, DEVELOPMENT, TOKEN } = require('./config')
 const config = require('./config.json')
 const bans = require('./bans.json')
-//const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
 const runSample = require('./modules/dialog.js').runSample
 const talkedRecently = new Set();
 const games = [
@@ -31,19 +30,17 @@ const games = [
 	'Waluigi is the best.',
 	'biagios.github.io/porn',
 	'gradientforest.com',
-	'iconic.',
-	'${PREFIX}help | ${client.guilds.cache.size} servers'
+	'iconic.'
 ]
+//const BotListUpdater = require('./modules/bot-list-updater').BotListUpdater
+
 
 // Modules
 const Util = require('./modules/util')
 const Logger = new Util.Logger();
 const fs = require('fs');
-
-
 // Imports the Google Cloud client library.
 const {Storage} = require('@google-cloud/storage');
-
 // Instantiates a client. If you don't specify credentials when constructing
 // the client, the client library will look for credentials in the
 // environment.
@@ -115,24 +112,26 @@ client.on('ready', async () => {
 				})
 		}, 60000 * 5)
 
-
+/*
 		// Creating a new updater
 		const updater = new BotListUpdater()
 
 		// Interval for updating the amount of servers the bot is used on on top.gg every 30 minutes
 		setInterval(() => {
-			//updater.updateTopGg(client.guilds.cache.size)
+			updater.updateTopGg(client.guilds.cache.size)
 		}, 1800000);
 
 		// Interval for updating the amount of servers the bot is used on on bots.ondiscord.xyz every 10 minutes
 		setInterval(() => {
-		//	updater.updateBotsXyz(client.guilds.cache.size)
+		  updater.updateBotsXyz(client.guilds.cache.size)
 		}, 600000);
 
 		// Interval for updating the amount of servers the bot is used on on discordbotlist.com every 5 minutes
 		setInterval(() => {
-			//updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
+			updater.updateDiscordBotList(client.guilds.cache.size, this.totalMembers(), client.voice.connections.size)
 		}, 300000);
+
+		*/
 
 	}
 
@@ -230,6 +229,12 @@ client.on('message', async message => {
 
 
 	try {
+		if(message.channel.type === 'dm' || message.channel.type === 'group') {
+			Logger.info(`${PREFIX + command} used in a private ${message.channel.type}.`)
+		}
+		else{
+			Logger.info(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
+		}
 		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
 	}
 	catch (error) {

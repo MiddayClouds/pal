@@ -1,23 +1,16 @@
 const Util = require('./../modules/util')
-const Logger = new Util.Logger();
 const bot = require('../bot')
 
 /**
  * Command: bot-info
- * Description: Gives you some information about the bot.
+ * Description: Outputs an embed containing information about the bot..
  * */
+
 module.exports = {
 	name: 'bot-info',
-	description: 'Gives you some information about the bot.',
+	description: 'Outputs an embed containing information about the bot.',
 	execute(message, args, config) {
-		// Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
-
+    // Start of command:
 		message.channel.send({
 			embed: {
 				author: {

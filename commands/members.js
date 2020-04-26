@@ -1,16 +1,14 @@
 // Any module required will be written up here
 const Util = require('./../modules/util')
-const Logger = new Util.Logger();
-const util = require('./../modules/util');
 
 /**
- * Command: NAME
- * Description: DESCRIPTION
+ * Command: members
+ * Description: Outputs the amount of people in the server.
  * */
 
 module.exports = {
 	name: 'members',
-	description: 'DESCRIPTION',
+	description: 'Outputs the amount of people in the server.',
 	execute(message, args, config) {
     // Check in what type of channel the command was executed
 		if(message.channel.type === 'dm' || message.channel.type === 'group') {
@@ -29,7 +27,7 @@ module.exports = {
             Util.betterError(message, `server-members -> msg.react (10) -> catch e: ${e}`)
         })
     } else {
-        util.loop(0, lengthNumber, memberAmount.toString(), message)
+        Util.loop(0, lengthNumber, memberAmount.toString(), message)
     }
     message.channel.send('On this discord server there are **' + memberAmount + '** members including yourself (bots included).')
 

@@ -1,21 +1,14 @@
 const Util = require('./../modules/util')
-const Logger = new Util.Logger();
 
 /**
  * Command: invite
- * Description: The invite command.
+ * Description: Outputs an embed containing an invite to add the bot to your own server.
  * */
 module.exports = {
 	name: 'invite',
-	description: 'The invite command.',
+	description: 'Outputs an embed containing an invite to add the bot to your own server',
 	execute(message, args, config) {
-		// Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+    // Start of command:
 
 		message.channel.send({
 			embed: {

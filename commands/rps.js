@@ -1,23 +1,17 @@
 // Any module required will be written up here
 const Util = require('./../modules/util')
-const Logger = new Util.Logger();
 
 /**
  * Command: rps
- * Description: Plays rps
+ * Description: Plays rock, paper, scissors with you.
  * */
 
 module.exports = {
 	name: 'rps',
-	description: 'Plays RPS',
+	description: 'Plays rock, paper, scissors with you.',
 	execute(message, args, config) {
-    // Check in what type of channel the command was executed
-		if(message.channel.type === 'dm' || message.channel.type === 'group') {
-			Logger.info(`${config.PREFIX + this.name} used in a private ${message.channel.type}.`)
-		}
-		else{
-			Logger.info(`${config.PREFIX + this.name} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-		}
+
+    // Start of command:
 
     const command = args[0].slice(config.PREFIX.length,)
     const argument = args.join(' ')
