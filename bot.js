@@ -28,7 +28,7 @@ const games = [
 	'Vine was never funny.',
 	'I committed tax fraud for respect to yoshi.',
 	'Waluigi is the best.',
-	'biagios.github.io/porn',
+	'biagios.github.io/v-1/porn',
 	'gradientforest.com',
 	'iconic.'
 ]

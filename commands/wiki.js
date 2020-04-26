@@ -10,6 +10,7 @@ const dataRequest = require('./../modules/datarequest');
 module.exports = {
 	name: 'wiki',
 	description: 'DESCRIPTION',
+  execute(message, args, config) {
     // Start of command:
 
     const command = args[0].slice(config.PREFIX.length,)

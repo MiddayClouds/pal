@@ -12,4 +12,4 @@ config.js
 config.json
 package-lock.json
 modules/dialog-auth.json
-modules/requests.js
+modules/bot-list-updater.js
