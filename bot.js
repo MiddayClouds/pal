@@ -42,8 +42,7 @@ const Logger = new Util.Logger();
 const fs = require('fs');
 // Imports the Google Cloud client library.
 const {Storage} = require('@google-cloud/storage');
-// Instantiates a client. If you don't specify credentials when constructing
-// the client, the client library will look for credentials in the
+// Instantiates a client. If you don't specify credentials when constructing the client, the client library will look for credentials in the
 // environment.
 const storage = new Storage();
 
@@ -74,7 +73,7 @@ client.on('error', console.error)
 client.on('ready', async () => {
 	Logger.info('\nStarting Pal...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
 	Logger.info('\nPal is online! Running on version: ' + VERSION + '\n')
-	palrevealer.send(`Pal restart. | Bot Version: ${VERSION} | Node version: ${process.version} | Discord.js Version: ${Discord.version} | Servers: `)
+	palrevealer.send('```Pal restarted. | Bot Version: ' + VERSION + ' | Node version: ' + process.version + ' | Discord.js Version: ' + Discord.version + '```')
 	// Different user presences for different development stages
 	// TRUE -> debugging
 	// FALSE -> Production usage
@@ -89,6 +88,7 @@ client.on('ready', async () => {
 			console.error(e)
 		})
 		Logger.warn('Bot is currently set on DEVELOPMENT = true')
+		palrevealer.send(`**Bot is currently set on DEVELOPMENT = true**`)
 
 	}
 	else {
@@ -136,7 +136,7 @@ client.on('ready', async () => {
 	}
 
 	Logger.info(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
-	palrevealer.send(`Bot fully restarted, serving ${this.totalMembers()} users on ${client.guilds.cache.size} servers.`)
+	palrevealer.send('```Bot fully restarted and online, ready to serve ' + this.totalMembers() + ' users on ' + client.guilds.cache.size + ' servers.```')
 })
 
 
@@ -150,7 +150,7 @@ client.on('guildCreate', guild => {
 
 	// Logging the event
 	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
-	palrevealer.send(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
+	palrevealer.send('```Joined server ' + guild.name + ' with ' + guild.memberCount + ' users. Total servers: ' + client.guilds.cache.size + '```')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -171,7 +171,7 @@ client.on('guildDelete', guild => {
 
 	// Logging the event
 	Logger.info(`Left a server. Total servers: ${client.guilds.cache.size}`)
-	palrevealer.send(`Left a server. Total servers: ${client.guilds.cache.size}`)
+	palrevealer.send('```Left a server. Total servers: ' + client.guilds.cache.size + '```')
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -230,11 +230,11 @@ client.on('message', async message => {
 	try {
 		if(message.channel.type === 'dm' || message.channel.type === 'group') {
 			Logger.info(`${PREFIX + command} used in a private ${message.channel.type}.`)
-			palrevealer.send(`${PREFIX + command} used in a private ${message.channel.type}.`)
+			palrevealer.send('```' + PREFIX + command + ' used in a private ' + message.channel.type + ' by ' + message.author.id + ' .```')
 		}
 		else{
 			Logger.info(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-			palrevealer.send(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
+			palrevealer.send('```' + PREFIX + command + ' used on ' + message.guild.name + '(' + message.guild.id + ')' + message.guild.memberCount + 'users.```')
 		}
 		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
 	}
