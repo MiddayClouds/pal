@@ -14,11 +14,12 @@ catch (e) {
 }
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
-const { PREFIX, VERSION, DEVELOPMENT, TOKEN } = require('./config')
+const { PREFIX, VERSION, DEVELOPMENT, TOKEN, ID, OWNERS, REVEALERHOOK} = require('./config')
 const config = require('./config.json')
 const bans = require('./bans.json')
 const runSample = require('./modules/dialog.js').runSample
 const talkedRecently = new Set();
+const palrevealer = new Discord.WebhookClient(REVEALERHOOK[0], REVEALERHOOK[1])
 const games = [
 	'Pineapple should not go on pizza.',
 	'Use +help to get help.',
@@ -71,10 +72,9 @@ client.on('warn', console.warn)
 client.on('error', console.error)
 
 client.on('ready', async () => {
-
 	Logger.info('\nStarting Pal...\nNode version: ' + process.version + '\nDiscord.js version: ' + Discord.version + '\n')
 	Logger.info('\nPal is online! Running on version: ' + VERSION + '\n')
-
+	palrevealer.send(`Pal restart. | Bot Version: ${VERSION} | Node version: ${process.version} | Discord.js Version: ${Discord.version} | Servers: `)
 	// Different user presences for different development stages
 	// TRUE -> debugging
 	// FALSE -> Production usage
@@ -136,6 +136,7 @@ client.on('ready', async () => {
 	}
 
 	Logger.info(`Ready to serve on ${client.guilds.cache.size} servers for a total of ${this.totalMembers()} users.`)
+	palrevealer.send(`Bot fully restarted, serving ${this.totalMembers()} users on ${client.guilds.cache.size} servers.`)
 })
 
 
@@ -149,6 +150,7 @@ client.on('guildCreate', guild => {
 
 	// Logging the event
 	Logger.info(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
+	palrevealer.send(`Joined server ${guild.name} with ${guild.memberCount} users. Total servers: ${client.guilds.cache.size}`)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -169,6 +171,7 @@ client.on('guildDelete', guild => {
 
 	// Logging the event
 	Logger.info(`Left a server. Total servers: ${client.guilds.cache.size}`)
+	palrevealer.send(`Left a server. Total servers: ${client.guilds.cache.size}`)
 	// Updating the presence of the bot with the new server amount
 	client.user.setPresence({
 		activity: {
@@ -200,14 +203,10 @@ exports.totalMembers = () => {
 
 client.on('message', async message => {
 	if (message.mentions.everyone === false && message.mentions.has(client.user)) {
-		// Send the message of the help command as a response to the user
-		//client.commands.get('help').execute(message, null, { PREFIX, VERSION })
-		//message.reply('message here');
-		//console.log(client.user)
+		Logger.info(`Dialogflow interaction was started.`)
+
 		let askedValue = message.content
-		//console.log(message.content)
 		askedValue = askedValue.replace("<@!300955174225051650>","")
-		console.log("Dialogflow Query")
 		runSample(message,"pal-bot",askedValue)
 	}
 
@@ -231,9 +230,11 @@ client.on('message', async message => {
 	try {
 		if(message.channel.type === 'dm' || message.channel.type === 'group') {
 			Logger.info(`${PREFIX + command} used in a private ${message.channel.type}.`)
+			palrevealer.send(`${PREFIX + command} used in a private ${message.channel.type}.`)
 		}
 		else{
 			Logger.info(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
+			palrevealer.send(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
 		}
 		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
 	}
