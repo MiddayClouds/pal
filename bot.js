@@ -15,7 +15,6 @@ catch (e) {
 
 const client = new Discord.Client({ disableMentions: 'everyone' });
 const { PREFIX, VERSION, DEVELOPMENT, TOKEN, ID, OWNERS, REVEALERHOOK} = require('./config')
-const config = require('./config.json')
 const bans = require('./bans.json')
 const runSample = require('./modules/dialog.js').runSample
 const talkedRecently = new Set();
@@ -234,7 +233,7 @@ client.on('message', async message => {
 		}
 		else{
 			Logger.info(`${PREFIX + command} used on ${message.guild.name} (${message.guild.id}; ${message.guild.memberCount} users)`)
-			palrevealer.send('```' + PREFIX + command + ' used on ' + message.guild.name + '(' + message.guild.id + ')' + message.guild.memberCount + 'users.```')
+			palrevealer.send('```' + PREFIX + command + ' used on ' + message.guild.name + '(' + message.guild.id + ') ' + message.guild.memberCount + ' users.```')
 		}
 		client.commands.get(command).execute(message, args, { PREFIX, VERSION });
 	}

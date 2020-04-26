@@ -7,7 +7,7 @@
 
 // Requiring got for making requests
 const got = require('got')
-const config = require('./../config.json')
+const {GIPHY} = require('./../config')
 const Util = require('./util')
 
 /**
@@ -21,6 +21,7 @@ const Util = require('./util')
  *
  * @public
  */
+
 exports.getWikipediaSummary = (url, msg, argument) => {
   got(url).then(res => {
     try {
@@ -104,7 +105,7 @@ exports.getWikipediaSummary = (url, msg, argument) => {
  * @public
  */
 exports.getGifFromGIPHY = (msg, searchQuery) => {
-  got('http://api.giphy.com/v1/gifs/random?api_key=' + config.giphyKey + '&tag=' + searchQuery).then(res => {
+  got('http://api.giphy.com/v1/gifs/random?api_key=' + GIPHY + '&tag=' + searchQuery).then(res => {
     try {
       let result = JSON.parse(res.body)
       return msg.channel.send(result.data.image_original_url)

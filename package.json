@@ -1,51 +1,32 @@
 {
-  "name": "Pal",
+  "name": "pal",
   "version": "2.0.0",
-  "description": "A bot that does a bunch of stuff.",
-  "main": "main.js",
+  "description": "Pal is a fun discord bot with many different commands.",
+  "main": "bot.js",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "date-time": "^3.1.0",
+    "dialogflow": "^1.2.0",
+    "@google-cloud/storage": "^6.14.4",
+    "discord.js": "^12.2.0",
+    "got": "^11.0.2",
+    "uuid": "^7.0.3"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MiddayClouds/pal.git"
   },
-  "scripts": {
-    "test": "standard"
-  },
   "keywords": [
-    "pal",
     "discord",
-    "bot",
-    "discordjs"
+    "discordjs",
+    "discord-js",
+    "discord-bot",
+    "discord-js-bot"
   ],
-  "author": "Midday ",
+  "author": "Midday",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/MiddayClouds/pal/issues"
   },
-  "homepage": "https://github.com/MiddayClouds/PAL/README#readme",
-  "devDependencies": {
-    "cz-conventional-changelog": "^3.1.0",
-    "nodemon": "^2.0.1"
-  },
-  "dependencies": {
-    "@google-cloud/storage": "^4.7.0",
-    "cheerio": "^1.0.0-rc.3",
-    "colors": "^1.4.0",
-    "date-time": "^3.1.0",
-    "dblapi.js": "^2.3.0",
-    "dialogflow": "^1.2.0",
-    "discord.js": "^12.0.2",
-    "eslint": "^6.6.0",
-    "got": "^10.0.3",
-    "lodash": "^4.17.11",
-    "node-opus": "^0.3.3",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "uuid": "^7.0.3",
-    "wikijs": "^6.0.0"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  }
+  "homepage": "https://github.com/MiddayClouds/pal#readme"
 }
