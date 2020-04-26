@@ -4,6 +4,7 @@
     <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
     <a href="https://discordapp.com/oauth2/authorize?&client_id=300955174225051650&scope=bot&permissions=536980545"><img src="https://img.shields.io/badge/Discord-Add%20Bot-7289DA.svg" /></a>
     <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal.svg?type=shield"/></a>
+    <a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability"><img src="https://api.codeclimate.com/v1/badges/5a80902ddf9ca9db9fd7/maintainability" /></a>
 </p>
 
 Pal is a fun discord bot with many different commands. The official change logs can be found [here](https://github.com/MiddayClouds/pal/releases).
