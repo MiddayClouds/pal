@@ -1,15 +1,14 @@
 # Dependency directories
 node_modules/
-jspm_packages/
 
 # Optional npm cache directory
 .npm
 
-.DS_Store
 
-# Project Files
+# Sensitive Project Files
 config.js
-config.json
+# bans.js
+
+# Not needed
+.DS_Store
 package-lock.json
-modules/dialog-auth.json
-modules/bot-list-updater.js

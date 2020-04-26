@@ -4,6 +4,7 @@ const Util = require('./../modules/util')
  * Command: invite
  * Description: Outputs an embed containing an invite to add the bot to your own server.
  * */
+ 
 module.exports = {
 	name: 'invite',
 	description: 'Outputs an embed containing an invite to add the bot to your own server',
@@ -17,7 +18,7 @@ module.exports = {
 				fields: [
 					{
 						name: 'Invite: ',
-						value: '[Click here](https://discordapp.com/oauth2/authorize?&client_id=300955174225051650&scope=bot&permissions=1878522945) to add the bot to your server.',
+						value: '[Click here](https://discordapp.com/oauth2/authorize?&client_id=300955174225051650&scope=bot&permissions=1007021143) to add the bot to your server.',
 					},
 				],
 			},

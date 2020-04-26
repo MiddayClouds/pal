@@ -13,9 +13,10 @@ catch (e) {
 	process.exit()
 }
 
-const client = new Discord.Client({ disableMentions: 'everyone' });
+const client = new Discord.Client({ disableMentions: 'everyone' })
 const { PREFIX, VERSION, DEVELOPMENT, TOKEN, ID, OWNERS, REVEALERHOOK} = require('./config')
-const bans = require('./bans.json')
+const { CBANS } = require('./bans')
+
 const runSample = require('./modules/dialog.js').runSample
 const talkedRecently = new Set();
 const palrevealer = new Discord.WebhookClient(REVEALERHOOK[0], REVEALERHOOK[1])

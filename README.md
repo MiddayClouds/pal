@@ -17,49 +17,49 @@ Pal is a fun discord bot with many different commands. The official change logs 
 ## Commands:
 Here is a list of commands Pal offers:
 
-- ### +botinfo
+- ### p+botinfo
     __Description:__ Outputs an embed containing information about the bot.
     > Example:   
     > ![alt text](https://feen.us/vna8g77il4qumy5dny6lnikzpghx387ozvrtfg67u8bw88p4s9.png "Logo Title Text 1")
 
-- ### +clap (message)
+- ### p+clap (message)
     __Description:__ Will output the message replacing the spaces with clapping emojis.
 
     > Example:    
     > ![alt text](https://feen.us/1n49s9kngek9qkvb7zdwjz74oewgo4qs6d7ehi8nxic653ujz5.png "Logo Title Text 1")
 
-- ### +embarrass @user
+- ### p+embarrass @user
     __Description:__ This command creates a webhook that impersonates a user. It changes the webhook image and name to the tagged user's. Once this has been done it sends a random message through the webhook. **PLEASE NOTE: THE WEBHOOK RECEIVES A BOT TAG, THIS COMMAND IS CLEARLY MEANT AS A JOKE AND DOES NOT ACTUALLY ATTEMPT TO IMPERSONATE A USER.**
 
     > Example:     
     > ![alt text](https://feen.us/3b6kbc6b9fyb70due4hobdoy3gnyfg0usqo3cagmtkfatu2oya.png "Logo Title Text 1")
 
-- ### +http
+- ### p+http
     __Description:__ Outputs a random embed image from http.cat
     > Example:
     > ![alt text](https://feen.us/2wj5wynz7ujvlh1suq0ac90awqhat14zqb0ba8ihkuuuxqobj2.png "Logo Title Text 1")
 
-- ### +inspire
+- ### p+inspire
     __Description:__ Outputs a random embed image from inspirobot.
     > Example:   
     > ![alt text](https://feen.us/i55x59nmbcvwu439azry04tuj7umr3du2jt5plrdbx3z6baran.png "Logo Title Text 1")
 
-- ### +invite
+- ### p+invite
     __Description:__ Outputs an embed containing an invite to add the bot to your own server.
     > Example:
     > ![alt text](https://feen.us/n2avny82pixnw6ri2fr51s26xrx8en4kngu3emqpon0c6pklwd.png "Logo Title Text 1")
 
-- ### +members
+- ### p+members
     __Description:__ Outputs the amount of people in the server.
     > Example:
     > ![alt text](https://feen.us/bv8fe44he79j0tobk55pn3snmzz1s56s9t868uwsae7ni22ihx.png "Logo Title Text 1")
 
-- ### +rps (argument)
+- ### p+rps (argument)
     __Description:__ Plays rock, paper, scissors with you.
     > Example:    
     > ![alt text](https://feen.us/yzb1uf5szgz6korl1mgk6soyw5zxw674qj8kxkr2qpoyqs5tpn.png "Logo Title Text 1")
 
-- ### +user @user
+- ### p+user @user
     __Description:__ Outputs an embed containing information about the specified user.
     > Example:  
     > ![alt text](https://feen.us/cjgvxz2j49r93sxioa1igh1mfh5ck2zj1nutmeujg33ie4t99t.png "Logo Title Text 1")
