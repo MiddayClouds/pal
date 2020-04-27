@@ -11,6 +11,9 @@ module.exports = {
 	name: 'help',
 	description: 'Gives out a list of bot commands.',
 	execute(message, args, config) {
+    console.log(args)
+    console.log(args[1])
+    console.log(args[2])
     const data = [];
     const { commands } = message.client;
 
