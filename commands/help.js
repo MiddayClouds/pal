@@ -30,11 +30,13 @@ module.exports = {
       //console.log(commands)
       commands.map(c => console.log(c.name))
       console.log(commands.map(command => command.name))
+      
 
       commands.map(command => {
         for (var i = 0; i < command.name.length; i++) {
+          console.log(command.name.length)
           //const lengthOFNAMES = c.names.length
-          console.log(command.name[0,i])
+          console.log(command.name[i])
         }
       })
 
