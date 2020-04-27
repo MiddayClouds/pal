@@ -27,9 +27,14 @@ module.exports = {
       data.push(commands.map(command => command.name).join(', '));
 
 
-      console.log(commands)
-      commands.map(c => console.log(c.name))
-      console.log(commands.map(command => command.name))
+      //console.log(commands)
+      //commands.map(c => console.log(c.name))
+      //console.log(commands.map(command => command.name))
+
+      for (var i = 0; i < c.names.length; i++) {
+        const lengthOFNAMES = c.names.length
+        console.log(c.names[i])
+      }
 
       data.push(`\nYou can send \`${config.PREFIX}help [command name]\` to get info on a specific command.`);
 
@@ -53,11 +58,12 @@ module.exports = {
 	    .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
 	    .setDescription('Some description here')
 	    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
-      commands.map(c => {
+      /*commands.map(c => {
         for (var i = 0; i < c.names.length; i++) {
+          const lengthOFNAMES = c.names.length
          .addField(c.names[i], 'Some value here')
         }
-      })
+      }) */
       .addField('Inline field title', 'Some value here', true)
 	    .setImage('https://i.imgur.com/wSTFkRM.png')
 	    .setTimestamp()
