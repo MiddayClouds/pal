@@ -11,11 +11,10 @@ module.exports = {
 	name: 'help',
 	description: 'Gives out a list of bot commands.',
 	execute(message, args, config) {
-    console.log(args)
-    console.log(args[1])
-    console.log(args[2])
     const data = [];
     const { commands } = message.client;
+    const rawArgument = args.join(' ')
+    const argument = rawArgument.replace(config.PREFIX + command + ' ', '')
 
     if (!args[1]) {
       data.push('Here\'s a list of all my commands:');
@@ -33,7 +32,7 @@ module.exports = {
       });
     }
 
-    const name = args[2].toLowerCase();
+    const name = argument.toLowerCase();
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
 
 		if (!command) {
