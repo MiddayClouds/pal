@@ -13,9 +13,9 @@ module.exports = {
 	execute(message, args, config) {
     const data = [];
     const { commands } = message.client;
-    const command = args[0].slice(config.PREFIX.length,)
+    const rawCommand = args[0].slice(config.PREFIX.length,)
     const rawArgument = args.join(' ')
-    const argument = rawArgument.replace(config.PREFIX + command + ' ', '')
+    const argument = rawArgument.replace(config.PREFIX + rawCommand + ' ', '')
 
     if (!args[1]) {
       data.push('Here\'s a list of all my commands:');
