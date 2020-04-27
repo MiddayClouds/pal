@@ -22,7 +22,7 @@ const talkedRecently = new Set();
 const palrevealer = new Discord.WebhookClient(REVEALERHOOK[0], REVEALERHOOK[1])
 const games = [
 	'Pineapple should not go on pizza.',
-	'Use +help to get help.',
+	'Use p+help to get help.',
 	'+help me.',
 	'Robots are forever on life support.',
 	'I no longer find Cards Against Humanity funny.',

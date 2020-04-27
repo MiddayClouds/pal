@@ -16,10 +16,16 @@ module.exports = {
     const rawCommand = args[0].slice(config.PREFIX.length,)
     const rawArgument = args.join(' ')
     const argument = rawArgument.replace(config.PREFIX + rawCommand + ' ', '')
+/*
+    function getCommandName(amount){
+      commands.forEach(command => command.name)
+    }
+*/
 
     if (!args[1]) {
       data.push('Here\'s a list of all my commands:');
       data.push(commands.map(command => command.name).join(', '));
+      console.log(commands.map(command => command.name).join(', '))
       data.push(`\nYou can send \`${config.PREFIX}help [command name]\` to get info on a specific command.`);
 
       return message.author.send(data, { split: true })
@@ -32,6 +38,27 @@ module.exports = {
         message.reply('it seems like I can\'t DM you!');
       });
     }
+
+/*
+    if (argument == 'all'){
+      const exampleEmbed = new Discord.MessageEmbed()
+      .setColor('#0099ff')
+      .setTitle('Some title')
+	    .setURL('https://discord.js.org/')
+	    .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
+	    .setDescription('Some description here')
+	    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
+	    .addFields(
+        { name: 'Regular field title', value: 'Some value here' },
+		    { name: '\u200B', value: '\u200B' },
+		    { name: 'Inline field title', value: 'Some value here', inline: true },
+		    { name: 'Inline field title', value: 'Some value here', inline: true },
+	     )
+      .addField('Inline field title', 'Some value here', true)
+	    .setImage('https://i.imgur.com/wSTFkRM.png')
+	    .setTimestamp()
+	    .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
+    } */
 
     const name = argument.toLowerCase();
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
