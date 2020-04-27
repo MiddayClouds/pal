@@ -29,7 +29,7 @@ module.exports = {
       //TESTS
       console.log(commands.map(command => command.name).join(', '))
       const dad = []
-      commands.map(command => command.name).join(', '))
+      commands.map(command => command.name).join(', ')
       console.log(commands)
       console.log(commands[1])
 
