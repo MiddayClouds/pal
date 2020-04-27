@@ -29,7 +29,7 @@ module.exports = {
 
       //console.log(commands)
       commands.map(c => console.log(c.name))
-      console.log(commands.map(command => command.name[]))
+      console.log(commands.map(command => command.name))
       console.log(commands.map(command => command.name[1]))
 
       //commands.map(command => {
