@@ -30,8 +30,9 @@ module.exports = {
       //console.log(commands)
       commands.map(c => console.log(c.name))
       console.log(commands.map(command => command.name))
-      console.log(commands.map(command => command.name[1]))
-
+      const commandNames = commands.map(command => command.name)
+      console.log(commandNames.get(1))
+      console.log(commandNames.get(2))
       //commands.map(command => {
         //for (var i = 0; i < command.name.length; i++) {
           //console.log(command.name.length)
