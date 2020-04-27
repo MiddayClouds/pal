@@ -13,6 +13,7 @@ module.exports = {
 	execute(message, args, config) {
     const data = [];
     const { commands } = message.client;
+    const command = args[0].slice(config.PREFIX.length,)
     const rawArgument = args.join(' ')
     const argument = rawArgument.replace(config.PREFIX + command + ' ', '')
 
