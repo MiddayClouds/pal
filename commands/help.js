@@ -31,10 +31,10 @@ module.exports = {
       //commands.map(c => console.log(c.name))
       //console.log(commands.map(command => command.name))
 
-      commands.map(c => {
-        for (var i = 0; i < c.names.length; i++) {
+      commands.map(command => {
+        for (var i = 0; i < command.name.length; i++) {
           //const lengthOFNAMES = c.names.length
-         console.log(c.names[i])
+          console.log(command.name[i])
         }
       })
 
