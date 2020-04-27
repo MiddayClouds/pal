@@ -29,9 +29,9 @@ module.exports = {
       //TESTS
       console.log(commands.map(command => command.name).join(', '))
       const dad = []
-      dad.push(commands.map(command => command.name).join(', '))
-      console.log(dad)
-      console.log(dad[1])
+      commands.map(command => command.name).join(', '))
+      console.log(commands)
+      console.log(commands[1])
 
 
       data.push(`\nYou can send \`${config.PREFIX}help [command name]\` to get info on a specific command.`);
