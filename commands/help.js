@@ -44,7 +44,7 @@ module.exports = {
       });
     }
 
-/*
+
     if (argument == 'all'){
       const exampleEmbed = new Discord.MessageEmbed()
       .setColor('#0099ff')
@@ -53,17 +53,17 @@ module.exports = {
 	    .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
 	    .setDescription('Some description here')
 	    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
-	    .addFields(
-        { name: 'Regular field title', value: 'Some value here' },
-		    { name: '\u200B', value: '\u200B' },
-		    { name: 'Inline field title', value: 'Some value here', inline: true },
-		    { name: 'Inline field title', value: 'Some value here', inline: true },
-	     )
+      commands.map(c => {
+        for (var i = 0; i < c.names.length; i++) {
+         .addField(c.names[i], 'Some value here')
+        }
+      })
       .addField('Inline field title', 'Some value here', true)
 	    .setImage('https://i.imgur.com/wSTFkRM.png')
 	    .setTimestamp()
 	    .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
-    } */
+      message.channel.send(exampleEmbed)
+    }
 
     const name = argument.toLowerCase();
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
