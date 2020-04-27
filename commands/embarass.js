@@ -8,7 +8,7 @@ const Util = require('./../modules/util')
 
 module.exports = {
 	name: 'embarrass',
-  alias: ['embarrass','embarass','embarras','shame','embaras'],
+  //alias: ['embarrass','embarass','embarras','shame','embaras'],
 	description: 'This command creates a webhook that impersonates a user. It changes the webhook image and name to the tagged user`s. Once this has been done it sends a random message through the webhook.',
 	execute(message, args, config) {
     // Start of command:
