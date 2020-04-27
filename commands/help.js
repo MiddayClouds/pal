@@ -29,16 +29,16 @@ module.exports = {
 
       //console.log(commands)
       commands.map(c => console.log(c.name))
-      console.log(commands.map(command => command.name))
-      
+      console.log(commands.map(command => command.name[]))
+      console.log(commands.map(command => command.name[1]))
 
-      commands.map(command => {
-        for (var i = 0; i < command.name.length; i++) {
-          console.log(command.name.length)
+      //commands.map(command => {
+        //for (var i = 0; i < command.name.length; i++) {
+          //console.log(command.name.length)
           //const lengthOFNAMES = c.names.length
-          console.log(command.name[i])
-        }
-      })
+          //console.log(command.name[i])
+        //}
+      //})
 
       data.push(`\nYou can send \`${config.PREFIX}help [command name]\` to get info on a specific command.`);
 
