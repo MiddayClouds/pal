@@ -25,7 +25,15 @@ module.exports = {
     if (!args[1]) {
       data.push('Here\'s a list of all my commands:');
       data.push(commands.map(command => command.name).join(', '));
+
+      //TESTS
       console.log(commands.map(command => command.name).join(', '))
+      const dad = []
+      dad.push(commands.map(command => command.name).join(', '))
+      console.log(dad)
+      console.log(dad[1])
+
+
       data.push(`\nYou can send \`${config.PREFIX}help [command name]\` to get info on a specific command.`);
 
       return message.author.send(data, { split: true })
