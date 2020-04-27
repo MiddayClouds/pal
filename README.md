@@ -13,7 +13,7 @@ Pal is a fun discord bot with many different commands. The official change logs 
 > - <a href="https://github.com/julianYaman/wikipedia-bot">Wikipedia-Bot</a>
 > - <a href="https://github.com/biagios/pal">Former versions of Pal</a>
 
-
+ 
 ## Commands:
 Here is a list of commands Pal offers:
 
