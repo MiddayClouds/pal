@@ -1,20 +1,20 @@
-// Any module required will be written up here
-const Util = require('./../modules/util')
+exports.run = async (client, message, args, level) => {
+  // Command here
 
-/**
- * Command: NAME
- * Description: DESCRIPTION
- * */
 
-module.exports = {
-	name: 'NAME',
-	description: 'DESCRIPTION',
-	execute(message, args, config) {
-    const command = args[0].slice(config.PREFIX.length,)
-    const rawArgument = args.join(' ')
-    const argument = rawArgument.replace(config.PREFIX + command + ' ', '')
+  };
 
-    // Put command here...
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: "User", // Who can use it
+  cooldown: 5
+};
 
-	},
-}
+exports.help = {
+  name: "name of command",
+  category: "Miscelaneous of message",
+  description: "Command description here.",
+  usage: "Write here how you are supposed to use the command. like 'user @user'"
+};

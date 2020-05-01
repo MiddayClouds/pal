@@ -7,8 +7,12 @@ node_modules/
 
 # Sensitive Project Files
 config.js
+data
 # bans.js
+
 
 # Not needed
 .DS_Store
 package-lock.json
+setup.js
+config_base.txt

@@ -1,23 +1,19 @@
-// Any module required will be written up here
-const Util = require('./../modules/util')
+exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
+  const msg = await message.channel.send("Ping?");
+  msg.edit(`Pong! Latency is ${msg.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(message.client.ws.ping)}ms`);
+};
 
-/**
- * Command: ping
- * Description: pongs
- * */
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: [],
+  permLevel: "User",
+  cooldown: 5
+};
 
-module.exports = {
-	name: 'ping',
-	description: 'pongs',
-	execute(message, args, config) {
-    // Start of command:
-
-    const pings = ['the moon.', 'europe.', 'oceania.', 'Trump.', 'a baguette.', 'pizza.', 'the Netherlands.', 'September 11th, 2001.', 'Google.', 'the BBC.', 'my mother.', 'Mr. Meeseeks.', "pewdipie's firewatch stream.", 'uncensored hentai.', 'Julian Assange.', 'Vine.']
-    const ranQuote = pings[Math.floor(Math.random() * pings.length)]
-    // Calculates ping between sending a message and editing it, giving a nice round-trip latency.
-    // The second ping is an average latency between the bot and the websocket server (one-way, not round-trip).
-    const m = message.channel.send('One second...')
-    m.edit('It took ` ' + (m.createdTimestamp - message.createdTimestamp) + ' ms ` to :ping_pong: ' + ranQuote + '.')
-
-	},
-}
+exports.help = {
+  name: "ping",
+  category: "Miscelaneous",
+  description: "It like... Pings. Then Pongs. And it's not Ping Pong.",
+  usage: "ping"
+};

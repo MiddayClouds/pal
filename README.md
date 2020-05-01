@@ -1,83 +1,62 @@
-<h1 align="center"> Pal, the discord bot.</h1>
+<h1 align="center">Welcome to pal 👋</h1>
+<p>
+  <img src="https://img.shields.io/badge/node-%3E%3D13.12.0-blue.svg" />
+  <a href="https://github.com/MiddayClouds/pal#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-no-red.svg" />
+  </a>
+  <a href="https://github.com/MiddayClouds/pal/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="https://github.com/MiddayClouds/pal/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/MiddayClouds/pal" />
+  </a>
+  <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal?ref=badge_shield" alt="FOSSA Status">
+  	<img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal.svg?type=shield"/>
+  </a>
+    <a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/5a80902ddf9ca9db9fd7/maintainability" />
+  </a>
 
-<p align="center">
-    <a href="https://standardjs.com"><img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="Standard - JavaScript Style Guide"></a>
-    <a href="https://discordapp.com/oauth2/authorize?&client_id=300955174225051650&scope=bot&permissions=536980545"><img src="https://img.shields.io/badge/Discord-Add%20Bot-7289DA.svg" /></a>
-    <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal.svg?type=shield"/></a>
-    <a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability"><img src="https://api.codeclimate.com/v1/badges/5a80902ddf9ca9db9fd7/maintainability" /></a>
+
+
 </p>
 
-Pal is a fun discord bot with many different commands. The official change logs can be found [here](https://github.com/MiddayClouds/pal/releases).
-> Pal runs on <a href="">discord.js</a> hosted on <a href="https://m.do.co/c/47c40acc6cf7">DigitalOcean</a>. Pal is based off these bots:
-> - <a href="https://gist.github.com/eslachance/3349734a98d30011bb202f47342601d3">The Perfect Lil' Bot</a>
-> - <a href="https://github.com/julianYaman/wikipedia-bot">Wikipedia-Bot</a>
-> - <a href="https://github.com/biagios/pal">Former versions of Pal</a>
+> Pal is a fun discord bot with many different commands.
 
- 
-## Commands:
-Here is a list of commands Pal offers:
+### 🏠 [Homepage](https://github.com/MiddayClouds/pal#readme)
 
-- ### p+botinfo
-    __Description:__ Outputs an embed containing information about the bot.
-    > Example:   
-    > ![alt text](https://feen.us/vna8g77il4qumy5dny6lnikzpghx387ozvrtfg67u8bw88p4s9.png "Logo Title Text 1")
+## Prerequisites
 
-- ### p+clap (message)
-    __Description:__ Will output the message replacing the spaces with clapping emojis.
+- node >=13.12.0
 
-    > Example:    
-    > ![alt text](https://feen.us/1n49s9kngek9qkvb7zdwjz74oewgo4qs6d7ehi8nxic653ujz5.png "Logo Title Text 1")
+## Commands
 
-- ### p+embarrass @user
-    __Description:__ This command creates a webhook that impersonates a user. It changes the webhook image and name to the tagged user's. Once this has been done it sends a random message through the webhook. **PLEASE NOTE: THE WEBHOOK RECEIVES A BOT TAG, THIS COMMAND IS CLEARLY MEANT AS A JOKE AND DOES NOT ACTUALLY ATTEMPT TO IMPERSONATE A USER.**
+A full list of the bot's commands can be found here.
 
-    > Example:     
-    > ![alt text](https://feen.us/3b6kbc6b9fyb70due4hobdoy3gnyfg0usqo3cagmtkfatu2oya.png "Logo Title Text 1")
 
-- ### p+http
-    __Description:__ Outputs a random embed image from http.cat
-    > Example:
-    > ![alt text](https://feen.us/2wj5wynz7ujvlh1suq0ac90awqhat14zqb0ba8ihkuuuxqobj2.png "Logo Title Text 1")
+## 👤 Authors
 
-- ### p+inspire
-    __Description:__ Outputs a random embed image from inspirobot.
-    > Example:   
-    > ![alt text](https://feen.us/i55x59nmbcvwu439azry04tuj7umr3du2jt5plrdbx3z6baran.png "Logo Title Text 1")
+**Midday (Biagio Santoro, Ben Mills)**
 
-- ### p+invite
-    __Description:__ Outputs an embed containing an invite to add the bot to your own server.
-    > Example:
-    > ![alt text](https://feen.us/n2avny82pixnw6ri2fr51s26xrx8en4kngu3emqpon0c6pklwd.png "Logo Title Text 1")
+* Website: [@Biagio](biagios.github.io) | [@Ben](benmills-co.github.io)
+* Twitter: [@Biagio](https://twitter.com/biagiosantori) | [@Ben](https://twitter.com/BenMillsco)
+* Github: [@Midday](https://github.com/MiddayClouds) [@Biagio](https://github.com/biagios) [@Ben](https://github.com/benmills-co)
 
-- ### p+members
-    __Description:__ Outputs the amount of people in the server.
-    > Example:
-    > ![alt text](https://feen.us/bv8fe44he79j0tobk55pn3snmzz1s56s9t868uwsae7ni22ihx.png "Logo Title Text 1")
+## 🤝 Contributing
 
-- ### p+rps (argument)
-    __Description:__ Plays rock, paper, scissors with you.
-    > Example:    
-    > ![alt text](https://feen.us/yzb1uf5szgz6korl1mgk6soyw5zxw674qj8kxkr2qpoyqs5tpn.png "Logo Title Text 1")
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/MiddayClouds/pal/issues). You can also take a look at the [contributing guide](https://github.com/MiddayClouds/pal/blob/master/CONTRIBUTING.md).
 
-- ### p+user @user
-    __Description:__ Outputs an embed containing information about the specified user.
-    > Example:  
-    > ![alt text](https://feen.us/cjgvxz2j49r93sxioa1igh1mfh5ck2zj1nutmeujg33ie4t99t.png "Logo Title Text 1")
+## Show your support
 
-## Contributing:
-Contributors are the reason this bot works or exists. Thank you for deciding to read this <3
-### How to contribute:
-- 1. Fork it!
-- 2. Create your feature branch: `git checkout -b my-new-feature`
-- 3. Commit your changes: `git commit -m 'Add some feature'`
-- 4. Push to the branch: `git push origin my-new-feature`
-- 5. Submit a pull request with your new stuff.
+Give a ⭐️ if this project helped you!
 
-### Contacting me:
-If you want to contact me you can use one of my contacts below some might be slower some faster.
-- Discord: The fastest way to contact me is by joining the server I own, this can be done [here](https://discord.gg/szFy478) you can also add me using my tag Biagio#8115.
-- Twitter DM: Not the fastest but not the slowest, this can be done [here](https://twitter.com/biagiosantori).
-- Email: I don't think this is the fastest but worth a try, my email is biagio.santori@gmail.com .
-- Steam: This option is if your real edgy, this can be done [here](http://steamcommunity.com/id/biagios).
+## 📝 License
 
-<h6 align="center">  © Midday 2020 | <a href="https://feen.us/">Images hosted by: feen.us</a> | <a href="https://github.com/MiddayClouds/pal/tree/master/LICENSES">Licenses</a> </h6>
+This project is [MIT](https://github.com/MiddayClouds/pal/blob/master/LICENSE) licensed.
+
+***
+
+<h6 align="center">
+Copyright © 2020 <a href="https://github.com/MiddayClouds">Midday</a> (Biagio Santoro & Ben Mills)
+<br/>
+README generated by <a href="https://github.com/kefranabg/readme-md-generator">readme-md-generator</a></h6>

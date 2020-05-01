@@ -1,97 +1,118 @@
-// Any module required will be written up here
-const Util = require('./../modules/util')
-
-const fs = require('fs');
-/**
- * Command: help
- * Description: Gives out a list of bot commands.
- * */
-
-module.exports = {
-	name: 'help',
-	description: 'Gives out a list of bot commands.',
-	execute(message, args, config) {
-    const data = [];
-    const { commands } = message.client;
-    const rawCommand = args[0].slice(config.PREFIX.length,)
-    const rawArgument = args.join(' ')
-    const argument = rawArgument.replace(config.PREFIX + rawCommand + ' ', '')
 /*
-    function getCommandName(amount){
-      commands.forEach(command => command.name)
-    }
+The HELP command is used to display every command's name and description
+to the user, so that he may see what commands are available. The help
+command is also filtered by level, so if a user does not have access to
+a command, it is not shown to them. If a command name is given with the
+help command, its extended help is shown.
 */
 
-    if (!args[1]) {
-      data.push('Here\'s a list of all my commands:');
-      data.push(commands.map(command => command.name).join(', '));
+exports.run = (client, message, args, level) => {
+  const Discord = require("discord.js");
 
+  const helpInfoEmbed = new Discord.MessageEmbed()
 
-      //console.log(commands)
-      commands.map(c => console.log(c.name(1)))
-      //console.log(commands.map(command => command.name))
-      //const commandNames = commands.map(command => command.name)
-      //console.log(commandNames.get(1))
-      //console.log(commandNames.get(2))
-      //commands.map(command => {
-        //for (var i = 0; i < command.name.length; i++) {
-          //console.log(command.name.length)
-          //const lengthOFNAMES = c.names.length
-          //console.log(command.name[i])
-        //}
-      //})
+  // If no specific command is called, show all filtered commands.
+  if (!args[0]) {
 
-      data.push(`\nYou can send \`${config.PREFIX}help [command name]\` to get info on a specific command.`);
+    // Set basic embed options
+    helpInfoEmbed.setColor('#00FDFF')
+    helpInfoEmbed.setTitle('Command List:')
+    helpInfoEmbed.setDescription('Use ' + message.settings.prefix + 'help <commandname> for details.')
+    helpInfoEmbed.addField("\u200B","\u200B")
+    helpInfoEmbed.setAuthor(client.user.name, client.user.displayAvatarURL())
+    helpInfoEmbed.setFooter('© Midday','https://avatars0.githubusercontent.com/u/33847796?s=200&v=4')
 
-      return message.author.send(data, { split: true })
-      .then(() => {
-        if (message.channel.type === 'dm') return;
-        message.reply('I\'ve sent you a DM with all my commands!');
-      })
-      .catch(error => {
-        console.error(`Could not send help DM to ${message.author.tag}.\n`, error);
-        message.reply('it seems like I can\'t DM you!');
-      });
+    // Filter all commands by which are available for the user's level, using the <Collection>.filter() method.
+    const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
+
+    // Here we have to get the command names only, and we use that array to get the longest name.
+    // This make the help commands "aligned" in the output.
+    const commandNames = myCommands.keyArray();
+    const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+
+    let currentCategory = "";
+    let command = [];
+    let possibleCategories = [];
+    let allCommandsInfo = []
+
+    // Set all of the commands and categories as sorted
+    const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
+    // Repeat for all of sorted commands
+    sorted.forEach( c => {
+      // Make cat the first category found.
+      const cat = c.help.category.toProperCase();
+      // Set the first command
+      const currentCommand = `${message.settings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} --> ${c.help.description}\n`;
+      if (currentCategory !== cat) {
+        // Add all possible categories
+        possibleCategories.push(cat);
+
+        // Change the current category to what it is on now
+        currentCategory = cat;
+      }
+      // Push all the possible Categories and Commands in one multidimentional array
+      allCommandsInfo.push([cat, currentCommand]);
+    });
+
+    // Create function for printing commands as it is much easier
+    function printCommands(remove, array) {
+      let command = ``
+      // Repeat for the lenght of the given array
+      for (var i = 0; i < array.length; i++) {
+        // console.log(array[i])
+        // console.log(array[i][0])
+
+        // Do not do anything if the array description matches remove array
+        if (array[i][0] == remove) {
+
+        } else {
+
+          // Otherwise add it to command
+          command += `${array[i][1]}\n`
+        }
+      }
+
+      // Return the command
+      return command
     }
 
-/*
-    if (argument == 'all'){
-      const exampleEmbed = new Discord.MessageEmbed()
-      .setColor('#0099ff')
-      .setTitle('Some title')
-	    .setURL('https://discord.js.org/')
-	    .setAuthor('Some name', 'https://i.imgur.com/wSTFkRM.png', 'https://discord.js.org')
-	    .setDescription('Some description here')
-	    .setThumbnail('https://i.imgur.com/wSTFkRM.png')
-      commands.map(c => {
-        for (var i = 0; i < c.names.length; i++) {
-          const lengthOFNAMES = c.names.length
-         .addField(c.names[i], 'Some value here')
-        }
-      })
-      .addField('Inline field title', 'Some value here', true)
-	    .setImage('https://i.imgur.com/wSTFkRM.png')
-	    .setTimestamp()
-	    .setFooter('Some footer text here', 'https://i.imgur.com/wSTFkRM.png');
-      message.channel.send(exampleEmbed)
-    } */
+    // For the lenght of the possibleCategories check what category it fits into and the print that category
+    // more elifs  have to be done manually if you add more categories
+    for (var i = 0; i < possibleCategories.length; i++) {
 
-    const name = argument.toLowerCase();
-		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));
+      // Print Miscelaneous category
+      if (possibleCategories[i] == 'Miscelaneous') {
+        helpInfoEmbed.addField("Miscelaneous:",printCommands('System',allCommandsInfo))
+        helpInfoEmbed.addField("\u200B","\u200B")
+      } else if (possibleCategories[i] == 'System') {
+        // Print System category
+        helpInfoEmbed.addField("System:",printCommands('Miscelaneous',allCommandsInfo))
+      }
+    }
+    message.channel.send(helpInfoEmbed)
 
-		if (!command) {
-			return message.reply('that\'s not a valid command!');
-		}
+  } else {
+    // Show individual command's help.
+    let command = args[0];
+    if (client.commands.has(command)) {
+      command = client.commands.get(command);
+      if (level < client.levelCache[command.conf.permLevel]) return;
+      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {code:"asciidoc"});
+    }
+  }
+};
 
-		data.push(`**Name:** ${command.name}`);
+exports.conf = {
+  enabled: true,
+  guildOnly: false,
+  aliases: ["h", "halp"],
+  permLevel: "User",
+  cooldown: 5
+};
 
-		if (command.aliases) data.push(`**Aliases:** ${command.aliases.join(', ')}`);
-		if (command.description) data.push(`**Description:** ${command.description}`);
-		if (command.usage) data.push(`**Usage:** ${config.PREFIX}${command.name} ${command.usage}`);
-
-		//data.push(`**Cooldown:** ${command.cooldown || 3} second(s)`);
-
-		message.channel.send(data, { split: true });
-
-	},
-}
+exports.help = {
+  name: "help",
+  category: "System",
+  description: "Displays all the available commands for your permission level.",
+  usage: "help [command]"
+};

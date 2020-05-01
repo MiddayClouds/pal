@@ -1,69 +1,55 @@
-// Any module required will be written up here
-const Util = require('./../modules/util')
-const dateTime = require('date-time')
+exports.run = (client, message, args, level) => {
+  const Discord = require("discord.js");
+  if (!message.mentions.users.size) {
+    return message.reply('You need to tag a user to display information bout them.');
+  }
 
-/**
- * Command: user
- * Description: Outputs an embed containing information about the specified user.
- * */
-
-module.exports = {
-	name: 'user',
-	description: 'Outputs an embed containing information about the specified user.',
-	execute(message, args, config) {
-    // Start of command:
-
-    // Made a try-catch because if someone is funny and tries to get data from a user which he cannot mention but still tries lmao.
-    try {
-      const member = message.guild.member(message.mentions.members.first())
-      let userCreatedDate = Util.getDate(new Date(member.user.createdTimestamp))
-      let guildJoinDate = Util.getDate(new Date(member.joinedTimestamp))
-      //const guildMember = new Discord.GuildMember()
-      //let roles = member.roles.highest.map()
-      //let roles = member.roles.highest.map()
-      //let roles = member.roles.highest.map((a) => {
-        //  return a
-      //})
-      const embed = {
-        "title": "User Info:",
-        "description": member.user.toString() + " (" + member.user.tag + ")",
-          "color": 15448698,
-          "timestamp": new Date(),
-          "footer": {
-            "icon_url": message.client.user.displayAvatarURL(),
-            "text": message.client.user.username
-          },
-          "thumbnail": {
-            "url": member.user.displayAvatarURL()
-          },
-          "author": {
-            "name": "Username: " + member.user.username,
-            "icon_url": member.user.displayAvatarURL()
-          },
-          "fields": [
-            {
-              "name": "Account created at:",
-              "value": userCreatedDate
-            },
-            {
-              "name": "Joined this server at:",
-              "value": guildJoinDate
-            },
-            {
-              "name": "ID:",
-              "value": member.user.id
-            }
-          ]
-        };
-        message.channel.send({ embed });
-      } catch (e) {
-        console.log(e)
-        message.channel.send({
-          embed: {
-            title: 'No user found in this guild with the name ' + args[0]
-          }
-      })
+  const taggedUser = message.guild.member(message.mentions.members.first())
+  const friendly = client.config.permLevels.find(l => l.level === level).name;
+  let userCreatedDate = client.getDate(new Date(taggedUser.user.createdTimestamp))
+  let userGuildJoinDate = client.getDate(new Date(taggedUser.joinedTimestamp))
+  let userRoles = []
+  userRoles.push(taggedUser.roles.cache.map(r => r.name).join(', '))
+  function hasNickname(nickname) {
+    if (nickname === null) {
+      const userGuildNickname = "None"
+      return userGuildNickname
+    } else {
+      return nickname
     }
+  }
+  const userInfoEmbed = new Discord.MessageEmbed()
+  .setColor('#00FDFF')
+  .setAuthor(taggedUser.user.tag, taggedUser.user.displayAvatarURL())
+  .setThumbnail(taggedUser.user.displayAvatarURL())
+  .addFields(
+    { name: 'Id: ', value: taggedUser.id,  inline: true },
+    { name: '\u200B', value: '\u200B', inline: true },
+    { name: 'Nickname: ', value: hasNickname(taggedUser.nickname), inline: true },
+    //{ name: '\u200B', value: '\u200B' },
+    { name: 'Account Created:', value: userCreatedDate},
+    { name: 'User Joined Guild:', value: userGuildJoinDate},
+    { name: 'Roles:', value: '`' + userRoles + '`' },
+    // { name: 'Bot Command Level:', value: '`' + client.permlevel(message.guild.member(message.mentions.members.id.first())) + ' - ' + friendly +'`',inline: true },
+  )
+  .setTimestamp()
+  .setFooter(client.user.username, message.client.user.displayAvatarURL());
+  //console.log(taggedUser.roles.cache.map(r => r.name))
 
-  },
+  message.channel.send(userInfoEmbed);
 }
+
+exports.conf = {
+  enabled: true,
+  guildOnly: true,
+  aliases: [],
+  permLevel: "User",
+  cooldown: 5
+};
+
+exports.help = {
+  name: "user",
+  category: "Miscelaneous",
+  description: "Gives some useful information on a user",
+  usage: "user @user"
+};
