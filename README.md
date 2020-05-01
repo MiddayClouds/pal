@@ -13,9 +13,7 @@
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal?ref=badge_shield" alt="FOSSA Status">
   	<img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal.svg?type=shield"/>
   </a>
-    <a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/5a80902ddf9ca9db9fd7/maintainability" />
-  </a>
+<a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability"><img src="https://api.codeclimate.com/v1/badges/92b81fccccb2faa9aaac/maintainability" /></a>
 
 
 
