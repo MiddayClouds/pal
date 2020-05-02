@@ -1,21 +1,12 @@
 # Security Policy
+Please read through this document if you believe you have found a security vulnerability with Pal.
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+Only the most recent version is supported with security updates. All previous version of the bot will **not** recieve any updates. 
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+When reporting a security vulnerability please contact any person who maintains the bot. You can find people who maintain the bot by visiting our discord server [here](https://discord.gg/szFy478). Or altrnatively feel free to contact anyone listed on the homepage of the bot found [here](https://github.com/MiddayClouds/pal/blob/master/README.md).
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+Once a vulnerability report has been submitted, it will be evaluated. On evanuation depending on the severity of the report you *may* be rewared acordingly at will by contributors.
