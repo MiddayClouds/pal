@@ -1,33 +1,42 @@
 /*
-Logger class for easy and aesthetically pleasing console logging 
+Logger class for easy and aesthetically pleasing console logging
 */
 const chalk = require("chalk");
 const moment = require("moment");
+const Discord = require("discord.js");
+const config = require("./../config.js");
 
 exports.log = (content, type = "log") => {
+  const palrevealer = new Discord.WebhookClient(config.revealerhook[0], config.revealerhook[1])
   const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
   switch (type) {
     case "log": {
-      return console.log(`${timestamp} ${chalk.bgBlue(type.toUpperCase())} ${content} `);
+      console.log(`${timestamp} ${chalk.bgBlue(type.toUpperCase())} ${content} `);
+      return palrevealer.send("```LOG:" + timestamp + " --> " + content + "```")
     }
     case "warn": {
-      return console.log(`${timestamp} ${chalk.black.bgYellow(type.toUpperCase())} ${content} `);
+      console.log(`${timestamp} ${chalk.black.bgYellow(type.toUpperCase())} ${content} `);
+      return palrevealer.send("```WARN:" + timestamp + " --> " + content + "```")
     }
     case "error": {
-      return console.log(`${timestamp} ${chalk.bgRed(type.toUpperCase())} ${content} `);
+      console.log(`${timestamp} ${chalk.bgRed(type.toUpperCase())} ${content} `);
+      return palrevealer.send("```ERROR:" + timestamp + " --> " + content + "```")
     }
     case "debug": {
-      return console.log(`${timestamp} ${chalk.green(type.toUpperCase())} ${content} `);
+      console.log(`${timestamp} ${chalk.green(type.toUpperCase())} ${content} `);
+      return palrevealer.send("```DEBUG:" + timestamp + " --> " + content + "```")
     }
     case "cmd": {
-      return console.log(`${timestamp} ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
+      console.log(`${timestamp} ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
+      return palrevealer.send("```CMD:" + timestamp + " --> " + content + "```")
     }
     case "ready": {
-      return console.log(`${timestamp} ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);
+      console.log(`${timestamp} ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);
+      return palrevealer.send("```READY:" + timestamp + " --> " + content + "```")
     }
     default: throw new TypeError("Logger type must be either warn, debug, log, ready, cmd or error.");
   }
-}; 
+};
 
 exports.error = (...args) => this.log(...args, "error");
 

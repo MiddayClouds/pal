@@ -5,6 +5,7 @@ exports.run = async (client, message, args, level) => {
     return message.reply('You need to tag a user to display information bout them.');
   }
 
+
   if (message.channel.permissionsFor(message.guild.me).has('MANAGE_WEBHOOKS')) {
     const messageActions = [
       "I shit myself??",
@@ -19,6 +20,11 @@ exports.run = async (client, message, args, level) => {
     ]
     const randAction = messageActions.random()
     const taggedUser = message.guild.member(message.mentions.members.first())
+    //console.log(taggedUser.id);
+    let customAction = message.content.replace(message.settings.prefix,'');
+    customAction = customAction.replace(taggedUser.id,'')
+    customAction = customAction.replace(/<@!>/g, '')
+    customAction = customAction.replace("embarrass", '')
     function deleteHooks() {
       message.channel.fetchWebhooks()
       .then(channelWebhhooks => {
@@ -30,12 +36,25 @@ exports.run = async (client, message, args, level) => {
         })
       })
     }
-    message.channel.createWebhook(
-      taggedUser.user.username, {avatar: taggedUser.user.displayAvatarURL()}
-    ).then(webhook => {
-      webhook.send(randAction)
-      deleteHooks()
-    })
+    if (args[1] == null) {
+      message.channel.createWebhook(
+        taggedUser.user.username, {avatar: taggedUser.user.displayAvatarURL()}
+      ).then(webhook => {
+        webhook.send(randAction)
+        setTimeout(function () {
+          deleteHooks()
+        }, 2000);
+      })
+    } else {
+      message.channel.createWebhook(
+        taggedUser.user.username, {avatar: taggedUser.user.displayAvatarURL()}
+      ).then(webhook => {
+        webhook.send(customAction)
+        setTimeout(function () {
+          deleteHooks()
+        }, 2000);
+      })
+    }
   } else {
     message.react('704826179500245042')
     message.channel.send({
