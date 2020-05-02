@@ -17,9 +17,9 @@ exports.run = (client, message, args, level) => {
     // Set basic embed options
     helpInfoEmbed.setColor('#00FDFF')
     helpInfoEmbed.setTitle('Command List:')
-    helpInfoEmbed.setDescription('Use ' + message.settings.prefix + 'help <commandname> for details.')
+    helpInfoEmbed.setDescription('Use ' + message.settings.prefix + 'help <commandname> for details.\n For a more in depth command list with examples click [here](https://feen.us/9l5qhn) \n Consider using `pal!vote` to help the bot reach more servers!')
     helpInfoEmbed.addField("\u200B","\u200B")
-    helpInfoEmbed.setAuthor(client.user.name, client.user.displayAvatarURL())
+    helpInfoEmbed.setAuthor(client.user.username, client.user.displayAvatarURL())
     helpInfoEmbed.setFooter('© Midday','https://avatars0.githubusercontent.com/u/33847796?s=200&v=4')
 
     // Filter all commands by which are available for the user's level, using the <Collection>.filter() method.

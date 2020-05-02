@@ -9,7 +9,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     color: 0x0099ff,
     author: {
       name: client.user.username,
-      icon_url: client.user.displayAvatarURL,
+      icon_url: client.user.displayAvatarURL(),
 		  url: 'https://github.com/MiddayClouds/pal',
     },
     description: '*If you need help, type **'+client.settings.get("default").prefix+'help***',
@@ -68,7 +68,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     ],
     timestamp: new Date(),
     footer: {
-      text: '© Midday',
+      text: '© Midday (Consider voting for the bot by using `pal!vote`)',
       icon_url: 'https://avatars0.githubusercontent.com/u/33847796?s=200&v=4',
     },
   };
