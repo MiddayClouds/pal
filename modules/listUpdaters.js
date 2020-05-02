@@ -4,7 +4,7 @@ exports.BotGuildUpdater = class {
 
 	constructor() {
 		this.DBL = require('dblapi.js')
-		this.dbl = new this.DBL(config.topgg, client)
+		this.dbl = new this.DBL(config.topgg, this.client)
 	}
 
 	/**
