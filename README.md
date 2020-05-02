@@ -1,6 +1,6 @@
 <h1 align="center">Welcome to pal 👋</h1>
+<p align="center"> Pal is a fun discord bot with many different commands.</p>
 <p>
-  <img src="https://img.shields.io/badge/node-%3E%3D13.12.0-blue.svg" />
   <a href="https://github.com/MiddayClouds/pal#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-no-red.svg" />
   </a>
@@ -13,32 +13,16 @@
   <a href="https://app.fossa.com/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal?ref=badge_shield" alt="FOSSA Status">
   	<img src="https://app.fossa.com/api/projects/git%2Bgithub.com%2FMiddayClouds%2Fpal.svg?type=shield"/>
   </a>
-<a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability"><img src="https://api.codeclimate.com/v1/badges/92b81fccccb2faa9aaac/maintainability" /></a>
-
-
+  <a href="https://codeclimate.com/github/MiddayClouds/pal/maintainability">
+    <img src="https://api.codeclimate.com/v1/badges/92b81fccccb2faa9aaac/maintainability"/>
+  </a>
 
 </p>
 
-> Pal is a fun discord bot with many different commands.
-
-### 🏠 [Homepage](https://github.com/MiddayClouds/pal#readme)
-
-## Prerequisites
-
-- node >=13.12.0
-
 ## Commands
 
-A full list of the bot's commands can be found here.
+A full list of the bot's commands can be found [here](https://github.com/MiddayClouds/pal/blob/master/commands/COMMANDS.md).
 
-
-## 👤 Authors
-
-**Midday (Biagio Santoro, Ben Mills)**
-
-* Website: [@Biagio](biagios.github.io) | [@Ben](benmills-co.github.io)
-* Twitter: [@Biagio](https://twitter.com/biagiosantori) | [@Ben](https://twitter.com/BenMillsco)
-* Github: [@Midday](https://github.com/MiddayClouds) [@Biagio](https://github.com/biagios) [@Ben](https://github.com/benmills-co)
 
 ## 🤝 Contributing
 
@@ -49,7 +33,13 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 This project is [MIT](https://github.com/MiddayClouds/pal/blob/master/LICENSE) licensed.
 
-***
+## 👤 Authors
+
+**Midday (Biagio Santoro, Ben Mills)**
+
+* Website: [@Biagio](biagios.github.io) | [@Ben](benmills-co.github.io)
+* Twitter: [@Biagio](https://twitter.com/biagiosantori) | [@Ben](https://twitter.com/BenMillsco)
+* Github: [@Midday](https://github.com/MiddayClouds) | [@Biagio](https://github.com/biagios) | [@Ben](https://github.com/benmills-co)
 
 <h6 align="center">
 Copyright © 2020 <a href="https://github.com/MiddayClouds">Midday</a> | <a href="https://app.fossa.com/reports/d2cfbea5-30d0-4e12-bdb8-cac19db33d29">Licenses</a>
