@@ -1,8 +1,8 @@
 <h1 align="center">Welcome to pal 👋</h1>
 <p align="center"> Pal is a fun discord bot with many different commands.</p>
 <p align="center">
-  <a href="https://github.com/MiddayClouds/pal#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-no-red.svg" />
+  <a href="https://top.gg/bot/300955174225051650" >
+    <img src="https://top.gg/api/widget/status/300955174225051650.svg" alt="Pal" />
   </a>
   <a href="https://github.com/MiddayClouds/pal/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
