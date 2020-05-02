@@ -19,7 +19,7 @@
 
 </p>
 
-## Commands
+## 🗄️ Commands
 
 A full list of the bot's commands can be found [here](https://github.com/MiddayClouds/pal/blob/master/commands/COMMANDS.md).
 
