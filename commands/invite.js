@@ -23,6 +23,6 @@ exports.conf = {
 exports.help = {
   name: "invite",
   category: "Miscelaneous",
-  description: "Sends you a message with a link to invite the bot to your own server.",
+  description: "Outputs a bot invite link",
   usage: "invite"
 };

@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 exports.run = async (client, message, args, level) => {
 
   if (!message.mentions.users.size) {
-    return message.reply('You need to tag a user to display information bout them.');
+    return message.reply('You need to tag a user to embarrass them.');
   }
 
 
@@ -75,7 +75,7 @@ exports.conf = {
 
 exports.help = {
   name: "embarrass",
-  category: "Miscelaneous",
-  description: "Creates a webhook and embarrassess the tagged user.",
-  usage: "embarrass @user"
+  category: "Fun",
+  description: "Outputs a webhook (with the tagged user's name and profile image) and a random message or your custom specified message.",
+  usage: "embarrass <@user> OR embarrass <@user> text"
 };

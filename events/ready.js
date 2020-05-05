@@ -5,7 +5,7 @@ module.exports = async client => {
   client.logger.log(`${client.user.tag}, ready to serve ${client.getMembers(client.guilds)} users in ${client.guilds.cache.size} servers.`, "ready");
 
   // Make the bot "play the game" which is the help command with default prefix.
-  client.user.setActivity(`${client.settings.get("default").prefix}help`, {type: "PLAYING"});
+  client.user.setActivity(`${client.settings.get("default").prefix} help on ${client.guilds.cache.size} guilds.`, {type: "PLAYING"});
 
   // Creating a new updater
 		const updater = new BotListUpdater()

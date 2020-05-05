@@ -65,9 +65,7 @@ exports.run = async (client, message, [action, key, ...value], level) => { // es
       if (["n","no","cancel"].includes(response)) {
         message.reply(`Your setting for \`${key}\` remains at \`${settings[key]}\``);
       }
-      // } else {
-      //   message.reply("Error id: 403 (:no_entry:) | `Command is reserved to Developers.`")
-      // }
+
     } else
     if (action === "get") {
       if (!key) return message.reply("Please specify a key to view");
@@ -82,15 +80,12 @@ exports.run = async (client, message, [action, key, ...value], level) => { // es
       });
       await message.channel.send(`= Current Guild Settings =\n${array.join("\n")}`, {code: "asciidoc"});
     }
-  // } else {
-  //   message.reply("Error id: 403 (:no_entry:) | `Command is reserved to Server Admins.`")
-  // }
 };
 
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: ["setting", "settings", "conf"],
+  aliases: ["setting", "settings"],
   permLevel: "Administrator",
   cooldown: 5
 };
@@ -98,6 +93,6 @@ exports.conf = {
 exports.help = {
   name: "set",
   category: "System",
-  description: "View or change settings for your server.",
-  usage: "set <view/get/edit> <key> <value>"
+  description: "Allows users who have the right permissions to edit the bot's settings for the server. Settings include the prefix welcome message and much more. These must be first edited by the server owner. The `adminRole` and `modRole` settings should be the name of the role moderators and admins have respectively. The `modLogChannel` should be the name of the channel where logs should be sent if the `systemNotice` option is enabled. This will log when users try to use commands they should not be using. The `welcomeChannel` should be the name of the channel where the `welcomeMessage` should be sent to when a user joins if `welcomeEnabled` is set to true.",
+  usage: "To view the guild settings: `set` | To set a new option use: `set edit <option> [new setting]` | To reset an option use: `delete <option>`"
 };

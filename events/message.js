@@ -46,14 +46,22 @@ module.exports = async (client, message) => {
   // Some commands may not be useable in DMs. This check prevents those commands from running
   // and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly)
-    return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
+    return message.channel.send(":exclamation: Error id: 405 | This command is unavailable via private message. Please run this command in a guild.");
 
   // If user should not run the command let them know
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
-      return message.channel.send(`Error id: 403 (:no_entry:) | You do not have permission to use this command.
-                                  Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
-                                  This command requires level ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel})`);
+      return message.channel.send(`:no_entry: Error id: 403 | You do not have permission to use this command. `);
+                                  // Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
+                                  // This command requires level ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel})`);
+    } else {
+      return;
+    }
+  }
+
+  if (cmd.conf.enabled == false) {
+    if (settings.systemNotice === "true") {
+      return message.channel.send(`:interrobang: Error id: 423 | This command has been disabled.`);
     } else {
       return;
     }
@@ -68,31 +76,17 @@ module.exports = async (client, message) => {
     message.flags.push(args.shift().slice(1));
   }
 
-  // const allCommandNames = []
-  // allCommandNames.push(cmd.help.name)
-  // allCommandNames.push(cmd.conf.aliases)
-
   if (!client.cooldowns.has(cmd.help.name)) {
     client.cooldowns.set(cmd.help.name, new Discord.Collection());
   }
 
-  // if (!client.cooldowns.has(cmd.conf.aliases)) {
-  //   client.cooldowns.set(cmd.help.name && cmd.conf.aliases, new Discord.Collection());
-  // }
-
   const now = Date.now();
-  //console.log(client.cooldowns);
-  //console.log(allCommandNames[0]);
-  //client.cooldowns.forEach(cm =>{console.log(cm)})
   const timestamps = client.cooldowns.get(cmd.help.name);
-  //console.log(timestamps);
   const cooldownAmount = (cmd.conf.cooldown || 3) * 1000;
-  //console.log(cooldownAmount);
 
   if (timestamps.has(message.author.id)) {
     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     if (now < expirationTime) {
-      //console.log("CMD USED TOO MUCH");
       const timeLeft = (expirationTime - now) / 1000;
       return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd.help.name}\` command.`);
     }
@@ -105,5 +99,4 @@ module.exports = async (client, message) => {
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
   cmd.run(client, message, args, level)
   message.react('704834924158386196').then(() => message.reactions.cache.get('704834924158386196').remove().catch(error => console.error('Failed to remove reactions: ', error)))
-  console.log(message.reactions.cache.map());
 };
