@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const { version } = require("discord.js");
+const package = require("./../package.json");
 const moment = require("moment");
 require("moment-duration-format");
 
@@ -38,7 +39,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
       },
       {
 		  	name: 'Bot Version:',
-		  	value: '2.5.0',
+		  	value: package.version,
         inline: true,
 		  },
       {
@@ -68,7 +69,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     ],
     timestamp: new Date(),
     footer: {
-      text: '© Midday (Consider voting for the bot by using `pal!vote`)',
+      text: '© Midday',
       icon_url: 'https://avatars0.githubusercontent.com/u/33847796?s=200&v=4',
     },
   };
@@ -86,6 +87,6 @@ exports.conf = {
 exports.help = {
   name: "stats",
   category: "Miscelaneous",
-  description: "Gives some useful bot statistics",
+  description: "Outputs statistics of the bot for nerds.",
   usage: "stats"
 };

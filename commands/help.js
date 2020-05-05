@@ -17,8 +17,9 @@ exports.run = (client, message, args, level) => {
     // Set basic embed options
     helpInfoEmbed.setColor('#00FDFF')
     helpInfoEmbed.setTitle('Command List:')
-    helpInfoEmbed.setDescription('Use ' + message.settings.prefix + 'help <commandname> for details.\n For a more in depth command list with examples click [here](https://feen.us/9l5qhn) \n Consider using `pal!vote` to help the bot reach more servers!')
-    helpInfoEmbed.addField("\u200B","\u200B")
+    helpInfoEmbed.setDescription('Use `' + message.settings.prefix + 'help <commandname>` for details.\n For a more in depth command list with examples click [here](https://feen.us/9l5qhn). \n Consider using `' + message.settings.prefix + '!vote` to help the bot reach more servers!' )
+    //helpInfoEmbed.addField("\u200B","\u200B")
+    helpInfoEmbed.addField(":robot: Server Prefix:", "`" + message.settings.prefix + "`")
     helpInfoEmbed.setAuthor(client.user.username, client.user.displayAvatarURL())
     helpInfoEmbed.setFooter('© Midday','https://avatars0.githubusercontent.com/u/33847796?s=200&v=4')
 
@@ -42,7 +43,8 @@ exports.run = (client, message, args, level) => {
       // Make cat the first category found.
       const cat = c.help.category.toProperCase();
       // Set the first command
-      const currentCommand = `${message.settings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} --> ${c.help.description}\n`;
+      //const currentCommand = `${message.settings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} --> ${c.help.description}\n`;
+      const currentCommand = `${c.help.name}`;
       if (currentCategory !== cat) {
         // Add all possible categories
         possibleCategories.push(cat);
@@ -59,17 +61,20 @@ exports.run = (client, message, args, level) => {
       let command = ``
       // Repeat for the lenght of the given array
       for (var i = 0; i < array.length; i++) {
-        // console.log(array[i])
-        // console.log(array[i][0])
 
-        // Do not do anything if the array description matches remove array
-        if (array[i][0] == remove) {
-
-        } else {
-
-          // Otherwise add it to command
-          command += `${array[i][1]}\n`
-        }
+        //for (var e = 0; e < remove.length; e++) {
+          //remove[e]
+          // Check if the array item matches the remove item.
+          if (array[i][0] == remove[0]) {
+            // Do nothing
+          } else if (array[i][0] == remove[1]){
+            // Do nothing
+          }else {
+            // Otherwise add it to command
+            //console.log(array[i][1]);
+            command += `${array[i][1]} `
+          }
+        //}
       }
 
       // Return the command
@@ -79,14 +84,20 @@ exports.run = (client, message, args, level) => {
     // For the lenght of the possibleCategories check what category it fits into and the print that category
     // more elifs  have to be done manually if you add more categories
     for (var i = 0; i < possibleCategories.length; i++) {
+      //console.log(possibleCategories);
 
-      // Print Miscelaneous category
-      if (possibleCategories[i] == 'Miscelaneous') {
-        helpInfoEmbed.addField("Miscelaneous:",printCommands('System',allCommandsInfo))
-        helpInfoEmbed.addField("\u200B","\u200B")
+      if (possibleCategories[i] == 'Fun') {
+        let remove = ["System","Miscelaneous"]
+        helpInfoEmbed.addField(":tada: **Fun:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
+      } else if (possibleCategories[i] == 'Miscelaneous') {
+        let remove = ["System","Fun"]
+        // Print Miscelaneous category
+        helpInfoEmbed.addField(":game_die: **Miscelaneous:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
+        //helpInfoEmbed.addField("\u200B","\u200B")
       } else if (possibleCategories[i] == 'System') {
+        let remove = ["Miscelaneous","Fun"]
         // Print System category
-        helpInfoEmbed.addField("System:",printCommands('Miscelaneous',allCommandsInfo))
+        helpInfoEmbed.addField(":wrench: **System:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
       }
     }
     message.channel.send(helpInfoEmbed)
@@ -113,6 +124,6 @@ exports.conf = {
 exports.help = {
   name: "help",
   category: "System",
-  description: "Displays all the available commands for your permission level.",
-  usage: "help [command]"
+  description: "Outputs a list of commands the bot can execute.",
+  usage: "help or help [command]"
 };

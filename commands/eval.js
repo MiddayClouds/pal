@@ -22,7 +22,7 @@ exports.conf = {
   guildOnly: false,
   aliases: [],
   permLevel: "Bot Owner",
-  cooldown: 5
+  cooldown: 10
 };
 
 exports.help = {

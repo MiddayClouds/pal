@@ -28,7 +28,7 @@ exports.conf = {
 
 exports.help = {
   name: "inspire",
-  category: "Miscelaneous",
-  description: "Outputs a random embed image from inspirobot.",
+  category: "Fun",
+  description: "Outputs a random image from InspiroBot",
   usage: "inspire"
 };

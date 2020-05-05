@@ -50,6 +50,6 @@ exports.conf = {
 exports.help = {
   name: "user",
   category: "Miscelaneous",
-  description: "Gives some useful information on a user",
+  description: "Outputs information about tagged user.",
   usage: "user @user"
 };

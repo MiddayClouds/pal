@@ -1,7 +1,6 @@
 // Export everything under client so it is nice and reachable
 module.exports = (client) => {
-  const dateTime = require('date-time')
-
+  
   /*
   PERMISSION LEVEL FUNCTION
 
@@ -42,8 +41,8 @@ module.exports = (client) => {
   const defaultSettings = {
     "prefix": "cpal!",
     "modLogChannel": "mod-log",
-    "modRole": "Moderator",
-    "adminRole": "Administrator",
+    "modRole": "Mod",
+    "adminRole": "Admin",
     "systemNotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
     "welcomeChannel": "welcome",
     "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
@@ -159,7 +158,7 @@ module.exports = (client) => {
   }
 
   client.getDate = function (/** Object */date) {
-    return date.toUTCString()
+    return date.toLocaleString("en-GB", {day: "numeric", month: "numeric", year:"numeric"})
     // return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
   }
 
@@ -207,4 +206,5 @@ module.exports = (client) => {
     client.logger.error(`Unhandled rejection: ${err}`);
     console.error(err);
   });
+
 };

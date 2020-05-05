@@ -87,7 +87,7 @@ exports.conf = {
   guildOnly: true,
   aliases: ["defaults"],
   permLevel: "Bot Admin",
-  cooldown: 5
+  cooldown: 20
 };
 
 exports.help = {
