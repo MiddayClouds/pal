@@ -2,12 +2,14 @@
 
 module.exports = (client, guild) => {
    if (!guild.available) return; // If there is an outage, return.
-  
-  client.logger.cmd(`[GUILD LEAVE] ${guild.name} (${guild.id}) removed the bot.`);
 
+  client.logger.cmd(`[GUILD LEAVE] ${guild.name} (${guild.id}) removed the bot.`);
+  //const updater = new BotListUpdater()
+  //updater.updateTopGg(client.guilds.cache.size)
   // If the settings Enmap contains any guild overrides, remove them.
   // No use keeping stale data!
   if (client.settings.has(guild.id)) {
     client.settings.delete(guild.id);
   }
+
 };

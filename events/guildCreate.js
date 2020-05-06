@@ -2,4 +2,7 @@
 
 module.exports = (client, guild) => {
   client.logger.cmd(`[GUILD JOIN] ${guild.name} (${guild.id}) added the bot. Owner: ${guild.owner.user.tag} (${guild.owner.user.id})`);
+  //const updater = new BotListUpdater()
+
+  //updater.updateTopGg(client.guilds.cache.size)
 };
