@@ -24,7 +24,7 @@ exports.run = (client, message, args, level) => {
     helpInfoEmbed.setFooter('© Midday','https://avatars0.githubusercontent.com/u/33847796?s=200&v=4')
 
     // Filter all commands by which are available for the user's level, using the <Collection>.filter() method.
-    const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
+    const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level && cmd.conf.enabled == true) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true );
 
     // Here we have to get the command names only, and we use that array to get the longest name.
     // This make the help commands "aligned" in the output.

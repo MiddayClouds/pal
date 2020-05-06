@@ -58,7 +58,7 @@ exports.steamHandler = class {
           const accountCreatedMonth = new Date((information.created * 1000)).toLocaleString("en-GB", {month: "numeric"})
           const accountCreatedDay = new Date((information.created * 1000)).toLocaleString("en-GB", {day: "numeric"})
           steamUserInfo.addField('\u200B', '\u200B')
-          steamUserInfo.addField('Account created on:', accountCreatedFullDate + " ~ :clock12: ~ **(" + moment([accountCreatedYear, (accountCreatedMonth - 1), accountCreatedDay]).toNow(true) + " years ago)**")
+          steamUserInfo.addField('Account created on:', accountCreatedFullDate + " ~ :clock12: ~ **(" + moment([accountCreatedYear, (accountCreatedMonth - 1), accountCreatedDay]).toNow(true) + " ago)**")
           steamUserInfo.addField('\u200B', '\u200B')
           if (bans.communityBanned == false) {
             steamUserInfo.addField('Community banned:', 'No', true)
