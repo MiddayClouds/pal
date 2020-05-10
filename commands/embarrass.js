@@ -6,6 +6,7 @@ exports.run = async (client, message, args, level) => {
   }
 
 
+
   if (message.channel.permissionsFor(message.guild.me).has('MANAGE_WEBHOOKS')) {
     const messageActions = [
       "I shit myself??",
@@ -20,6 +21,9 @@ exports.run = async (client, message, args, level) => {
     ]
     const randAction = messageActions.random()
     const taggedUser = message.guild.member(message.mentions.members.first())
+    if (taggedUser == '300955174225051650') {
+      return message.reply(`I can't embarrass myself, that's super embarrassing!`);
+    }
     //console.log(taggedUser.id);
     let customAction = message.content.replace(message.settings.prefix,'');
     customAction = customAction.replace(taggedUser.id,'')
