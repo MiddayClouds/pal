@@ -47,6 +47,7 @@ exports.run = async (client, message, args, level) => {
         webhook.send(randAction)
         setTimeout(function () {
           deleteHooks()
+          message.delete()
         }, 2000);
       })
     } else {
@@ -56,6 +57,7 @@ exports.run = async (client, message, args, level) => {
         webhook.send(customAction)
         setTimeout(function () {
           deleteHooks()
+          message.delete()
         }, 2000);
       })
     }
