@@ -6,13 +6,15 @@ module.exports = async client => {
   client.logger.log(`${client.user.tag}, ready to serve ${client.getMembers(client.guilds)} users in ${client.guilds.cache.size} servers.`, "ready");
 
   // Set bot status to `booting up`
-  client.user.setActivity(`Booting up...`, {type: "PLAYING"});
+  client.user.setPresence({ activity: { name: 'Booting up...' }, status: 'idle' })
+  //client.user.setActivity(`Booting up...`, {type: "STREAMING"});
 
   // Pause the client for 5 seconds
   await client.wait(5000);
 
   // Set bot status to the help prefix
-  client.user.setActivity(`${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, {type: "PLAYING"});
+  client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: 'dnd'})
+  //client.user.setActivity(`for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, {type: "WATCHING"});
 
   const randomActivities = [
     `pineapple should not go on pizza.`,

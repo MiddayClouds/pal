@@ -1,7 +1,7 @@
 exports.run = (client, message, args, level) => {
   const Discord = require("discord.js");
   if (!message.mentions.users.size) {
-    return message.reply('You need to tag a user to display information bout them.');
+    return message.reply('You need to tag a user to display information about them.');
   }
 
   const taggedUser = message.guild.member(message.mentions.members.first())
