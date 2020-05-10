@@ -1,68 +1,74 @@
-// This will check if the node version you are running is the required
-// Node version, if it isn't it will throw the following error to inform
-// you.
-if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 10.0.0 or higher is required. Update Node on your system.");
+// This is just a failsafe that checks that the node version isnt the problem
+if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 12.0.0 or higher is required. Update Node on your system.");
 
 // Load up the discord.js library
 const Discord = require("discord.js");
-// Load up the API permissions the bot needs.
+
+// Load up the API permissions the bot needs
 const { Client, Intents } = require('discord.js');
 
-// Save the API permissions the bot needs.
+// Save the API permissions the bot needs
 const botIntents = new Intents(Intents.NON_PRIVILEGED);
 botIntents.remove(['GUILD_PRESENCES']);
 
-// We also load the rest of the things we need in this file:
+// Load other modules that are needed
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
-// This is your client. Some people call it `bot`, some people call it `self`,
-// some might call it `cootchie`. Either way, when you see `client.something`,
-// or `bot.something`, this is what we're refering to. Your client.
-//const client = new Discord.Client();
+// Defining the client.
 const client = new Client({ ws: { intents: botIntents } });
 
-// Here we load the config file that contains our token and our prefix values.
+// Here we load the config file that contains our token and our prefix values
 client.config = require("./config.js");
 
-// Require our logger
+// Require the logger module, this sends webhooks with logs
 client.logger = require("./modules/Logger");
 
-// Require some useful functions.
+// Require some useful functions
 require("./modules/functions.js")(client);
 
 // Create Cooldowns
 client.cooldowns = new Discord.Collection();
 
-// Aliases and commands are put in collections where they can be read from,
-// catalogued, listed, etc.
+// Aliases and commands are put in collections where they can be read from
 client.commands = new Enmap();
 client.aliases = new Enmap();
 
-// Now we integrate the use of Evie's awesome EnMap module, which essentially saves a collection to disk.
+// Now we integrate the use of Evie's awesome EnMap module, which essentially saves a collection to disk
 client.settings = new Enmap({name: "settings"});
 
-// Create the "initializer" for the bot.
+// Create the "initializer" for the bot
 const init = async () => {
 
-  // Here we load **commands** into memory, as a collection, so they're accessible everywhere.
+  // Here we load the commands into memory, as a collection, so they're accessible everywhere
   const cmdFiles = await readdir("./commands/");
+
   // Log the loading of commands.
   client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
+
+  // Complete the following actions for every file in commands folder
   cmdFiles.forEach(f => {
+    // Check if it ends with .js otherwise ignore it
     if (!f.endsWith(".js")) return;
+    // Actually load the command
     const response = client.loadCommand(f);
     if (response) console.log(response);
   });
 
   // Then we load events, which will include our message and ready event.
   const evtFiles = await readdir("./events/");
-  // Log the loading of possible bot events.
+
+  // Log the loading of total bot events.
   client.logger.log(`Loading a total of ${evtFiles.length} events.`);
+
+  // Complete the following for each event
   evtFiles.forEach(file => {
+    // Define the name
     const eventName = file.split(".")[0];
+    // Log the event
     client.logger.log(`Loading Event: ${eventName}`);
+    // Require the event
     const event = require(`./events/${file}`);
     // Bind the client to any event, before the existing arguments provided by the discord.js event.
     client.on(eventName, event.bind(null, client));

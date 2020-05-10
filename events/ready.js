@@ -15,26 +15,26 @@ module.exports = async client => {
   client.user.setActivity(`${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, {type: "PLAYING"});
 
   const randomActivities = [
-    `Pineapple should not go on pizza.`,
+    `pineapple should not go on pizza.`,
     `VVVVVV`,
     `${client.settings.get("default").prefix}help me.`,
-    `Robots are forever on life support.`,
-    `I no longer find Cards Against Humanity funny.`,
-    `Tell your friends about it!`,
+    `robots are forever on life support.`,
+    `i no longer find Cards Against Humanity funny.`,
+    `tell your friends about it!`,
     `Yoshi committed tax fraud!`,
     `Waluigi is the best.`,
-    `Now using the backpack.tf API`,
-    `Find me on github!`,
-    `Be safe, stay home!`,
-    `Shop for those in need!`,
-    `Go on try me!`,
-    `Just use ${client.settings.get("default").prefix}`,
+    `now using the backpack.tf API`,
+    `find me on github!`,
+    `be safe, stay home!`,
+    `shop for those in need!`,
+    `go on try me!`,
+    `just use ${client.settings.get("default").prefix}`,
     `Json! Json! Json!`,
-    `Soon anime will be taxed!`,
-    `Now with Steam functionality!`,
-    `On version ${package.version}!`,
-    `Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch is a real place!`,
-    `A Man Has Fallen Into The River In Lego City!`
+    `soon anime will be taxed!`,
+    `now with Steam functionality!`,
+    `on version ${package.version}!`,
+    `llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch is a real place!`,
+    `a Man Has Fallen Into The River In Lego City!`
   ]
 
 
@@ -44,11 +44,11 @@ module.exports = async client => {
   }, 600000);
 
   // Creating a new updater
-		const updater = new BotListUpdater()
+		//const updater = new BotListUpdater()
 
 		// Interval for updating the amount of servers on top.gg every 60 minutes
-		setInterval(() => {
-			updater.updateTopGg(client.guilds.cache.size)
-		}, 3600000);
+		// setInterval(() => {
+		// 	updater.updateTopGg(client.guilds.cache.size)
+		// }, 3600000);
 
 };
