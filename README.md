@@ -19,6 +19,9 @@
 
 </p>
 
+<p align="center">This is Pal, a discord bot that runs off <a href="https://github.com/hydrabolt/discord.js/">discord.js</a> and is based off <a href="https://github.com/AnIdiotsGuide/guidebot">GuideBot</a></p>
+
+
 ## 🗄️ Commands
 
 A full list of the bot's commands can be found [here](https://github.com/MiddayClouds/pal/blob/master/commands/COMMANDS.md).

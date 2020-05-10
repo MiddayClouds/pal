@@ -76,27 +76,42 @@ module.exports = async (client, message) => {
     message.flags.push(args.shift().slice(1));
   }
 
+  // Check if the command is currently on cooldown
   if (!client.cooldowns.has(cmd.help.name)) {
+    // If it's not add it to the commands that will be on cooldown
     client.cooldowns.set(cmd.help.name, new Discord.Collection());
   }
 
+  // Set now as the current time
   const now = Date.now();
+
+  // Set the timestamp
   const timestamps = client.cooldowns.get(cmd.help.name);
+
+  // Set the cooldown amount
   const cooldownAmount = (cmd.conf.cooldown || 3) * 1000;
 
+  // Check if the timestamp has the author of the message
   if (timestamps.has(message.author.id)) {
+    // Create an expiration time for the command
     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+    // If the expirationTime is bigger than the time now warn that the user has to wait
     if (now < expirationTime) {
       const timeLeft = (expirationTime - now) / 1000;
       return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${cmd.help.name}\` command.`);
     }
   }
 
+  // Set the timestamp as the author id and the time now
   timestamps.set(message.author.id, now);
+
+  // Delete the author from the timestamps
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
   // If the command exists, **AND** the user has permission, run it.
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
+  // Run the command
   cmd.run(client, message, args, level)
+  // React to the message to show the bot is processing
   message.react('704834924158386196').then(() => message.reactions.cache.get('704834924158386196').remove().catch(error => console.error('Failed to remove reactions: ', error)))
 };
