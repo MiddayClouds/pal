@@ -5,7 +5,7 @@ exports.run = (client, message, args, level) => {
       fields: [
         {
           name: 'Bot Invite: ',
-					value: '[Click here](https://discordapp.com/oauth2/authorize?&client_id='+ client.id +'&scope=bot&permissions=1007021143) to add the bot to your server.',
+					value: '[Click here](https://discordapp.com/oauth2/authorize?&client_id='+ client.user.id +'&scope=bot&permissions=1007021143) to add the bot to your server.',
           },
         ],
       },

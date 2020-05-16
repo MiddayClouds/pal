@@ -4,7 +4,7 @@ module.exports = (client, guild) => {
   if (!guild.available) return; // If there is an outage, return.
 
   // Log the bot leaving the guild
-  client.logger.cmd(`[GUILD LEAVE] ${guild.name} (${guild.id}) removed the bot.`);
+  client.logger.cmd(`[GUILD LEAVE] ${guild.name} (${guild.id}) with ${guild.memberCount} members removed the bot.`);
 
   // Update the bot guild count on topgg
   const updater = new BotListUpdater()
