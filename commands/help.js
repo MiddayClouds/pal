@@ -69,7 +69,9 @@ exports.run = (client, message, args, level) => {
             // Do nothing
           } else if (array[i][0] == remove[1]){
             // Do nothing
-          }else {
+          } else if (array[i][0] == remove[2]){
+            // Do nothing
+          } else {
             // Otherwise add it to command
             //console.log(array[i][1]);
             command += `${array[i][1]} `
@@ -87,17 +89,21 @@ exports.run = (client, message, args, level) => {
       //console.log(possibleCategories);
 
       if (possibleCategories[i] == 'Fun') {
-        let remove = ["System","Miscelaneous"]
+        let remove = ["System","Miscelaneous","Server"]
         helpInfoEmbed.addField(":tada: **Fun:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
       } else if (possibleCategories[i] == 'Miscelaneous') {
-        let remove = ["System","Fun"]
+        let remove = ["System","Fun","Server"]
         // Print Miscelaneous category
         helpInfoEmbed.addField(":game_die: **Miscelaneous:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
         //helpInfoEmbed.addField("\u200B","\u200B")
       } else if (possibleCategories[i] == 'System') {
-        let remove = ["Miscelaneous","Fun"]
+        let remove = ["Miscelaneous","Fun","Server"]
         // Print System category
         helpInfoEmbed.addField(":wrench: **System:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
+      } else if (possibleCategories[i] == 'Server') {
+        let remove = ["Miscelaneous","Fun","System"]
+        // Print System category
+        helpInfoEmbed.addField(":desktop: **Server:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
       }
     }
     message.channel.send(helpInfoEmbed)
