@@ -51,6 +51,9 @@ exports.run = async (client, message, args, level) => {
       // }
     ]
   }
+  if (!args[0]) {
+    message.channel.send('Error parsing date. Try using format: +remind <minutes> <message>')
+  }
 
   var yesPollReactions = []
   var noPollReactions = []
