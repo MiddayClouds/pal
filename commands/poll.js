@@ -52,7 +52,7 @@ exports.run = async (client, message, args, level) => {
     ]
   }
   if (!args[0]) {
-    message.channel.send('Error parsing date. Try using format: +remind <minutes> <message>')
+    message.channel.send('Error parsing date. Try using format: ' + message.settings.prefix +'poll <minutes> <message>')
   }
 
   var yesPollReactions = []
@@ -91,11 +91,11 @@ exports.run = async (client, message, args, level) => {
   return new Promise((resolve) => {
 
     // This is triggered if the format is incorrect.
-    if (!args || args.length < 1) return message.channel.send('Error parsing date. Try using format: +remind <minutes> <message>')
-    if (time == 1) return message.channel.send('Must be at least 2 minutes long!')
+    if (!args || args.length < 1) return message.channel.send('Error parsing date. Try using format: ' + message.settings.prefix +'poll <minutes> <message>')
+    if (time == 1) return message.channel.send('The poll must be at least 2 minutes long!')
 
     const results = chrono.parse(msg)
-    if (results.length === 0) return resolve('Error parsing date. Try using format: +remind <minutes> <message>')
+    //if (results.length === 0) return resolve('Error parsing date. Try using format: +remind <minutes> <message>')
 
     // Construct the endTime for the poll.
     let endTime = Moment(results[0].start.date())
