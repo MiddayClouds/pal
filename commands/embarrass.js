@@ -29,6 +29,8 @@ exports.run = async (client, message, args, level) => {
     customAction = customAction.replace(taggedUser.id,'')
     customAction = customAction.replace(/<@!>/g, '')
     customAction = customAction.replace("embarrass", '')
+    customAction = customAction.replace("embarass", '')
+    customAction = customAction.replace("embarras", '')
     function deleteHooks() {
       message.channel.fetchWebhooks()
       .then(channelWebhhooks => {
@@ -74,7 +76,7 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: ["embarass","embarras","doafunny"],
+  aliases: ["embarass","embarras"],
   permLevel: "User",
   cooldown: 10
 };
