@@ -7,15 +7,13 @@ module.exports = async client => {
 
   // Set bot status to `booting up`
   client.user.setPresence({ activity: { name: 'Booting up...' }, status: 'idle' })
-  //client.user.setActivity(`Booting up...`, {type: "STREAMING"});
 
   // Pause the client for 5 seconds
   await client.wait(5000);
 
   // Set bot status to the help prefix
-  client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: 'dnd'})
-  //client.user.setActivity(`for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, {type: "WATCHING"});
-
+  client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: 'online'})
+  
   const randomActivities = [
     `pineapple should not go on pizza.`,
     `VVVVVV`,
@@ -41,9 +39,9 @@ module.exports = async client => {
 
 
   // Change the bots status to something random every 10 minutes.
-  setInterval(() => {
-    client.user.setActivity(randomActivities.random(), {type: "PLAYING"});
-  }, 600000);
+  //setInterval(() => {
+    //client.user.setActivity(randomActivities.random(), {type: "PLAYING"});
+  //}, 600000);
 
   // Creating a new updater
 		//const updater = new BotListUpdater()

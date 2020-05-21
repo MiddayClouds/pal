@@ -93,7 +93,7 @@ module.exports = async (client, message) => {
 
   // Check if the timestamp has the author of the message
   if (timestamps.has(message.author.id)) {
-    // Create an expiration time for the command
+    // Create an expiration time for the command.
     const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
     // If the expirationTime is bigger than the time now warn that the user has to wait
     if (now < expirationTime) {
@@ -105,19 +105,22 @@ module.exports = async (client, message) => {
   // Set the timestamp as the author id and the time now
   timestamps.set(message.author.id, now);
 
-  // Delete the author from the timestamps
+  // Delete the author from the timestamps.
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-  // If the command exists, **AND** the user has permission, run it.
+  // If the command exists, **AND** the user has permission, run it
   client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
 
-  // React to the message to show the bot is processing
-  message.react('704834924158386196').then(() => message.reactions.cache.get('704834924158386196').remove().catch(error => console.error('Failed to remove reactions: ', error)))
+  // Only triggers if not in a DM otherwise it throws error as it cant manage perms
+  if(message.channel.type === 'text') {
+    // React to the message to show the bot is processing
+    message.react('704834924158386196').then(() => message.reactions.cache.get('704834924158386196').remove().catch(error => console.error('Failed to remove reactions: ', error)))
+  }
 
-  message.channel.startTyping()
+  //message.channel.startTyping()
 
   // Run the command
   cmd.run(client, message, args, level)
 
-  message.channel.stopTyping()
+  //message.channel.stopTyping()
 };
