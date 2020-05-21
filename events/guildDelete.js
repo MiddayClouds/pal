@@ -7,6 +7,7 @@ module.exports = (client, guild) => {
   client.logger.cmd(`[GUILD LEAVE] ${guild.name} (${guild.id}) with ${guild.memberCount} members removed the bot.`);
 
   // Update the bot guild count on topgg
+  const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
   const updater = new BotListUpdater()
   updater.updateTopGg(client.guilds.cache.size)
 
