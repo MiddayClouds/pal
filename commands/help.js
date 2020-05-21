@@ -17,7 +17,7 @@ exports.run = (client, message, args, level) => {
     // Set basic embed options
     helpInfoEmbed.setColor('#00FDFF')
     helpInfoEmbed.setTitle('Command List:')
-    helpInfoEmbed.setDescription('Use `' + message.settings.prefix + 'help <commandname>` for details.\n For a more in depth command list with examples click [here](https://feen.us/9l5qhn). \n Consider using `' + message.settings.prefix + '!vote` to help the bot reach more servers!' )
+    helpInfoEmbed.setDescription('Use `' + message.settings.prefix + 'help <commandname>` for details.\nFor a more in depth command list with examples click [here](https://feen.us/9l5qhn). \nConsider using `' + message.settings.prefix + 'vote` to help the bot reach more servers!' )
     //helpInfoEmbed.addField("\u200B","\u200B")
     helpInfoEmbed.addField(":robot: Server Prefix:", "`" + message.settings.prefix + "`")
     helpInfoEmbed.setAuthor(client.user.username, client.user.displayAvatarURL())
@@ -106,6 +106,8 @@ exports.run = (client, message, args, level) => {
         helpInfoEmbed.addField(":desktop: **Server:**","```" + printCommands(remove,allCommandsInfo) + "```", true)
       }
     }
+    helpInfoEmbed.addField("\u200B","\u200B",true)
+    helpInfoEmbed.addField("\u200B","\u200B",true)
     message.channel.send(helpInfoEmbed)
 
   } else {
