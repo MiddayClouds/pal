@@ -6,6 +6,7 @@ module.exports = (client, guild) => {
   client.logger.cmd(`[GUILD JOIN] ${guild.name} (${guild.id}) with ${guild.memberCount} members added the bot.`);
 
   // Update the server number on top.gg
+  const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
   const updater = new BotListUpdater()
   updater.updateTopGg(client.guilds.cache.size)
 };
