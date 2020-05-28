@@ -29,7 +29,7 @@ exports.conf = {
   enabled: true,
   guildOnly: false,
   aliases: ["cat"],
-  permLevel: "User", // Who can use it
+  permLevel: "User",
   cooldown: 5
 };
 
