@@ -16,9 +16,9 @@ exports.run = async (client, message, args, level) => {
   const timeToday = new Date()
   var expiryDate = new Date(timeToday.getTime() + time*60000);
   //const pollTitle = args[2]
+  args.shift()
+  args.shift()
   //args.shift()
-  args.shift()
-  args.shift()
   const pollDescription = args.join(" ");
 
   pollEmbed.setColor('#00FDFF')
@@ -51,9 +51,9 @@ exports.run = async (client, message, args, level) => {
       // }
     ]
   }
-  if (!args[0]) {
-    message.channel.send('Error parsing date. Try using format: ' + message.settings.prefix +'poll <minutes> <message>')
-  }
+  // if (!args[0]) {
+  //   message.channel.send('Invalid Format!\nTry using this format: `' + message.settings.prefix +'poll <minutes> minutes <poll title>`\nFor example: `' + message.settings.prefix +'poll 2 minutes Should we host a game night?`')
+  // }
 
   var yesPollReactions = []
   var noPollReactions = []
@@ -91,7 +91,7 @@ exports.run = async (client, message, args, level) => {
   return new Promise((resolve) => {
 
     // This is triggered if the format is incorrect.
-    if (!args || args.length < 1) return message.channel.send('Error parsing date. Try using format: ' + message.settings.prefix +'poll <minutes> <message>')
+    if (!args || args.length < 1) return message.channel.send('Invalid Format!\nTry using this format: `' + message.settings.prefix +'poll <minutes> minutes <poll title>`\nFor example: `' + message.settings.prefix +'poll 2 minutes Should we host a game night?`')
     if (time == 1) return message.channel.send('The poll must be at least 2 minutes long!')
 
     const results = chrono.parse(msg)
@@ -166,7 +166,7 @@ exports.run = async (client, message, args, level) => {
 };
 
 exports.conf = {
-  enabled: true,
+  enabled: false,
   guildOnly: true,
   aliases: [],
   permLevel: "User", // Who can use it
@@ -176,6 +176,6 @@ exports.conf = {
 exports.help = {
   name: "poll",
   category: "Server",
-  description: "Creates poll for the server.",
-  usage: "poll (time) <title> <description>"
+  description: "Creates a poll for the server.",
+  usage: "poll (time) (title) | Example: poll 2 minutes Should we host a game night?"
 };

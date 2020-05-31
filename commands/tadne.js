@@ -1,18 +1,5 @@
 exports.run = async (client, message, args, level) => {
-  const embed = {
-    "url": "https://www.thisartworkdoesnotexist.com/",
-    "title": "This piece of art does not exist.",
-    "color": 1984960,
-    "footer": {
-      "icon_url": "https://feen.us/xvzn8g.png",
-      "text": "Imagined by a GAN | Powered by: thisartworkdoesnotexist.com"
-    },
-    "image": {
-      "url": "https://www.thisartworkdoesnotexist.com/artwork?"+ Math.floor(100000 + Math.random() * 900000)
-    }
-  }
-  message.channel.send({ embed });
-
+  message.reply("This command has been moved, please use the `generate` command instead.")
 };
 
 exports.conf = {
