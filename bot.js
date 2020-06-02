@@ -45,34 +45,42 @@ const init = async () => {
   const cmdFiles = await readdir("./commands/");
 
   // Log the loading of commands.
-  client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
+  client.logger.log(`Loading a total of ${cmdFiles.length} commands...`);
+
+  let loadedCommands = []
 
   // Complete the following actions for every file in commands folder
   cmdFiles.forEach(f => {
     // Check if it ends with .js otherwise ignore it
     if (!f.endsWith(".js")) return;
     // Actually load the command
-    const response = client.loadCommand(f);
+    const response = client.loadCommand(f,loadedCommands);
     if (response) console.log(response);
   });
+
+  client.logger.log(`Commands Loaded: ${loadedCommands}`);
 
   // Then we load events, which will include our message and ready event.
   const evtFiles = await readdir("./events/");
 
   // Log the loading of total bot events.
-  client.logger.log(`Loading a total of ${evtFiles.length} events.`);
+  client.logger.log(`Loading a total of ${evtFiles.length} events...`);
+
+  let loadedEvents = []
 
   // Complete the following for each event
   evtFiles.forEach(file => {
     // Define the name
     const eventName = file.split(".")[0];
-    // Log the event
-    client.logger.log(`Loading Event: ${eventName}`);
+    loadedEvents.push(`\n${eventName}`)
     // Require the event
     const event = require(`./events/${file}`);
     // Bind the client to any event, before the existing arguments provided by the discord.js event.
     client.on(eventName, event.bind(null, client));
   });
+
+  // Log the event
+  client.logger.log(`Events Loaded: ${loadedEvents}`);
 
   // Generate a cache of client permissions for pretty perm names in commands.
   client.levelCache = {};

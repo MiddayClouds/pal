@@ -15,13 +15,6 @@ Here is a list of commands users can use with pal, not all commands are included
     > Example:   
     > <img src="https://feen.us/m29fk2ocny3r8jl3m5iw.jpg" alt="help command example" style="width:500px;height:600px;">
 
-- ### pal!inspire
-    __Description:__ Outputs a random image from InspiroBot.  
-    __Usage:__ `pal!inspire`
-
-    > Example:   
-    > <img src="https://feen.us/2zxv35jcqa1su8dwpqlw.png" alt="inspire command example" style="width:500px;height:600px;">
-
 - ### pal!invite
     __Description:__ Outputs a bot invite link.  
     __Usage:__ `pal!invite`
@@ -63,4 +56,11 @@ Here is a list of commands users can use with pal, not all commands are included
     __Usage:__ `pal!steam <steamID64>` OR `pal!steam <customURL>` OR `pal!steam <profile https:// link>`
 
     > Example:   
-    > <img src="https://feen.us/srfttdp3jmwftp4k2ktq.png" alt="steam command example" style="width:500px;height:600px;">
+    > <img src="https://feen.us/ryi2da.png" alt="steam command example" style="width:500px;height:600px;">
+
+- ### pal!generate
+    __Description:__ Outputs different types of generated images. Choose from a list of options available such as: `art`,`person`,`quote`,`error`  
+    __Usage:__ To view all options: `pal!generate` otherwise `pal!generate <option>`
+
+    > Example:   
+    > <img src="https://feen.us/yb72xc.png" alt="generate command example" style="width:500px;height:600px;">

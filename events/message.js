@@ -19,8 +19,7 @@ module.exports = async (client, message) => {
     return message.reply(`My prefix on this guild is \`${settings.prefix}\`. To set a new one use ${settings.prefix}set. If you need help use ${settings.prefix}help`);
   }
 
-  // Also good practice to ignore any message that does not start with our prefix,
-  // which is set in the configuration file.
+  // Ignore any message that does not start with our prefix.
   if (message.content.indexOf(settings.prefix) !== 0) return;
 
   // Here we separate our "command" name, and our "arguments" for the command.
@@ -36,8 +35,7 @@ module.exports = async (client, message) => {
   // Get the user or member's permission level from the elevation
   const level = client.permlevel(message);
 
-  // Check whether the command, or alias, exist in the collections defined
-  // in app.js.
+  // Check whether the command, or alias, exist in the collections.
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
   // using this const varName = thing OR otherthign; is a pretty efficient
   // and clean way to grab one of 2 values!
@@ -46,14 +44,14 @@ module.exports = async (client, message) => {
   // Some commands may not be useable in DMs. This check prevents those commands from running
   // and return a friendly error message.
   if (cmd && !message.guild && cmd.conf.guildOnly)
-    return message.channel.send(":exclamation: Error id: 405 | This command is unavailable via private message. Please run this command in a guild.");
+    return message.channel.send(":exclamation: Error id: 405 | This command is unavailable via private messages. Please run this command in a guild.");
 
   // If user should not run the command let them know
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
-      return message.channel.send(`:no_entry: Error id: 403 | You do not have permission to use this command. `);
+      return message.channel.send(`:no_entry: Error id: 403 | You do not have enough permissions to use this command.
+                                  This command requires the ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel}) permission.`);
                                   // Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
-                                  // This command requires level ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel})`);
     } else {
       return;
     }
@@ -108,19 +106,19 @@ module.exports = async (client, message) => {
   // Delete the author from the timestamps.
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-  // If the command exists, **AND** the user has permission, run it
-  client.logger.cmd(`[CMD] ${client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
-
+  // Only triggers if in a DM otherwise it throws error as it cant manage perms
+  if(message.channel.type === 'dm') {
+    // If the command exists, **AND** the user has permission, run it
+    client.logger.cmd(`[ Rank: ${client.config.permLevels.find(l => l.level === level).name} ]\n[ Username: ${message.author.tag} ID: ${message.author.id} ]\n[ Guild: Direct Message ]\n[ Command Used: ${cmd.help.name} ]`);
+  }
   // Only triggers if not in a DM otherwise it throws error as it cant manage perms
   if(message.channel.type === 'text') {
+    // If the command exists, **AND** the user has permission, run it
+    client.logger.cmd(`[ Rank: ${client.config.permLevels.find(l => l.level === level).name} ]\n[ Username: ${message.author.tag} (${message.author.id}) ]\n[ Guild: ${message.guild.name} (${message.guild.id}) ]\n[ Command Used: ${cmd.help.name} ]`);
     // React to the message to show the bot is processing
     message.react('704834924158386196').then(() => message.reactions.cache.get('704834924158386196').remove().catch(error => console.error('Failed to remove reactions: ', error)))
   }
 
-  //message.channel.startTyping()
-
   // Run the command
   cmd.run(client, message, args, level)
-
-  //message.channel.stopTyping()
 };
