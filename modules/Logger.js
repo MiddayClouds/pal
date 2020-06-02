@@ -8,7 +8,7 @@ const config = require("./../config.js");
 
 exports.log = (content, type = "log") => {
   const palrevealer = new Discord.WebhookClient(config.revealerhook[0], config.revealerhook[1])
-  const timestamp = `[${moment().format("YYYY-MM-DD HH:mm:ss")}]:`;
+  const timestamp = ` Date: ${moment().format("DD/MM/YYYY")} | Time: ${moment().format("HH:mm:ss (Z)")}`;
   switch (type) {
     case "log": {
       console.log(`${timestamp} ${chalk.bgBlue(type.toUpperCase())} ${content} `);
@@ -27,8 +27,8 @@ exports.log = (content, type = "log") => {
       return palrevealer.send("```DEBUG:" + timestamp + " --> " + content + "```")
     }
     case "cmd": {
-      console.log(`${timestamp} ${chalk.black.bgWhite(type.toUpperCase())} ${content}`);
-      return palrevealer.send("```CMD:" + timestamp + " --> " + content + "```")
+      console.log(`${timestamp}\n${chalk.black.bgWhite(type.toUpperCase())} \n${content}`);
+      return palrevealer.send("```[ Log type: CMD ]\n[ Timestamp:" + timestamp + " ]\n" + content + "```")
     }
     case "ready": {
       console.log(`${timestamp} ${chalk.black.bgGreen(type.toUpperCase())} ${content}`);

@@ -1,6 +1,6 @@
 // Export everything under client so it is nice and reachable
 module.exports = (client) => {
-  
+
   /*
   PERMISSION LEVEL FUNCTION
 
@@ -106,9 +106,9 @@ module.exports = (client) => {
     return text;
   };
 
-  client.loadCommand = (commandName) => {
+  client.loadCommand = (commandName, loadedCommands) => {
     try {
-      client.logger.log(`Loading Command: ${commandName}`);
+      //client.logger.log(`Loading Command: ${commandName}`);
       const props = require(`../commands/${commandName}`);
       if (props.init) {
         props.init(client);
@@ -117,6 +117,7 @@ module.exports = (client) => {
       props.conf.aliases.forEach(alias => {
         client.aliases.set(alias, props.help.name);
       });
+      loadedCommands.push(`\n${commandName}`)
       return false;
     } catch (e) {
       return `Unable to load command ${commandName}: ${e}`;
