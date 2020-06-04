@@ -1,9 +1,16 @@
 module.exports = async client => {
+  const { version } = require("discord.js");
   const package = require("./../package.json");
   const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
 
   // Log that the bot is online.
   client.logger.log(`${client.user.tag}, ready to serve ${client.getMembers(client.guilds)} users in ${client.guilds.cache.size} servers.`, "ready");
+
+  // Debug
+  client.logger.debug(`BOT ID: ${client.user.id}`)
+  client.logger.debug(`BOT VERSION: ${package.version}`)
+  client.logger.debug(`DISCORD.JS VERSION: v${version}`)
+  client.logger.debug(`NODE.JS VERSION: ${process.version}`)
 
   // Set bot status to `booting up`
   client.user.setPresence({ activity: { name: 'Booting up...' }, status: 'idle' })
@@ -13,7 +20,7 @@ module.exports = async client => {
 
   // Set bot status to the help prefix
   client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: 'online'})
-  
+
   const randomActivities = [
     `pineapple should not go on pizza.`,
     `VVVVVV`,

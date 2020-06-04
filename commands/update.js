@@ -1,6 +1,7 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  await message.reply("Bot is shutting down.");
-  await client.user.setPresence({ activity: { name: 'Bot shutting down...' }, status: 'dnd' })
+  const updatingEmoji = client.emojis.cache.get("717876611440967740");
+  await message.reply(`${updatingEmoji} | Updating from GitHub...`);
+  await client.user.setPresence({ activity: { name: 'Bot rebooting...' }, status: 'dnd' })
   await Promise.all(client.commands.map(cmd =>
     client.unloadCommand(cmd)
   ));
@@ -10,13 +11,13 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ["reboot","get","pull","shutdown"],
   permLevel: "Bot Admin",
   cooldown: 20
 };
 
 exports.help = {
-  name: "reboot",
+  name: "update",
   category: "System",
   description: "Shuts down the bot. If running under PM2, bot will restart automatically.",
   usage: "reboot"

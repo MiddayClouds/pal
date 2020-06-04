@@ -3,7 +3,7 @@
 module.exports = (client, guild) => {
 
   // Log the bot joining the guild
-  client.logger.cmd(`[GUILD JOIN] ${guild.name} (${guild.id}) with ${guild.memberCount} members added the bot.`);
+  client.logger.log(`[GUILD JOIN] ${guild.name} (${guild.id}) with ${guild.memberCount} members added the bot.`);
 
   // Update the server number on top.gg
   const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
