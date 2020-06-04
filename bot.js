@@ -18,6 +18,7 @@ const Enmap = require("enmap");
 
 // Defining the client.
 const client = new Client({ ws: { intents: botIntents } });
+//ONLYUSEWHENNEEDEDINDEBUGPLS const client = new Client()
 
 // Here we load the config file that contains our token and our prefix values
 client.config = require("./config.js");
@@ -72,7 +73,7 @@ const init = async () => {
   evtFiles.forEach(file => {
     // Define the name
     const eventName = file.split(".")[0];
-    loadedEvents.push(`\n${eventName}`)
+    loadedEvents.push(` ${eventName}`)
     // Require the event
     const event = require(`./events/${file}`);
     // Bind the client to any event, before the existing arguments provided by the discord.js event.

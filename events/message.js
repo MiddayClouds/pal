@@ -5,8 +5,7 @@ const Discord = require("discord.js");
 // goes `client, other, args` when this function is run.
 
 module.exports = async (client, message) => {
-  // It's good practice to ignore other bots. This also makes your bot ignore itself
-  // and not get into a spam loop (we call that "botception").
+  // Ignore other bots.
   if (message.author.bot) return;
 
   // Grab the settings for this server from Enmap.
@@ -16,16 +15,13 @@ module.exports = async (client, message) => {
   // Checks if the bot was mentioned, with no message after it, returns the prefix.
   const prefixMention = new RegExp(`^<@!?${client.user.id}>( |)$`);
   if (message.content.match(prefixMention)) {
-    return message.reply(`My prefix on this guild is \`${settings.prefix}\`. To set a new one use ${settings.prefix}set. If you need help use ${settings.prefix}help`);
+    return message.reply(`my prefix on this guild is \`${settings.prefix}\`\nIf you are a guild admin and want to configure the bot use \`${settings.prefix}set\`\nOtherwise, if you need help use \`${settings.prefix}help\``);
   }
 
   // Ignore any message that does not start with our prefix.
   if (message.content.indexOf(settings.prefix) !== 0) return;
 
-  // Here we separate our "command" name, and our "arguments" for the command.
-  // e.g. if we have the message "+say Is this the real life?" , we'll get the following:
-  // command = say
-  // args = ["Is", "this", "the", "real", "life?"]
+  // Here we separate our "command" name, and our "arguments" for the command. The arguments are separated in an array.
   const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
   const command = args.shift().toLowerCase();
 
@@ -37,26 +33,26 @@ module.exports = async (client, message) => {
 
   // Check whether the command, or alias, exist in the collections.
   const cmd = client.commands.get(command) || client.commands.get(client.aliases.get(command));
-  // using this const varName = thing OR otherthign; is a pretty efficient
-  // and clean way to grab one of 2 values!
+
+  // If the command does not exist, do nothing.
   if (!cmd) return;
 
-  // Some commands may not be useable in DMs. This check prevents those commands from running
-  // and return a friendly error message.
+  // If the command is disabled via direct message then throw an error for the user.
   if (cmd && !message.guild && cmd.conf.guildOnly)
     return message.channel.send(":exclamation: Error id: 405 | This command is unavailable via private messages. Please run this command in a guild.");
 
-  // If user should not run the command let them know
+  // Output an error if bot is configured to when a user attempts to use a command they should not use.
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
-      return message.channel.send(`:no_entry: Error id: 403 | You do not have enough permissions to use this command.
-                                  This command requires the ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel}) permission.`);
-                                  // Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
+      return message.channel.send(`:no_entry: Error id: 403 | You do not have enough permissions to use this command.`)
+      //This command requires the ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel}) permission.`);
+      // Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
     } else {
       return;
     }
   }
 
+  // Check if the command has been manually disabled.
   if (cmd.conf.enabled == false) {
     if (settings.systemNotice === "true") {
       return message.channel.send(`:interrobang: Error id: 423 | This command has been disabled.`);
@@ -106,19 +102,21 @@ module.exports = async (client, message) => {
   // Delete the author from the timestamps.
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-  // Only triggers if in a DM otherwise it throws error as it cant manage perms
+  // Only triggers if in a DM in order to not recieve errors when getting guild IDs.
   if(message.channel.type === 'dm') {
-    // If the command exists, **AND** the user has permission, run it
-    client.logger.cmd(`[ Rank: ${client.config.permLevels.find(l => l.level === level).name} ]\n[ Username: ${message.author.tag} ID: ${message.author.id} ]\n[ Guild: Direct Message ]\n[ Command Used: ${cmd.help.name} ]`);
+    // Log the used command and helpful info.
+    client.logger.cmd(`${cmd.help.name}\nINTERNAL RANK & GUILD:: ${client.config.permLevels.find(l => l.level === level).name} || Direct Message\nUSERNAME:: ${message.author.tag} ()${message.author.id})`);
   }
-  // Only triggers if not in a DM otherwise it throws error as it cant manage perms
+
+  // Only triggers if command is used in a guild in order to not recieve errors when getting guild IDs.
   if(message.channel.type === 'text') {
-    // If the command exists, **AND** the user has permission, run it
-    client.logger.cmd(`[ Rank: ${client.config.permLevels.find(l => l.level === level).name} ]\n[ Username: ${message.author.tag} (${message.author.id}) ]\n[ Guild: ${message.guild.name} (${message.guild.id}) ]\n[ Command Used: ${cmd.help.name} ]`);
+    // Log the used command and helpful info.
+    client.logger.cmd(`${cmd.help.name}\nINTERNAL RANK & GUILD:: ${client.config.permLevels.find(l => l.level === level).name} || ${message.guild.name} (${message.guild.id})\nUSERNAME:: ${message.author.tag} (${message.author.id})`);
     // React to the message to show the bot is processing
-    message.react('704834924158386196').then(() => message.reactions.cache.get('704834924158386196').remove().catch(error => console.error('Failed to remove reactions: ', error)))
+    //message.react('717875601964269658').then(() => message.reactions.cache.get('717875601964269658').remove().catch(error => console.error('Failed to remove reactions: ', error)))
   }
 
   // Run the command
   cmd.run(client, message, args, level)
+  
 };

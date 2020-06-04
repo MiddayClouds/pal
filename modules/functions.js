@@ -117,7 +117,7 @@ module.exports = (client) => {
       props.conf.aliases.forEach(alias => {
         client.aliases.set(alias, props.help.name);
       });
-      loadedCommands.push(`\n${commandName}`)
+      loadedCommands.push(` ${commandName}`)
       return false;
     } catch (e) {
       return `Unable to load command ${commandName}: ${e}`;
