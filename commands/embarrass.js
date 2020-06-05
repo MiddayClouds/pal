@@ -29,7 +29,7 @@ exports.run = async (client, message, args, level) => {
   // }
 
 
-  let taggedUser = message.guild.member(message.mentions.members.first())
+  //let taggedUser = message.guild.member(message.mentions.members.first())
   if (!message.mentions.users.size) {
     return message.reply('You need to tag a user to embarrass them.');
   }
