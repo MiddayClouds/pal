@@ -76,7 +76,7 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ["covid","covid19","disease"],
   permLevel: "User", // Who can use it
   cooldown: 5
 };

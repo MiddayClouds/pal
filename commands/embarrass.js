@@ -1,11 +1,38 @@
 const Discord = require("discord.js");
 exports.run = async (client, message, args, level) => {
+  // let taggedUser = ''
+  // if (!message.mentions.users.size) {
+  //   try {
+  //     taggedUser = message.guild.members.fetch({ query: args[0], limit: 1 })
+  //     .then(member => console.log(member.get("user")))
+  //     //console.log(taggedUser);
+  //   } catch (e) {
+  //
+  //   }
+  // }
+  //
+  // console.log(args[0]);
+  // console.log(message.guild.members.fetch({ query: args[0], limit: 1 }));
+  //
+  // let taggedUser = message.guild.member(message.mentions.members.first())
+  // if (!message.mentions.users.size) {
+  //   try {
+  //     console.log(message.guild.members.get(args[0]).id);
+  //     //taggedUser = message.guild.members.fetch(args[0]);
+  //     return taggedUser = message.guild.member(message.guild.members.fetch(args[0]));
+  //
+  //   } catch (e) {
+  //     console.log(e);
+  //     return message.reply('fuck you');
+  //   }
+  //   return message.reply('You need to tag a user to embarrass them.');
+  // }
 
+
+  let taggedUser = message.guild.member(message.mentions.members.first())
   if (!message.mentions.users.size) {
     return message.reply('You need to tag a user to embarrass them.');
   }
-
-
 
   if (message.channel.permissionsFor(message.guild.me).has('MANAGE_WEBHOOKS')) {
     const messageActions = [
@@ -25,12 +52,8 @@ exports.run = async (client, message, args, level) => {
       return message.reply(`I can't embarrass myself, that's super embarrassing!`);
     }
     //console.log(taggedUser.id);
-    let customAction = message.content.replace(message.settings.prefix,'');
-    customAction = customAction.replace(taggedUser.id,'')
-    customAction = customAction.replace(/<@!>/g, '')
-    customAction = customAction.replace("embarrass", '')
-    customAction = customAction.replace("embarass", '')
-    customAction = customAction.replace("embarras", '')
+    let customAction = args
+    customAction.shift()
     function deleteHooks() {
       message.channel.fetchWebhooks()
       .then(channelWebhhooks => {
@@ -42,7 +65,7 @@ exports.run = async (client, message, args, level) => {
         })
       })
     }
-    if (args[1] == null) {
+    if (args[0] == null) {
       message.channel.createWebhook(
         taggedUser.user.username, {avatar: taggedUser.user.displayAvatarURL()}
       ).then(webhook => {
@@ -56,7 +79,7 @@ exports.run = async (client, message, args, level) => {
       message.channel.createWebhook(
         taggedUser.user.username, {avatar: taggedUser.user.displayAvatarURL()}
       ).then(webhook => {
-        webhook.send(customAction)
+        webhook.send(customAction.join(' '))
         setTimeout(function () {
           deleteHooks()
           message.delete()
@@ -76,7 +99,7 @@ exports.run = async (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: ["embarass","embarras"],
+  aliases: ["embarass","embarras","embs"],
   permLevel: "User",
   cooldown: 10
 };

@@ -27,7 +27,7 @@ exports.log = (content, type = "log") => {
       return palrevealer.send("```asciidoc\nTIMESTAMP::" + timestamp + "\nDEBUG:: " + content + "\n```")
     }
     case "cmd": {
-      console.log(`Timestamp:: ${timestamp}\nLog Type and Command Used:: ${chalk.black.bgWhite(type.toUpperCase())} || ${content}\n`);
+      console.log(`TIMESTAMP:: ${timestamp}\nLOG TYPE & COMMAND:: ${chalk.black.bgWhite(type.toUpperCase())} || ${content}\n`);
       return palrevealer.send("```asciidoc\nTIMESTAMP::" + timestamp +"\nCOMMAND:: " + content + "\n```")
     }
     case "ready": {
