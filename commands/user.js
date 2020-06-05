@@ -42,7 +42,7 @@ exports.run = (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: [],
+  aliases: ["user-info","ui","whois"],
   permLevel: "User",
   cooldown: 5
 };

@@ -1,85 +1,43 @@
 const Discord = require("discord.js");
 const { version } = require("discord.js");
-const package = require("./../package.json");
+const { Octokit } = require("@octokit/rest");
+//const package = require("./../package.json");
 const moment = require("moment");
 require("moment-duration-format");
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
+  const octokit = new Octokit()
+  const settings = message.settings = client.getSettings(message.guild);
   const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
-  const clientInfo = {
-    color: 0x0099ff,
-    author: {
-      name: client.user.username,
-      icon_url: client.user.displayAvatarURL(),
-		  url: 'https://github.com/MiddayClouds/pal',
-    },
-    description: '*If you need help, type **'+client.settings.get("default").prefix+'help***',
-    fields: [
-      {
-        name: 'Github Repository',
-			  value: 'https://github.com/MiddayClouds/pal',
-		  },
-      {
-        name: '\u200B',
-        value: '\u200B',
-      },
-		  {
-			  name: 'Guilds Serving:',
-        value: message.client.guilds.cache.size.toLocaleString(),
-        inline: true,
-      },
-		  {
-		  	name: 'Users Serving:',
-		  	value: client.getMembers(message.client.guilds),
-		  	inline: true,
-		  },
-      {
-        name: '\u200B',
-        value: '\u200B',
-      },
-      {
-		  	name: 'Bot Version:',
-		  	value: package.version,
-        inline: true,
-		  },
-      {
-		  	name: 'Discord.js Version:',
-		  	value: 'v'+version,
-		  	inline: true,
-		  },
-      {
-        name: 'Node Version:',
-        value: process.version,
-        inline: true,
-      },
-      {
-        name: '\u200B',
-        value: '\u200B',
-      },
-      {
-        name: 'Memory Usage:',
-        value: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + 'MB',
-        inline: true,
-      },
-      {
-        name: 'Uptime:',
-        value: duration,
-        inline: true,
-      },
-    ],
-    timestamp: new Date(),
-    footer: {
-      text: '© Midday',
-      icon_url: 'https://avatars0.githubusercontent.com/u/33847796?s=200&v=4',
-    },
-  };
-  message.channel.send({ embed: clientInfo });
+  const botInfo = new Discord.MessageEmbed()
+  octokit.pulls.list({
+    owner: "MiddayClouds",
+    repo: "pal",
+    state: "all",
+  }).then((data) => {
+    botInfo.setAuthor(client.user.username,client.user.displayAvatarURL(),'https://github.com/MiddayClouds/pal')
+    botInfo.setDescription('*If you need help, type **'+settings.prefix+'help***')
+    botInfo.addField('Github Repository', 'https://github.com/MiddayClouds/pal', false)
+    botInfo.addField('\u200B', '\u200B', false)
+    botInfo.addField('Guilds Serving:', message.client.guilds.cache.size.toLocaleString(), true)
+    botInfo.addField('Users Serving:', client.getMembers(message.client.guilds), true)
+    botInfo.addField('\u200B', '\u200B', false)
+    // This simply prints the latest github commit i shall add some more like if it checks its open and stuff later..
+    let latestSha = data.data[0].merge_commit_sha
+    botInfo.addField('Commit Running:', "`"+latestSha.substring(0,6)+"`", true)
+    botInfo.addField('Discord.js Version:', 'v'+version, true)
+    botInfo.addField('Node Version:', process.version, true)
+    botInfo.addField('\u200B', '\u200B', false)
+    botInfo.addField('Memory Usage:', (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + 'MB', true)
+    botInfo.addField('Uptime since restart:', duration, true)
+    message.channel.send(botInfo)
+  })
 };
 
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ["info","bot-info","information","status"],
   permLevel: "User",
   cooldown: 5
 };

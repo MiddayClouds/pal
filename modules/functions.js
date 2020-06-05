@@ -131,7 +131,7 @@ module.exports = (client) => {
     } else if (client.aliases.has(commandName)) {
       command = client.commands.get(client.aliases.get(commandName));
     }
-    if (!command) return `The command \`${commandName}\` doesn"t seem to exist, nor is it an alias. Try again!`;
+    if (!command) return `:exclamation: Error id: 404 | The command \`${commandName}\` does not exist, nor is it an alias.\nMaybe the command was not loaded into memory, please check <#700386049045823503>.`;
 
     if (command.shutdown) {
       await command.shutdown(client);

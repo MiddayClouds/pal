@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/MiddayClouds/pal#readme",
   "dependencies": {
+    "@octokit/rest": "^17.10.0",
     "better-sqlite3": "^6.0.1",
     "chalk": "^4.0.0",
     "chrono-node": "^1.4.6",

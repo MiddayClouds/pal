@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ["ping","p","latency"],
   permLevel: "User",
   cooldown: 5
 };
