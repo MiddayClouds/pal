@@ -13,10 +13,10 @@ exports.BotGuildUpdater = class {
 	 * @param {Number} guildSize - Amount of guilds where the server is on.
 	 *
 	 * */
-	updateTopGg(guildSize) {
+	updateTopGg(client, guildSize) {
 		this.dbl.postStats(guildSize)
 		client.logger.debug(`Guld size updated to ${guildSize} on TOP.GG`)
-		
+
 		this.dbl.on('error', e => {
 			client.logger.error(`Error occurred while trying to update the server amount on top.gg! ${e}`)
 			console.error(e)

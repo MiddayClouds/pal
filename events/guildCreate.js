@@ -8,5 +8,5 @@ module.exports = (client, guild) => {
   // Update the server number on top.gg
   const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
   const updater = new BotListUpdater()
-  updater.updateTopGg(client.guilds.cache.size)
+  updater.updateTopGg(client, client.guilds.cache.size)
 };

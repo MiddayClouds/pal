@@ -9,7 +9,7 @@ module.exports = (client, guild) => {
   // Update the bot guild count on topgg
   const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
   const updater = new BotListUpdater()
-  updater.updateTopGg(client.guilds.cache.size)
+  updater.updateTopGg(client, client.guilds.cache.size)
 
   // If the settings Enmap contains any guild overrides, remove them.
   // No use keeping stale data!
