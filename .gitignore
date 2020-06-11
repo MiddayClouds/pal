@@ -16,3 +16,7 @@ data
 package-lock.json
 setup.js
 config_base.txt
+modules/messageModal
+commands/musixmatch
+commands/reacter
+commands/role-react
