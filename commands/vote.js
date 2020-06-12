@@ -2,7 +2,7 @@ exports.run = (client, message, args, level) => {
   message.channel.send({
     content: 'In order to help the bot grow please consider voting for Pal on the websites listed below.',
     embed: {
-      color: 15448698,
+      color: 3447003,
       fields: [
         {
           name: 'Vote on top.gg : ',
@@ -29,5 +29,5 @@ exports.help = {
   name: "vote",
   category: "Miscelaneous",
   description: "Sends you a message with a link to vote for the bot.",
-  usage: "vote"
+  usage: "`vote`"
 };

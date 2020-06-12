@@ -7,7 +7,6 @@ require("moment-duration-format");
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
   const octokit = new Octokit()
-  const settings = message.settings = client.getSettings(message.guild);
   const duration = moment.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
   const botInfo = new Discord.MessageEmbed()
   octokit.pulls.list({
@@ -15,9 +14,10 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     repo: "pal",
     state: "all",
   }).then((data) => {
+    botInfo.setColor('#3498DB')
     botInfo.setAuthor(client.user.username,client.user.displayAvatarURL(),'https://github.com/MiddayClouds/pal')
-    botInfo.setDescription('*If you need help, type **'+settings.prefix+'help***')
-    botInfo.addField('Github Repository', 'https://github.com/MiddayClouds/pal', false)
+    botInfo.setDescription('*If you need help, use*  `'+message.settings.prefix+'help`\n[Github Repository](https://github.com/MiddayClouds/pal)\n[Command List](https://feen.us/9l5qhn)')
+    //botInfo.addField('Github Repository', 'https://github.com/MiddayClouds/pal', false)
     botInfo.addField('\u200B', '\u200B', false)
     botInfo.addField('Guilds Serving:', message.client.guilds.cache.size.toLocaleString(), true)
     botInfo.addField('Users Serving:', client.getMembers(message.client.guilds), true)
@@ -44,7 +44,7 @@ exports.conf = {
 
 exports.help = {
   name: "stats",
-  category: "Miscelaneous",
+  category: "System",
   description: "Outputs statistics of the bot for nerds.",
   usage: "stats"
 };

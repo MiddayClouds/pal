@@ -11,11 +11,12 @@ exports.run = (client, message, args, level) => {
 
   const helpInfoEmbed = new Discord.MessageEmbed()
 
+  helpInfoEmbed.setColor('#3498DB')
+
   // If no specific command is called, show all filtered commands.
   if (!args[0]) {
 
     // Set basic embed options
-    helpInfoEmbed.setColor('#00FDFF')
     helpInfoEmbed.setTitle('Command List:')
     helpInfoEmbed.setDescription('Use `' + message.settings.prefix + 'help <commandname>` for details.\nFor a more in depth command list with examples click [here](https://feen.us/9l5qhn). \nConsider using `' + message.settings.prefix + 'vote` to help the bot reach more servers!' )
     //helpInfoEmbed.addField("\u200B","\u200B")
@@ -116,7 +117,14 @@ exports.run = (client, message, args, level) => {
     if (client.commands.has(command)) {
       command = client.commands.get(command);
       if (level < client.levelCache[command.conf.permLevel]) return;
-      message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {code:"asciidoc"});
+      helpInfoEmbed.setTitle("Command: `"+command.help.name+"`")
+      helpInfoEmbed.setDescription(command.help.description)
+      helpInfoEmbed.addField(`**Command Aliases:**`,`\`${command.conf.aliases.join("`, `")}\``)
+      helpInfoEmbed.addField(`**Usage Example:**`,`${command.help.usage}`)
+      helpInfoEmbed.setFooter('© Midday','https://avatars0.githubusercontent.com/u/33847796?s=200&v=4')
+      message.channel.send(helpInfoEmbed)
+
+      //message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {code:"asciidoc"});
     }
   }
 };
@@ -124,7 +132,7 @@ exports.run = (client, message, args, level) => {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["h", "halp","hp"],
+  aliases: ["h","hp"],
   permLevel: "User",
   cooldown: 5
 };
@@ -133,5 +141,5 @@ exports.help = {
   name: "help",
   category: "System",
   description: "Outputs a list of commands the bot can execute.",
-  usage: "help or help [command]"
+  usage: "`help` or `help [command]`"
 };

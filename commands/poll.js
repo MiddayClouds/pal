@@ -177,5 +177,5 @@ exports.help = {
   name: "poll",
   category: "Server",
   description: "Creates a poll for the server.",
-  usage: "poll (time) (title) | Example: poll 2 minutes Should we host a game night?"
+  usage: "`poll (time) (title)` | Example: `poll 2 minutes Should we host a game night?`"
 };

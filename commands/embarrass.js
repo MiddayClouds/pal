@@ -87,10 +87,11 @@ exports.run = async (client, message, args, level) => {
       })
     }
   } else {
-    message.react('704826179500245042')
+    message.react('710291890465144872')
     message.channel.send({
       embed: {
-        title: ":no_entry: | I do not have WebHook permissions for this channels or server. Please allow my role to manage webhooks. "
+        color: 12597547,
+        title: ":no_entry:\nI do not have the `MANAGE_WEBHOOKS` permission for this channels or server!\nPlease make sure Pal's permissions are correctly set up.\nFor more information on how to do this please run the `rebuild` command."
       }
     })
   }
@@ -108,5 +109,5 @@ exports.help = {
   name: "embarrass",
   category: "Fun",
   description: "Outputs a webhook (with the tagged user's name and profile image) and a random message or your custom specified message.",
-  usage: "embarrass <@user> OR embarrass <@user> text"
+  usage: "`embarrass <@user>` OR `embarrass <@user> text`"
 };

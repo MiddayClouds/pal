@@ -72,5 +72,5 @@ exports.help = {
   name: "steam",
   category: "Miscelaneous",
   description: "Outputs information about given steam account, including SteamRep data.",
-  usage: "steam <steamID64> OR steam <customURL> OR steam <profile https:// link>"
+  usage: "`steam <steamID64>` OR `steam <customURL>` OR `steam <profile https:// link>`"
 };

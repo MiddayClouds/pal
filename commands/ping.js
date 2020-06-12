@@ -17,5 +17,5 @@ exports.help = {
   name: "ping",
   category: "Miscelaneous",
   description: "Everyone knows how this command works, outputs the Bot's own and the Discord API latency in ms.",
-  usage: "ping"
+  usage: "`ping`"
 };
