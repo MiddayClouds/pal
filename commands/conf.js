@@ -94,5 +94,5 @@ exports.help = {
   name: "conf",
   category: "System",
   description: "Modify the default configuration for all guilds.",
-  usage: "conf <view/get/edit> <key> <value>"
+  usage: "`conf <view/get/edit> <key> <value>`"
 };

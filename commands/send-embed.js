@@ -40,6 +40,6 @@ exports.conf = {
 exports.help = {
   name: "send-embed",
   category: "Miscelaneous",
-  description: "Command description here.",
-  usage: "Write here how you are supposed to use the command. like 'user @user'"
+  description: "Allows users to send embeds.",
+  usage: "`send-embed`"
 };

@@ -85,5 +85,5 @@ exports.help = {
   name: "covid-info",
   category: "Miscelaneous",
   description: "Gives information on Covid-19 cases.",
-  usage: "covid-info OR covind-info <country>"
+  usage: "`covid-info` OR `covind-info <country>`"
 };

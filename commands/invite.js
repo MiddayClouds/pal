@@ -1,7 +1,7 @@
 exports.run = (client, message, args, level) => {
   message.channel.send({
     embed: {
-      color: 15448698,
+      color: 3447003,
       fields: [
         {
           name: 'Bot Invite: ',
@@ -24,5 +24,5 @@ exports.help = {
   name: "invite",
   category: "Miscelaneous",
   description: "Outputs a bot invite link",
-  usage: "invite"
+  usage: "`invite`"
 };

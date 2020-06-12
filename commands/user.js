@@ -19,7 +19,7 @@ exports.run = (client, message, args, level) => {
     }
   }
   const userInfoEmbed = new Discord.MessageEmbed()
-  .setColor('#00FDFF')
+  .setColor('#3498DB')
   .setAuthor(taggedUser.user.tag, taggedUser.user.displayAvatarURL())
   .setThumbnail(taggedUser.user.displayAvatarURL())
   .addFields(
@@ -51,5 +51,5 @@ exports.help = {
   name: "user",
   category: "Miscelaneous",
   description: "Outputs information about tagged user.",
-  usage: "user @user"
+  usage: "`user @user`"
 };

@@ -21,28 +21,28 @@ module.exports = async client => {
   // Set bot status to the help prefix
   client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: 'online'})
 
-  const randomActivities = [
-    `pineapple should not go on pizza.`,
-    `VVVVVV`,
-    `${client.settings.get("default").prefix}help me.`,
-    `robots are forever on life support.`,
-    `i no longer find Cards Against Humanity funny.`,
-    `tell your friends about it!`,
-    `Yoshi committed tax fraud!`,
-    `Waluigi is the best.`,
-    `now using the backpack.tf API`,
-    `find me on github!`,
-    `be safe, stay home!`,
-    `shop for those in need!`,
-    `go on try me!`,
-    `just use ${client.settings.get("default").prefix}`,
-    `Json! Json! Json!`,
-    `soon anime will be taxed!`,
-    `now with Steam functionality!`,
-    `on version ${package.version}!`,
-    `llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch is a real place!`,
-    `a Man Has Fallen Into The River In Lego City!`
-  ]
+  // const randomActivities = [
+  //   `pineapple should not go on pizza.`,
+  //   `VVVVVV`,
+  //   `${client.settings.get("default").prefix}help me.`,
+  //   `robots are forever on life support.`,
+  //   `i no longer find Cards Against Humanity funny.`,
+  //   `tell your friends about it!`,
+  //   `Yoshi committed tax fraud!`,
+  //   `Waluigi is the best.`,
+  //   `now using the backpack.tf API`,
+  //   `find me on github!`,
+  //   `be safe, stay home!`,
+  //   `shop for those in need!`,
+  //   `go on try me!`,
+  //   `just use ${client.settings.get("default").prefix}`,
+  //   `Json! Json! Json!`,
+  //   `soon anime will be taxed!`,
+  //   `now with Steam functionality!`,
+  //   `on version ${package.version}!`,
+  //   `llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch is a real place!`,
+  //   `a Man Has Fallen Into The River In Lego City!`
+  // ]
 
 
   // Change the bots status to something random every 10 minutes.
