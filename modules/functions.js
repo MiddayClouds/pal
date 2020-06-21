@@ -28,6 +28,19 @@ module.exports = (client) => {
     return permlvl;
   };
 
+  client.pushTotalGuilds = (client, guildSize) => {
+    this.DBL = require("dblapi.js");
+    this.dbl = new this.DBL(client.topgg, this.client);
+
+    this.dbl.postStats(guildSize);
+    client.logger.debug(`Guld size updated to ${guildSize} on TOP.GG`);
+
+    this.dbl.on("error", e => {
+      client.logger.error(`Error occurred while trying to update the server amount on top.gg! ${e}`);
+      console.error(e);
+    });
+  };
+
   /*
   GUILD SETTINGS FUNCTION
 
@@ -53,7 +66,7 @@ module.exports = (client) => {
   // enmap should only have *unique* overrides that are different from defaults.
   client.getSettings = (guild) => {
     client.settings.ensure("default", defaultSettings);
-    if(!guild) return client.settings.get("default");
+    if (!guild) return client.settings.get("default");
     const guildConf = client.settings.get(guild.id) || {};
     // This "..." thing is the "Spread Operator". It's awesome!
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
@@ -117,7 +130,7 @@ module.exports = (client) => {
       props.conf.aliases.forEach(alias => {
         client.aliases.set(alias, props.help.name);
       });
-      loadedCommands.push(` ${commandName}`)
+      loadedCommands.push(` ${commandName}`);
       return false;
     } catch (e) {
       return `Unable to load command ${commandName}: ${e}`;
@@ -147,21 +160,21 @@ module.exports = (client) => {
     return false;
   };
 
-  client.getMembers = guilds => {
+  client.getMembers = guild => { // eslint-disable-line no-unused-vars
     const totalMembersArray = client.guilds.cache.map(guild => {
-      return guild.memberCount
-    })
+      return guild.memberCount;
+    });
     let total = 0;
-    for(let i = 0; i < totalMembersArray.length; i++) {
-      total = total + totalMembersArray[i]
+    for (let i = 0; i < totalMembersArray.length; i++) {
+      total = total + totalMembersArray[i];
     }
-    return total
-  }
+    return total;
+  };
 
-  client.getDate = function (/** Object */date) {
-    return date.toLocaleString("en-GB", {day: "numeric", month: "numeric", year:"numeric"})
+  client.getDate = function(/** Object */date) {
+    return date.toLocaleString("en-GB", {day: "numeric", month: "numeric", year:"numeric"});
     // return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
-  }
+  };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
 

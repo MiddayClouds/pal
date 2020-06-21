@@ -5,11 +5,11 @@ if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 1
 const Discord = require("discord.js");
 
 // Load up the API permissions the bot needs
-const { Client, Intents } = require('discord.js');
+const { Client, Intents } = require("discord.js");
 
 // Save the API permissions the bot needs
 const botIntents = new Intents(Intents.NON_PRIVILEGED);
-botIntents.remove(['GUILD_PRESENCES']);
+botIntents.remove(["GUILD_PRESENCES"]);
 
 // Load other modules that are needed
 const { promisify } = require("util");
@@ -22,6 +22,8 @@ const client = new Client({ ws: { intents: botIntents } });
 
 // Here we load the config file that contains our token and our prefix values
 client.config = require("./config.js");
+
+client.bans = require("./bans.js");
 
 // Require the logger module, this sends webhooks with logs
 client.logger = require("./modules/Logger");
@@ -48,7 +50,7 @@ const init = async () => {
   // Log the loading of commands.
   client.logger.log(`Loading a total of ${cmdFiles.length} commands...`);
 
-  let loadedCommands = []
+  const loadedCommands = [];
 
   // Complete the following actions for every file in commands folder
   cmdFiles.forEach(f => {
@@ -67,13 +69,13 @@ const init = async () => {
   // Log the loading of total bot events.
   client.logger.log(`Loading a total of ${evtFiles.length} events...`);
 
-  let loadedEvents = []
+  const loadedEvents = [];
 
   // Complete the following for each event
   evtFiles.forEach(file => {
     // Define the name
     const eventName = file.split(".")[0];
-    loadedEvents.push(` ${eventName}`)
+    loadedEvents.push(` ${eventName}`);
     // Require the event
     const event = require(`./events/${file}`);
     // Bind the client to any event, before the existing arguments provided by the discord.js event.
