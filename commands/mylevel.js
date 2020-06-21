@@ -1,4 +1,4 @@
-exports.run = async (client, message, args, level) => {
+exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
   const friendly = client.config.permLevels.find(l => l.level === level).name;
   message.reply(`Your permission level is: ${level} - ${friendly}`);
 };

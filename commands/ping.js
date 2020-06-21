@@ -1,6 +1,6 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  const pings = ['the moon.', 'europe.', 'oceania.', 'Trump.', 'a baguette.', 'a pizza.', 'the Netherlands.', 'Google.', 'the BBC.', 'my mother.', 'Mr. Meeseeks.', "pewdipie's firewatch stream.", 'uncensored hentai.', 'Julian Assange.', 'Vine.']
-  const ranPing = pings.random()
+  const pings = ["the moon.", "europe.", "oceania.", "Trump.", "a baguette.", "a pizza.", "the Netherlands.", "Google.", "the BBC.", "my mother.", "Mr. Meeseeks.", "pewdipie's firewatch stream.", "Julian Assange.", "Vine."];
+  const ranPing = pings.random();
   const msg = await message.channel.send("Calculating...");
   msg.edit(`:ping_pong: | It took ${msg.createdTimestamp - message.createdTimestamp}ms to ping ${ranPing}\nAPI Latency is ${Math.round(message.client.ws.ping)}ms`);
 };

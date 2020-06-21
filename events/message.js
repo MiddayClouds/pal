@@ -44,7 +44,7 @@ module.exports = async (client, message) => {
   // Output an error if bot is configured to when a user attempts to use a command they should not use.
   if (level < client.levelCache[cmd.conf.permLevel]) {
     if (settings.systemNotice === "true") {
-      return message.channel.send(`:no_entry: Error id: 403 | You do not have enough permissions to use this command.`)
+      return message.channel.send(":no_entry: Error id: 403 | You do not have enough permissions to use this command.");
       //This command requires the ${client.levelCache[cmd.conf.permLevel]} (${cmd.conf.permLevel}) permission.`);
       // Your permission level is ${level} (${client.config.permLevels.find(l => l.level === level).name})
     } else {
@@ -55,7 +55,7 @@ module.exports = async (client, message) => {
   // Check if the command has been manually disabled.
   if (cmd.conf.enabled == false) {
     if (settings.systemNotice === "true") {
-      return message.channel.send(`:interrobang: Error id: 423 | This command has been disabled.`);
+      return message.channel.send(":interrobang: Error id: 423 | This command has been disabled.");
     } else {
       return;
     }
@@ -96,6 +96,14 @@ module.exports = async (client, message) => {
     }
   }
 
+  if (client.bans.users.includes(message.author.id)) {
+    if (settings.systemNotice === "true") {
+      return message.channel.send(":interrobang: Error id: 401 | You have been barred from all aspects of the bot.");
+    } else {
+      return;
+    }
+  }
+
   // Set the timestamp as the author id and the time now
   timestamps.set(message.author.id, now);
 
@@ -103,13 +111,14 @@ module.exports = async (client, message) => {
   setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
   // Only triggers if in a DM in order to not recieve errors when getting guild IDs.
-  if(message.channel.type === 'dm') {
+
+  if (message.channel.type === "dm") {
     // Log the used command and helpful info.
     client.logger.cmd(`${cmd.help.name}\nINTERNAL RANK & GUILD:: ${client.config.permLevels.find(l => l.level === level).name} || Direct Message\nUSERNAME:: ${message.author.tag} ()${message.author.id})`);
   }
 
-  // Only triggers if command is used in a guild in order to not recieve errors when getting guild IDs.
-  if(message.channel.type === 'text') {
+  //Only triggers if command is used in a guild in order to not recieve errors when getting guild IDs.
+  if (message.channel.type === "text") {
     // Log the used command and helpful info.
     client.logger.cmd(`${cmd.help.name}\nINTERNAL RANK & GUILD:: ${client.config.permLevels.find(l => l.level === level).name} || ${message.guild.name} (${message.guild.id})\nUSERNAME:: ${message.author.tag} (${message.author.id})`);
     // React to the message to show the bot is processing
@@ -117,6 +126,6 @@ module.exports = async (client, message) => {
   }
 
   // Run the command
-  cmd.run(client, message, args, level)
-  
+  cmd.run(client, message, args, level);
+
 };
