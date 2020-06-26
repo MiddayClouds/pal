@@ -10,16 +10,16 @@ module.exports = (client) => {
 
   */
 
-  client.permlevel = message => {
+  client.permlevel = (message) => {
     let permlvl = 0;
 
-    const permOrder = client.config.permLevels.slice(0).sort(
-        (p, c) => p.level < c.level ? 1 : -1);
+    const permOrder = client.config.permLevels
+      .slice(0)
+      .sort((p, c) => (p.level < c.level ? 1 : -1));
 
     while (permOrder.length) {
       const currentLevel = permOrder.shift();
-      if (message.guild && currentLevel.guildOnly)
-        continue;
+      if (message.guild && currentLevel.guildOnly) continue;
       if (currentLevel.check(message)) {
         permlvl = currentLevel.level;
         break;
@@ -35,10 +35,10 @@ module.exports = (client) => {
     this.dbl.postStats(guildSize);
     client.logger.debug(`Guld size updated to ${guildSize} on TOP.GG`);
 
-    this.dbl.on("error", e => {
+    this.dbl.on("error", (e) => {
       client.logger.error(
-          `Error occurred while trying to update the server amount on top.gg! ${
-              e}`);
+        `Error occurred while trying to update the server amount on top.gg! ${e}`
+      );
       console.error(e);
     });
   };
@@ -54,16 +54,16 @@ module.exports = (client) => {
 
   // THIS IS HERE INCASE ALL THE GUILD SETTINGS ARE DELEATED
   const defaultSettings = {
-    "prefix" : "cpal!",
-    "modLogChannel" : "mod-log",
-    "modRole" : "Mod",
-    "adminRole" : "Admin",
-    "systemNotice" : "true", // This gives a notice when a user tries to run a
-                             // command that they do not have permission to use.
-    "welcomeChannel" : "welcome",
-    "welcomeMessage" :
-        "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-    "welcomeEnabled" : "false"
+    prefix: "cpal!",
+    modLogChannel: "mod-log",
+    modRole: "Mod",
+    adminRole: "Admin",
+    systemNotice: "true", // This gives a notice when a user tries to run a
+    // command that they do not have permission to use.
+    welcomeChannel: "welcome",
+    welcomeMessage:
+      "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
+    welcomeEnabled: "false",
   };
 
   // getSettings merges the client defaults with the guild settings. guild
@@ -71,12 +71,11 @@ module.exports = (client) => {
   // from defaults.
   client.getSettings = (guild) => {
     client.settings.ensure("default", defaultSettings);
-    if (!guild)
-      return client.settings.get("default");
+    if (!guild) return client.settings.get("default");
     const guildConf = client.settings.get(guild.id) || {};
     // This "..." thing is the "Spread Operator". It's awesome!
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-    return ({...client.settings.get("default"), ...guildConf});
+    return { ...client.settings.get("default"), ...guildConf };
   };
 
   /*
@@ -92,11 +91,14 @@ module.exports = (client) => {
 
   */
   client.awaitReply = async (msg, question, limit = 60000) => {
-    const filter = m => m.author.id === msg.author.id;
+    const filter = (m) => m.author.id === msg.author.id;
     await msg.channel.send(question);
     try {
-      const collected = await msg.channel.awaitMessages(
-          filter, {max : 1, time : limit, errors : [ "time" ]});
+      const collected = await msg.channel.awaitMessages(filter, {
+        max: 1,
+        time: limit,
+        errors: ["time"],
+      });
       return collected.first().content;
     } catch (e) {
       return false;
@@ -112,17 +114,17 @@ module.exports = (client) => {
   This is mostly only used by the Eval and Exec commands.
   */
   client.clean = async (client, text) => {
-    if (text && text.constructor.name == "Promise")
-      text = await text;
+    if (text && text.constructor.name == "Promise") text = await text;
     if (typeof text !== "string")
-      text = require("util").inspect(text, {depth : 1});
+      text = require("util").inspect(text, { depth: 1 });
 
-    text =
-        text.replace(/`/g, "`" + String.fromCharCode(8203))
-            .replace(/@/g, "@" + String.fromCharCode(8203))
-            .replace(
-                client.token,
-                "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
+    text = text
+      .replace(/`/g, "`" + String.fromCharCode(8203))
+      .replace(/@/g, "@" + String.fromCharCode(8203))
+      .replace(
+        client.token,
+        "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0"
+      );
 
     return text;
   };
@@ -135,8 +137,9 @@ module.exports = (client) => {
         props.init(client);
       }
       client.commands.set(props.help.name, props);
-      props.conf.aliases.forEach(
-          alias => { client.aliases.set(alias, props.help.name); });
+      props.conf.aliases.forEach((alias) => {
+        client.aliases.set(alias, props.help.name);
+      });
       loadedCommands.push(` ${commandName}`);
       return false;
     } catch (e) {
@@ -152,16 +155,16 @@ module.exports = (client) => {
       command = client.commands.get(client.aliases.get(commandName));
     }
     if (!command)
-      return `:exclamation: Error id: 404 | The command \`${
-          commandName}\` does not exist, nor is it an alias.\nMaybe the command was not loaded into memory, please check <#700386049045823503>.`;
+      return `:exclamation: Error id: 404 | The command \`${commandName}\` does not exist, nor is it an alias.\nMaybe the command was not loaded into memory, please check <#700386049045823503>.`;
 
     if (command.shutdown) {
       await command.shutdown(client);
     }
     const mod =
-        require.cache[require.resolve(`../commands/${command.help.name}`)];
-    delete require
-        .cache[require.resolve(`../commands/${command.help.name}.js`)];
+      require.cache[require.resolve(`../commands/${command.help.name}`)];
+    delete require.cache[
+      require.resolve(`../commands/${command.help.name}.js`)
+    ];
     for (let i = 0; i < mod.parent.children.length; i++) {
       if (mod.parent.children[i] === mod) {
         mod.parent.children.splice(i, 1);
@@ -171,9 +174,11 @@ module.exports = (client) => {
     return false;
   };
 
-  client.getMembers = guild => { // eslint-disable-line no-unused-vars
-    const totalMembersArray =
-        client.guilds.cache.map(guild => { return guild.memberCount; });
+  client.getMembers = (guild) => {
+    // eslint-disable-line no-unused-vars
+    const totalMembersArray = client.guilds.cache.map((guild) => {
+      return guild.memberCount;
+    });
     let total = 0;
     for (let i = 0; i < totalMembersArray.length; i++) {
       total = total + totalMembersArray[i];
@@ -181,9 +186,12 @@ module.exports = (client) => {
     return total;
   };
 
-  client.getDate = function(/** Object */ date) {
-    return date.toLocaleString(
-        "en-GB", {"year" : "numeric", "month" : "long", "day" : "numeric"});
+  client.getDate = function (/** Object */ date) {
+    return date.toLocaleString("en-GB", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
     // return date.getDate() + '/' + (date.getMonth() + 1) + '/' +
     // date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
   };
@@ -198,17 +206,20 @@ module.exports = (client) => {
   // <String>.toPropercase() returns a proper-cased string such as:
   // "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
   Object.defineProperty(String.prototype, "toProperCase", {
-    value : function() {
-      return this.replace(/([^\W_]+[^\s-]*) */g,
-                          (txt) => txt.charAt(0).toUpperCase() +
-                                   txt.substr(1).toLowerCase());
-    }
+    value: function () {
+      return this.replace(
+        /([^\W_]+[^\s-]*) */g,
+        (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+      );
+    },
   });
 
   // <Array>.random() returns a single random element from an array
   // [1, 2, 3, 4, 5].random() can return 1, 2, 3, 4 or 5.
   Object.defineProperty(Array.prototype, "random", {
-    value : function() { return this[Math.floor(Math.random() * this.length)]; }
+    value: function () {
+      return this[Math.floor(Math.random() * this.length)];
+    },
   });
 
   // `await client.wait(1000);` to "pause" for 1 second.
@@ -225,7 +236,7 @@ module.exports = (client) => {
     process.exit(1);
   });
 
-  process.on("unhandledRejection", err => {
+  process.on("unhandledRejection", (err) => {
     client.logger.error(`Unhandled rejection: ${err}`);
     console.error(err);
   });
