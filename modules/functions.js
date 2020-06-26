@@ -172,7 +172,7 @@ module.exports = (client) => {
   };
 
   client.getDate = function(/** Object */date) {
-    return date.toLocaleString("en-GB", {day: "numeric", month: "numeric", year:"numeric"});
+    return date.toLocaleString("en-GB", {"year": "numeric", "month": "long", "day": "numeric"});
     // return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
   };
 
