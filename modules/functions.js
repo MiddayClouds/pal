@@ -1,6 +1,5 @@
 // Export everything under client so it is nice and reachable
 module.exports = (client) => {
-
   /*
   PERMISSION LEVEL FUNCTION
 
@@ -11,15 +10,16 @@ module.exports = (client) => {
 
   */
 
-
   client.permlevel = message => {
     let permlvl = 0;
 
-    const permOrder = client.config.permLevels.slice(0).sort((p, c) => p.level < c.level ? 1 : -1);
+    const permOrder = client.config.permLevels.slice(0).sort(
+        (p, c) => p.level < c.level ? 1 : -1);
 
     while (permOrder.length) {
       const currentLevel = permOrder.shift();
-      if (message.guild && currentLevel.guildOnly) continue;
+      if (message.guild && currentLevel.guildOnly)
+        continue;
       if (currentLevel.check(message)) {
         permlvl = currentLevel.level;
         break;
@@ -36,7 +36,9 @@ module.exports = (client) => {
     client.logger.debug(`Guld size updated to ${guildSize} on TOP.GG`);
 
     this.dbl.on("error", e => {
-      client.logger.error(`Error occurred while trying to update the server amount on top.gg! ${e}`);
+      client.logger.error(
+          `Error occurred while trying to update the server amount on top.gg! ${
+              e}`);
       console.error(e);
     });
   };
@@ -44,29 +46,33 @@ module.exports = (client) => {
   /*
   GUILD SETTINGS FUNCTION
 
-  This function merges the default settings (from config.defaultSettings) with any
-  guild override you might have for particular guild. If no overrides are present,
-  the default settings are used.
+  This function merges the default settings (from config.defaultSettings) with
+  any guild override you might have for particular guild. If no overrides are
+  present, the default settings are used.
 
   */
 
   // THIS IS HERE INCASE ALL THE GUILD SETTINGS ARE DELEATED
   const defaultSettings = {
-    "prefix": "cpal!",
-    "modLogChannel": "mod-log",
-    "modRole": "Mod",
-    "adminRole": "Admin",
-    "systemNotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
-    "welcomeChannel": "welcome",
-    "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-    "welcomeEnabled": "false"
+    "prefix" : "cpal!",
+    "modLogChannel" : "mod-log",
+    "modRole" : "Mod",
+    "adminRole" : "Admin",
+    "systemNotice" : "true", // This gives a notice when a user tries to run a
+                             // command that they do not have permission to use.
+    "welcomeChannel" : "welcome",
+    "welcomeMessage" :
+        "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
+    "welcomeEnabled" : "false"
   };
 
-  // getSettings merges the client defaults with the guild settings. guild settings in
-  // enmap should only have *unique* overrides that are different from defaults.
+  // getSettings merges the client defaults with the guild settings. guild
+  // settings in enmap should only have *unique* overrides that are different
+  // from defaults.
   client.getSettings = (guild) => {
     client.settings.ensure("default", defaultSettings);
-    if (!guild) return client.settings.get("default");
+    if (!guild)
+      return client.settings.get("default");
     const guildConf = client.settings.get(guild.id) || {};
     // This "..." thing is the "Spread Operator". It's awesome!
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
@@ -89,13 +95,13 @@ module.exports = (client) => {
     const filter = m => m.author.id === msg.author.id;
     await msg.channel.send(question);
     try {
-      const collected = await msg.channel.awaitMessages(filter, { max: 1, time: limit, errors: ["time"] });
+      const collected = await msg.channel.awaitMessages(
+          filter, {max : 1, time : limit, errors : [ "time" ]});
       return collected.first().content;
     } catch (e) {
       return false;
     }
   };
-
 
   /*
   MESSAGE CLEAN FUNCTION
@@ -109,27 +115,28 @@ module.exports = (client) => {
     if (text && text.constructor.name == "Promise")
       text = await text;
     if (typeof text !== "string")
-      text = require("util").inspect(text, {depth: 1});
+      text = require("util").inspect(text, {depth : 1});
 
-    text = text
-      .replace(/`/g, "`" + String.fromCharCode(8203))
-      .replace(/@/g, "@" + String.fromCharCode(8203))
-      .replace(client.token, "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
+    text =
+        text.replace(/`/g, "`" + String.fromCharCode(8203))
+            .replace(/@/g, "@" + String.fromCharCode(8203))
+            .replace(
+                client.token,
+                "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0");
 
     return text;
   };
 
   client.loadCommand = (commandName, loadedCommands) => {
     try {
-      //client.logger.log(`Loading Command: ${commandName}`);
+      // client.logger.log(`Loading Command: ${commandName}`);
       const props = require(`../commands/${commandName}`);
       if (props.init) {
         props.init(client);
       }
       client.commands.set(props.help.name, props);
-      props.conf.aliases.forEach(alias => {
-        client.aliases.set(alias, props.help.name);
-      });
+      props.conf.aliases.forEach(
+          alias => { client.aliases.set(alias, props.help.name); });
       loadedCommands.push(` ${commandName}`);
       return false;
     } catch (e) {
@@ -144,13 +151,17 @@ module.exports = (client) => {
     } else if (client.aliases.has(commandName)) {
       command = client.commands.get(client.aliases.get(commandName));
     }
-    if (!command) return `:exclamation: Error id: 404 | The command \`${commandName}\` does not exist, nor is it an alias.\nMaybe the command was not loaded into memory, please check <#700386049045823503>.`;
+    if (!command)
+      return `:exclamation: Error id: 404 | The command \`${
+          commandName}\` does not exist, nor is it an alias.\nMaybe the command was not loaded into memory, please check <#700386049045823503>.`;
 
     if (command.shutdown) {
       await command.shutdown(client);
     }
-    const mod = require.cache[require.resolve(`../commands/${command.help.name}`)];
-    delete require.cache[require.resolve(`../commands/${command.help.name}.js`)];
+    const mod =
+        require.cache[require.resolve(`../commands/${command.help.name}`)];
+    delete require
+        .cache[require.resolve(`../commands/${command.help.name}.js`)];
     for (let i = 0; i < mod.parent.children.length; i++) {
       if (mod.parent.children[i] === mod) {
         mod.parent.children.splice(i, 1);
@@ -161,9 +172,8 @@ module.exports = (client) => {
   };
 
   client.getMembers = guild => { // eslint-disable-line no-unused-vars
-    const totalMembersArray = client.guilds.cache.map(guild => {
-      return guild.memberCount;
-    });
+    const totalMembersArray =
+        client.guilds.cache.map(guild => { return guild.memberCount; });
     let total = 0;
     for (let i = 0; i < totalMembersArray.length; i++) {
       total = total + totalMembersArray[i];
@@ -171,42 +181,41 @@ module.exports = (client) => {
     return total;
   };
 
-  client.getDate = function(/** Object */date) {
-    return date.toLocaleString("en-GB", {"year": "numeric", "month": "long", "day": "numeric"});
-    // return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
+  client.getDate = function(/** Object */ date) {
+    return date.toLocaleString(
+        "en-GB", {"year" : "numeric", "month" : "long", "day" : "numeric"});
+    // return date.getDate() + '/' + (date.getMonth() + 1) + '/' +
+    // date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
   };
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
 
-  // EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds this
-  // later, this conflicts with native code. Also, if some other lib you use does
-  // this, a conflict also occurs. KNOWING THIS however, the following 2 methods
-  // are, we feel, very useful in code.
+  // EXTENDING NATIVE TYPES IS BAD PRACTICE. Why? Because if JavaScript adds
+  // this later, this conflicts with native code. Also, if some other lib you
+  // use does this, a conflict also occurs. KNOWING THIS however, the following
+  // 2 methods are, we feel, very useful in code.
 
   // <String>.toPropercase() returns a proper-cased string such as:
   // "Mary had a little lamb".toProperCase() returns "Mary Had A Little Lamb"
   Object.defineProperty(String.prototype, "toProperCase", {
-    value: function() {
-      return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+    value : function() {
+      return this.replace(/([^\W_]+[^\s-]*) */g,
+                          (txt) => txt.charAt(0).toUpperCase() +
+                                   txt.substr(1).toLowerCase());
     }
   });
 
   // <Array>.random() returns a single random element from an array
   // [1, 2, 3, 4, 5].random() can return 1, 2, 3, 4 or 5.
   Object.defineProperty(Array.prototype, "random", {
-    value: function() {
-      return this[Math.floor(Math.random() * this.length)];
-    }
+    value : function() { return this[Math.floor(Math.random() * this.length)]; }
   });
-
-
-
-
 
   // `await client.wait(1000);` to "pause" for 1 second.
   client.wait = require("util").promisify(setTimeout);
 
-  // These 2 process methods will catch exceptions and give *more details* about the error and stack trace.
+  // These 2 process methods will catch exceptions and give *more details* about
+  // the error and stack trace.
   process.on("uncaughtException", (err) => {
     const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
     client.logger.error(`Uncaught Exception: ${errorMsg}`);
@@ -220,5 +229,4 @@ module.exports = (client) => {
     client.logger.error(`Unhandled rejection: ${err}`);
     console.error(err);
   });
-
 };
