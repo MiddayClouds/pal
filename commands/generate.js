@@ -12,7 +12,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   // Image generation
   const gen = Math.floor(100000 + Math.random() * 900000);
   // const personURL = `https://www.thispersondoesnotexist.com/image.jpg?${gen}`;
-  const personURL = "https://www.thispersondoesnotexist.com/";
+  const personURL = "https://www.thispersondoesnotexist.com/image";
   const personPATH = "./images/GAN/person.jpg";
   // const artURL = `https://www.thisartworkdoesnotexist.com/artwork?${gen}`;
   const artURL = "https://www.thisartworkdoesnotexist.com/";
