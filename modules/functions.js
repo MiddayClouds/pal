@@ -30,7 +30,7 @@ module.exports = (client) => {
 
   client.pushTotalGuilds = (client, guildSize) => {
     this.DBL = require("dblapi.js");
-    this.dbl = new this.DBL(client.topgg, this.client);
+    this.dbl = new this.DBL(client.config.topgg, this.client);
 
     this.dbl.postStats(guildSize);
     client.logger.debug(`Guld size updated to ${guildSize} on TOP.GG`);
