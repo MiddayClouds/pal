@@ -1,0 +1,75 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+<title>Settings | <%= guild.name %></title>
+<div class="container-fluid">
+    <div class="d-sm-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-white mb-0">Settings | <%= guild.name %></h2>
+    </div>
+    <div class="row">
+        <div class="col-lg-7 col-xl-8">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-white font-weight-bold m-0">Configuration</h6>
+                    <div class="dropdown no-arrow invisible"><button class="btn btn-link btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                        <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in"
+                            role="menu">
+                            <!-- <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" role="presentation" href="#">&nbsp;Action</a><a class="dropdown-item" role="presentation" href="#">&nbsp;Another action</a> -->
+                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#">&nbsp;Something else here</a></div>
+                    </div>
+                </div>
+                <form method="post">
+                  <div class="card-body">
+                    <div class="table-responsive-md">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">Setting Name</th>
+                            <th scope="col">Current Setting</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <% const settings = bot.getSettings(guild);
+                          const defaults = bot.config.defaultSettings;
+                          for (const key in settings) { %>
+                          <tr>
+                            <th scope="row" class="align-middle"><%= key %></th>
+                            <td width="80%"><input type="text" class="form-control form-control-sm" style="text-align: left;" name="<%= key %>" id="<%= key %>" value="<%= settings[key] %>" placeholder="Enter <%= key %>"required></td>
+                          </tr>
+                          <% } %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-primary btn-block">Save Changes <i class="fa fa-fw fa-save" aria-hidden="true"></i></button>
+                    <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#settingsResetModal" role="button">Reset Defaults <i class="fa fa-fw fa-cogs" aria-hidden="true"></i></a>
+                  </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-5 col-xl-4">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="text-white font-weight-bold m-0">Server Overview</h6>
+                    <div class="dropdown no-arrow invisible"><button class="btn btn-link btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" type="button"><i class="fas fa-ellipsis-v text-gray-400"></i></button>
+                        <div class="dropdown-menu shadow dropdown-menu-right animated--fade-in"
+                            role="menu">
+                            <!-- <p class="text-center dropdown-header">dropdown header:</p><a class="dropdown-item" role="presentation" href="#">&nbsp;Action</a><a class="dropdown-item" role="presentation" href="#">&nbsp;Another action</a> -->
+                            <div class="dropdown-divider"></div><a class="dropdown-item" role="presentation" href="#">&nbsp;Something else here</a></div>
+                    </div>
+                </div>
+                <div class="card-body text-center">
+                  <%- include('../blocks/guild-card', {guild}) %>
+                </div>
+                <div class="card-footer">
+                  <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#serverLeaveModal" role="button" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left">Leave <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Include the modals so they actually work -->
+<%- include('../blocks/guild-modals') %>
+
+
+<%- include('../blocks/footer') %>

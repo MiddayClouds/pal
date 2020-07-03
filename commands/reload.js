@@ -1,5 +1,5 @@
 exports.run = async (client, message, args, level) => { // eslint-disable-line no-unused-vars
-  let loadedCommands = []
+  const loadedCommands = [];
   if (!args || args.length < 1) return message.reply("Error! You must provide a command to reload!");
   const command = client.commands.get(args[0]) || client.commands.get(client.aliases.get(args[0]));
   let response = await client.unloadCommand(args[0]);
@@ -22,6 +22,6 @@ exports.conf = {
 exports.help = {
   name: "reload",
   category: "System",
-  description: "Reloads a command that\"s been modified.",
-  usage: "reload [command]"
+  description: "Reloads a command that's been modified.",
+  usage: "`reload <command>`"
 };

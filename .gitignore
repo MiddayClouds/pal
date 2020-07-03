@@ -8,7 +8,8 @@ node_modules/
 # Sensitive Project Files
 config.js
 data
-# bans.js
+installer
+bans.js
 
 
 # Not needed
@@ -20,3 +21,4 @@ modules/messageModal
 commands/musixmatch
 commands/reacter
 commands/role-react
+.eslintrc.json

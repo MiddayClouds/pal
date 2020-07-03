@@ -1,0 +1,25 @@
+          <hr class="my-4 invisible">
+        </div>
+        </div>
+      </main>
+
+      <footer class="footer mt-auto py-3">
+        <div class="container">
+          <span class="font-weight-lighter">
+            <p>
+              <a class="navbar-brand" href="/dashboard" ><img src="https://avatars0.githubusercontent.com/u/33847796?s=200&v=4" width="30" height="30" class="d-inline-block rounded-circle" alt="<%= bot.user.username %>"> <span class="align-middle"></span></a>
+              Designed and built by <a href="https://anidiots.guide">An Idiot's Guide</a> | Updated and remodeled by <a href="https://github.com/MiddayClouds/">Midday</a> |
+              Currently serving <a href="/stats"><%= bot.guilds.cache.reduce((p, c) => p + c.memberCount, 0); %> users</a> | Code under <a href="https://github.com/MiddayClouds/pal/blob/master/LICENSE">MIT License</a>.
+            </p>
+          </span>
+        </div>
+      </footer>
+      <script>
+        jQuery(document).ready(function(){
+            $( "#loader" ).delay(800).fadeOut(400, function(){
+                $( "#your-page" ).fadeIn(400);
+            });
+        });
+      </script>
+  </body>
+</html>

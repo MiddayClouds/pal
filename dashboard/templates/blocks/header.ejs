@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+  <!-- <title>Dashboard | <%= bot.user.username %></title> -->
+
+  <!-- Embeded links meta tags -->
+  <% if(bot.application.description.length > 3) { %> <meta name="twitter:description" content="<%= bot.application.description %>"> <% }  %>
+  <% if(bot.application.description.length > 3) { %> <meta name="description" content="<%= bot.application.description %>"> <% }  %>
+  <meta name="twitter:image" content="<%= bot.user.avatarURL()%>">
+  <meta property="og:image" content="<%= bot.user.avatarURL()%>">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="<%=bot.user.username%>">
+
+  <link rel='icon' href='<%= bot.user.avatarURL() %>'>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js" integrity="sha256-zG8v+NWiZxmjNi+CvUYnZwKtHzFtdO8cAKUIdB8+U9I=" crossorigin="anonymous"></script>
+  <script src="https://cdn.datatables.net/v/bs4/dt-1.10.16/cr-1.4.1/r-2.2.0/datatables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+  <link rel="stylesheet" href="/public/darkly.css"/>
+
+  <style media="screen">
+    .loading-icon,body,html{min-height:100%;height:100%}.loading-icon{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;justify-content:center;-ms-align-items:center;-webkit-justify-content:center;background-color:#222}i.fa.fa-spinner.fa-spin.fa-5x.fa-fw{color:#6a6a6a}.navigation-clean{background:#fff;padding-top:.75rem;padding-bottom:.75rem;color:#333;border-radius:0;box-shadow:none;border:none;margin-bottom:0}.navigation-clean .navbar-brand{font-weight:700;color:inherit}.navigation-clean .navbar-brand:hover{color:#222}.navigation-clean.navbar-dark .navbar-brand:hover{color:#f0f0f0}.navigation-clean .navbar-brand img{height:100%;display:inline-block;margin-right:10px;width:auto}.navigation-clean .navbar-toggler{border-color:#ddd;color:#888}.navigation-clean .navbar-toggler:focus,.navigation-clean .navbar-toggler:hover{background:0 0}.navigation-clean.navbar-dark .navbar-toggler{border-color:#555;color:#eee}.navigation-clean .form-inline,.navigation-clean .navbar-collapse{border-top-color:#ddd}.navigation-clean.navbar-dark .form-inline,.navigation-clean.navbar-dark .navbar-collapse{border-top-color:#333}.navigation-clean .navbar-nav>.active>a,.navigation-clean .navbar-nav>.show>a{background:0 0;box-shadow:none}.navigation-clean.navbar-light .navbar-nav .nav-link.active,.navigation-clean.navbar-light .navbar-nav .nav-link.active:focus,.navigation-clean.navbar-light .navbar-nav .nav-link.active:hover{color:#8f8f8f;box-shadow:none;background:0 0;pointer-events:none}.navigation-clean.navbar .navbar-nav .nav-link{padding-left:18px;padding-right:18px}.navigation-clean.navbar-light .navbar-nav .nav-link{color:#465765}.navigation-clean.navbar-light .navbar-nav .nav-link:focus,.navigation-clean.navbar-light .navbar-nav .nav-link:hover{color:#37434d!important;background-color:transparent}.navigation-clean .navbar-nav>li>.dropdown-menu{margin-top:-5px;box-shadow:none;background-color:#fff;border-radius:2px}@media (min-width:768px){.navigation-clean{padding-top:1rem;padding-bottom:1rem}.navigation-clean .navbar-nav .show .dropdown-menu{box-shadow:0 4px 8px rgba(0,0,0,.1)}}@media (max-width:767px){.navigation-clean .navbar-nav .show .dropdown-menu .dropdown-item{color:#37434d;padding-top:.8rem;padding-bottom:.8rem;line-height:1}}.navigation-clean .dropdown-menu .dropdown-item,.navigation-clean .dropdown-menu .dropdown-item:focus{line-height:2;color:#37434d}.navigation-clean .dropdown-menu .dropdown-item:focus,.navigation-clean .dropdown-menu .dropdown-item:hover{background:#eee;color:inherit}.navigation-clean.navbar-dark{background-color:#1f2021;color:#fff}.navigation-clean.navbar-dark .navbar-nav a.active,.navigation-clean.navbar-dark .navbar-nav a.active:focus,.navigation-clean.navbar-dark .navbar-nav a.active:hover{color:#8f8f8f;box-shadow:none;background:0 0;pointer-events:none}.navigation-clean.navbar-dark .navbar-nav .nav-link{color:#dfe8ee}.navigation-clean.navbar-dark .navbar-nav .nav-link:focus,.navigation-clean.navbar-dark .navbar-nav .nav-link:hover{color:#fff;background-color:transparent}.navigation-clean.navbar-dark .navbar-nav>li>.dropdown-menu{background-color:#1f2021}.navigation-clean.navbar-dark .dropdown-menu .dropdown-item,.navigation-clean.navbar-dark .dropdown-menu .dropdown-item:focus{color:#f2f5f8}.navigation-clean.navbar-dark .dropdown-menu .dropdown-item:focus,.navigation-clean.navbar-dark .dropdown-menu .dropdown-item:hover{background:#363739}@media (max-width:767px){.navigation-clean.navbar-dark .navbar-nav .show .dropdown-menu .dropdown-item{color:#fff}}
+    .unselectable {-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+  </style>
+
+</head>
+
+<body id="page-top">
+    <!-- <div id="LoadingPage" class="loading-icon"><i class="material-icons md-48 d-xl-flex fa-spin md-48" style="font-size: 84px;">track_changes</i></div> -->
+    <div id="wrapper">
+        <div class="d-flex flex-column" id="content-wrapper">
+            <div id="content">
+              <%- include('../blocks/nav.ejs')%>

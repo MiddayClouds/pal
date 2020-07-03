@@ -1,61 +1,53 @@
 module.exports = async client => {
   const { version } = require("discord.js");
-  const package = require("./../package.json");
-  const BotListUpdater = require('./../modules/listUpdaters').BotGuildUpdater
 
-  // Log that the bot is online.
-  client.logger.log(`${client.user.tag}, ready to serve ${client.getMembers(client.guilds)} users in ${client.guilds.cache.size} servers.`, "ready");
+  // Why await here? Because the ready event isn't actually ready, sometimes
+  // guild information will come in *after* ready. 1s is plenty, generally,
+  // for all of them to be loaded.
+  // NOTE: client.wait and client.log are added by ./util/functions.js !
+  await client.wait(1000);
 
-  // Debug
-  client.logger.debug(`BOT ID: ${client.user.id}`)
-  client.logger.debug(`BOT VERSION: ${package.version}`)
-  client.logger.debug(`DISCORD.JS VERSION: v${version}`)
-  client.logger.debug(`NODE.JS VERSION: ${process.version}`)
+  // This loop ensures that client.application always contains up to date data
+  // about the app's status. This includes whether the bot is public or not,
+  // its description, owner(s), etc. Used for the dashboard amongs other things.
+  client.application = await client.fetchApplication();
+
+
+  if (client.owners.length < 1) client.application.owner ? client.owners.push(...client.application.owner.members.keys()) : client.owners.push(client.application.owner.id);
+
+  setInterval( async () => {
+    client.owners = [];
+    client.application = await client.fetchApplication();
+    client.application.team ? client.owners.push(...client.application.team.members.keys()) : client.owners.push(client.application.owner.id);
+  }, 60000);
+
+  //client.owners.push(client.application.team.members.keys());
+
+  // Check whether the "Default" guild settings are loaded in the enmap.
+  // If they're not, write them in. This should only happen on first load.
+  if (!client.settings.has("default")) {
+    if (!client.config.defaultSettings) throw new Error("defaultSettings not preset in config.js or settings database. Bot cannot load.");
+    client.settings.set("default", client.config.defaultSettings);
+  }
+
+  // Initializes the dashboard, which must be done on ready otherwise some data
+  // may be missing from the dashboard.
+  require("../util/dashboard")(client);
 
   // Set bot status to `booting up`
-  client.user.setPresence({ activity: { name: 'Booting up...' }, status: 'idle' })
+  client.user.setPresence({ activity: { name: "Booting up..." }, status: "idle" });
 
   // Pause the client for 5 seconds
   await client.wait(5000);
 
   // Set bot status to the help prefix
-  client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: 'online'})
+  client.user.setPresence({ activity: { name: `for ${client.settings.get("default").prefix}help on ${client.guilds.cache.size} guilds.`, type: "WATCHING"}, status: "online"});
 
-  const randomActivities = [
-    `pineapple should not go on pizza.`,
-    `VVVVVV`,
-    `${client.settings.get("default").prefix}help me.`,
-    `robots are forever on life support.`,
-    `i no longer find Cards Against Humanity funny.`,
-    `tell your friends about it!`,
-    `Yoshi committed tax fraud!`,
-    `Waluigi is the best.`,
-    `now using the backpack.tf API`,
-    `find me on github!`,
-    `be safe, stay home!`,
-    `shop for those in need!`,
-    `go on try me!`,
-    `just use ${client.settings.get("default").prefix}`,
-    `Json! Json! Json!`,
-    `soon anime will be taxed!`,
-    `now with Steam functionality!`,
-    `on version ${package.version}!`,
-    `llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch is a real place!`,
-    `a Man Has Fallen Into The River In Lego City!`
-  ]
-
-
-  // Change the bots status to something random every 10 minutes.
-  //setInterval(() => {
-    //client.user.setActivity(randomActivities.random(), {type: "PLAYING"});
-  //}, 600000);
-
-  // Creating a new updater
-		//const updater = new BotListUpdater()
-
-		// Interval for updating the amount of servers on top.gg every 60 minutes
-		// setInterval(() => {
-		// 	updater.updateTopGg(client.guilds.cache.size)
-		// }, 3600000);
-
+  // Log that the bot is online.
+  client.logger.log(`${client.user.tag}, ready to serve ${client.getMembers(client.guilds)} users in ${client.guilds.cache.size} servers.`, "ready");
+  // Debug
+  client.logger.debug(`BOT ID: ${client.user.id}`);
+  //client.logger.debug(`BOT VERSION: ${package.version}`);
+  client.logger.debug(`DISCORD.JS VERSION: v${version}`);
+  client.logger.debug(`NODE.JS VERSION: ${process.version}`);
 };

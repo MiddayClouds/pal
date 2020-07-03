@@ -1,4 +1,4 @@
-// Export everything under client so it is nice and reachable
+const _ = require("lodash");
 module.exports = (client) => {
 
   /*
@@ -10,8 +10,6 @@ module.exports = (client) => {
   command including the VERY DANGEROUS `eval` and `exec` commands!
 
   */
-
-
   client.permlevel = message => {
     let permlvl = 0;
 
@@ -37,27 +35,44 @@ module.exports = (client) => {
 
   */
 
-  // THIS IS HERE INCASE ALL THE GUILD SETTINGS ARE DELEATED
+  // THIS IS HERE BECAUSE SOME PEOPLE DELETE ALL THE GUILD SETTINGS
+  // And then they're stuck because the default settings are also gone.
+  // So if you do that, you're resetting your defaults. Congrats.
   const defaultSettings = {
-    "prefix": "cpal!",
+    "prefix": "pal!",
     "modLogChannel": "mod-log",
-    "modRole": "Mod",
-    "adminRole": "Admin",
-    "systemNotice": "true", // This gives a notice when a user tries to run a command that they do not have permission to use.
+    "modRole": "Moderator",
+    "adminRole": "Administrator",
+    "systemNotice": "true",
     "welcomeChannel": "welcome",
-    "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
+    "welcomeMessage": "Say hello to {{user}}, everyone!",
     "welcomeEnabled": "false"
   };
 
   // getSettings merges the client defaults with the guild settings. guild settings in
   // enmap should only have *unique* overrides that are different from defaults.
   client.getSettings = (guild) => {
+    // This line coupled with the defaultSettings defined above will always make sure
+    // the bot is functional, if a user deletes the default settings from the database
+    // ensuring the data will re-set those defaults.
     client.settings.ensure("default", defaultSettings);
-    if(!guild) return client.settings.get("default");
-    const guildConf = client.settings.get(guild.id) || {};
-    // This "..." thing is the "Spread Operator". It's awesome!
-    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax
-    return ({...client.settings.get("default"), ...guildConf});
+    return {
+      ...(client.settings.get("default") || {}),
+      ...(guild && client.settings.get(guild.id) || {})
+    };
+  };
+
+  // writeSettings overrides, or adds, any configuration item that is different
+  // than the defaults. This ensures less storage wasted and to detect overrides.
+  client.writeSettings = (id, newSettings) => {
+    const defaults = client.settings.get("default");
+    const settings = client.settings.get(id) || {};
+    // Using the spread operator again, and lodash's "pickby" function to remove any key
+    // from the settings that aren't in the defaults (meaning, they don't belong there)
+    client.settings.set(id, {
+      ..._.pickBy(settings, (v, k) => !_.isNil(defaults[k])),
+      ..._.pickBy(newSettings, (v, k) => !_.isNil(defaults[k]))
+    });
   };
 
   /*
@@ -117,7 +132,7 @@ module.exports = (client) => {
       props.conf.aliases.forEach(alias => {
         client.aliases.set(alias, props.help.name);
       });
-      loadedCommands.push(` ${commandName}`)
+      loadedCommands.push(` ${commandName}`);
       return false;
     } catch (e) {
       return `Unable to load command ${commandName}: ${e}`;
@@ -147,21 +162,35 @@ module.exports = (client) => {
     return false;
   };
 
-  client.getMembers = guilds => {
+  client.getMembers = guilds => { // eslint-disable-line no-unused-vars
     const totalMembersArray = client.guilds.cache.map(guild => {
-      return guild.memberCount
-    })
+      return guild.memberCount;
+    });
     let total = 0;
-    for(let i = 0; i < totalMembersArray.length; i++) {
-      total = total + totalMembersArray[i]
+    for (let i = 0; i < totalMembersArray.length; i++) {
+      total = total + totalMembersArray[i];
     }
-    return total
-  }
+    return total;
+  };
 
-  client.getDate = function (/** Object */date) {
-    return date.toLocaleString("en-GB", {day: "numeric", month: "numeric", year:"numeric"})
+  client.getDate = function(/** Object */date) {
+    return date.toLocaleString("en-GB", {"year": "numeric", "month": "long", "day": "numeric"});
     // return date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' (' + hours + ':' + minutes + ':' + seconds + ' )'
-  }
+  };
+
+  client.pushTotalGuilds = (client, guildSize) => {
+    this.DBL = require("dblapi.js");
+    this.dbl = new this.DBL(client.config.topgg, this.client);
+
+    this.dbl.postStats(guildSize);
+    client.logger.debug(`Guld size updated to ${guildSize} on TOP.GG`);
+
+    this.dbl.on("error", e => {
+      client.logger.error(`Error occurred while trying to update the server amount on top.gg! ${e}`);
+      console.error(e);
+    });
+  };
+
 
   /* MISCELANEOUS NON-CRITICAL FUNCTIONS */
 
@@ -186,10 +215,6 @@ module.exports = (client) => {
     }
   });
 
-
-
-
-
   // `await client.wait(1000);` to "pause" for 1 second.
   client.wait = require("util").promisify(setTimeout);
 
@@ -207,5 +232,4 @@ module.exports = (client) => {
     client.logger.error(`Unhandled rejection: ${err}`);
     console.error(err);
   });
-
 };

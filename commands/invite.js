@@ -1,16 +1,16 @@
-exports.run = (client, message, args, level) => {
+exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
   message.channel.send({
     embed: {
-      color: 15448698,
+      color: 3447003,
       fields: [
         {
-          name: 'Bot Invite: ',
-					value: '[Click here](https://discordapp.com/oauth2/authorize?&client_id='+ client.user.id +'&scope=bot&permissions=805694544) to add the bot to your server.',
-          },
-        ],
-      },
-    })
-}
+          name: "Bot Invite: ",
+          value: "[Click here](https://discordapp.com/oauth2/authorize?&client_id="+ client.user.id +"&scope=bot&permissions=805694544) to add the bot to your server.",
+        },
+      ],
+    },
+  });
+};
 
 exports.conf = {
   enabled: true,
@@ -24,5 +24,5 @@ exports.help = {
   name: "invite",
   category: "Miscelaneous",
   description: "Outputs a bot invite link",
-  usage: "invite"
+  usage: "`invite`"
 };

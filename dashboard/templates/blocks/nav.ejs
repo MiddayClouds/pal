@@ -1,0 +1,44 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <ul class="navbar-nav mr-auto">
+      <a class="navbar-brand text-uppercase" style="margin-left: -90px;margin-right: 40px;" href="/">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@900&display=swap" rel="stylesheet">
+        <h4 style="font-family: 'Roboto', sans-serif;letter-spacing: 2px;"><strong><%= bot.user.username %></strong></h4>
+      </a>
+      <li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard <span class="badge badge-info">Beta</span></a></li>
+      <li class="nav-item"><a class="nav-link" href="/commands">Commands</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://discord.gg/szFy478">Support</a></li>
+    </ul>
+
+    <style media="screen">
+      .dropdown-menu {display: block;visibility: hidden;opacity:0;transform: translateY(0px);transition:.5s ease all;}
+      .dropdown-menu.show {display: block;visibility: visible;opacity:1;transform: translateY(0px);transition:.5s ease all;}
+    </style>
+
+    <div style="margin-right: -130px;" class="">
+      <% if(user) { %>
+        <li class="nav-link dropdown">
+          <a class="nav-item dropdown-toggle text-white unselectable" style="cursor: pointer;" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false" id="userDropdown" >
+            <img style="margin-right: 5px;" src="https://cdn.discordapp.com/avatars/<%= user.id %>/<%= user.avatar %>?size=32" width="25" height="25" class="d-inline-block align-middle rounded-circle" alt="Profile Picture">
+            <strong class="font-weight-bold"><%= user.username %></strong>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right fade" aria-labelledby="userDropdown">
+            <!-- <h6 class="dropdown-header"><i class="fas fa-user" aria-hidden="true"></i> <%= user.username %></h6> -->
+            <a class="dropdown-item" href="/dashboard">My servers <span class="badge badge-info">Beta</span></a>
+            <% if(bot.config.ownerID.includes(user.id)) { %>
+              <a class="dropdown-item" href="/admin">Admin Tool</a>
+            <% } %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item text-danger" href="/logout">Logout</a>
+          </div>
+        </li>
+      <% } else { %>
+        <li class="nav-link"><a href="/login" class="nav-item btn btn-info" style="padding-left:20px;padding-right:20px;">Login</a></li>
+      <% } %>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid" style="margin: 0;padding: 88px;padding-top: 15px;">
+
+  <!-- <script type="text/javascript">if ((window.location.pathname.includes("/dashboard"))) {$("#alert").removeClass('nodisplay');}</script> -->

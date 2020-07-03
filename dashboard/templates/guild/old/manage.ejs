@@ -1,0 +1,60 @@
+<!-- Include the Header -->
+<%- include('../blocks/header', {bot, user, path}) %>
+
+<!-- Beginning of container for page body -->
+<div class="card-deck">
+
+  <!-- Guild Card with info box -->
+  <div class="col-md-4">
+    <div class="card">
+      <%- include('../blocks/guild-card', {guild}) %>
+    </div>
+  </div>
+
+  <!-- Guild Settings box -->
+  <div class="col-md-8">
+    <div class="card">
+      <form method="post">
+        <div class="card-body">
+          <div class="table-responsive-md">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Setting Name</th>
+                  <th scope="col">Current Setting</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% const settings = bot.getSettings(guild);
+                const defaults = bot.config.defaultSettings;
+                for (const key in settings) { %>
+                <tr>
+                  <th scope="row" class="align-middle"><%= key %></th>
+                  <td width="80%"><input type="text" class="form-control form-control-sm" style="text-align: left;" name="<%= key %>" id="<%= key %>" value="<%= settings[key] %>" placeholder="Enter <%= key %>"></td>
+                </tr>
+                <% } %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary btn-block">Save Changes <i class="fa fa-fw fa-save" aria-hidden="true"></i></button>
+          <a class="btn btn-danger btn-block" data-toggle="modal" data-target="#settingsResetModal" role="button">Reset Defaults <i class="fa fa-fw fa-cogs" aria-hidden="true"></i></a>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+</div>
+
+<!-- Include the modals so they actually work -->
+<%- include('../blocks/guild-modals') %>
+
+<!-- Used for the date desplayed for when the guild was made -->
+<script type="text/javascript">
+  var ts = parseInt($('#guildCreate').text());
+  $('#guildCreate').html(`${moment(ts).format('MMMM Do YYYY')}`);
+</script>
+
+<!-- Include the Footer -->
+<%- include('../blocks/footer') %>

@@ -1,0 +1,68 @@
+<%- include('blocks/header', {bot, user, path}) %>
+<title>Dashboard | <%= bot.user.username %></title>
+
+<div style="margin-right: 150px;margin-left: 150px;" id="alert" class="alert alert-warning" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button><span><strong>Warning!</strong>&nbsp;This dashboard is currently in it's Alpha stage and is not fully finctional as of yet. Please report any bugs to the Midday discord server.</span></div>
+<div class="card shadow" style="margin-right: 150px;margin-left: 150px;">
+    <div class="card-header py-3">
+        <p class="text-center text-white m-0 font-weight-bold"><strong>PLEASE SELECT A SERVER</strong></p>
+    </div>
+    <div class="card-body">
+      <div class="d-xl-flex justify-content-xl-center">
+        <div class="table-responsive table-borderless">
+          <table class="table table-bordered table-hover">
+            <tbody>
+              <% user.guilds.forEach(guild => {
+                    const permsOnGuild = new perms(guild.permissions);
+                    if(!permsOnGuild.has("MANAGE_GUILD")) return;
+              %>
+
+
+                  <tr>
+
+                      <td>
+                        <% if (guild.icon) { %>
+                          <img class="rounded-circle" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=128` %>" style="width: 45px;margin-right: 15px;">
+                        <% } else { %>
+                          <canvas style="background-color: #7289da;margin-right: 15px;width: 45px;height: 45px;vertical-align: middle;" class="rounded-circle" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="45px" height="45px"></canvas>
+                          <script>
+                            function draw() {
+                              const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+                              ctx.font = '15px Arial';
+                              ctx.textAlign = "center";
+                              ctx.fillStyle = "white";
+                              ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 22.5, 28.5);
+                            };
+                            draw();
+                          </script>
+                        <% } %>
+                        <strong>&nbsp;<%= guild.name %></strong>
+                      </td>
+                      <%
+                        let href, text;
+                        let enabled;
+                        if(bot.guilds.cache.get(guild.id)) {
+                          href = `/dashboard/${guild.id}/manage`;
+                          text = "Go to Dashboard";
+                          enabled = true;
+                          btnClass = "btn btn-success"
+                        } else {
+                          href = `https://discordapp.com/oauth2/authorize?client_id=${bot.application.id}&scope=bot&permissions=1007021143&guild_id=${guild.id}&response_type=code&redirect_uri=${encodeURIComponent(bot.config.dashboard.callbackURL)}`;
+                          text = "Set Up Pal";
+                          enabled = bot.application.botPublic;
+                          btnClass = "btn btn-secondary"
+                        }
+                      %>
+                      <td class="d-xl-flex justify-content-xl-end">
+                        <a class="btn <%= btnClass %><% if(!enabled) { %> disabled<% } %> float-right" role="button" href=" <%= href %> "><%= text %></a>
+                      </td>
+                    </tr>
+
+
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+<%- include('./blocks/footer') %>

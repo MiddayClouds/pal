@@ -1,0 +1,68 @@
+<div>
+  <% if (guild.icon) { %>
+    <img class="rounded" src="<%= `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}.png?size=256` %>">
+  <% } else { %>
+    <canvas style="background-color: #7289da" class="rounded" id="<%= guild.name.split(' ').join('').replace(`'`, ``) %>" width="256px" height="256px"></canvas>
+    <script>
+      function draw() {
+        const ctx = document.getElementById("<%= guild.name.split(' ').join('').replace(`'`, ``) %>").getContext('2d');
+        ctx.font = '70px Arial';
+        ctx.textAlign = "center";
+        ctx.fillStyle = "white";
+        ctx.fillText("<%= guild.name.split(' ').map(v => v[0]).join('') %>", 128, 153);
+      };
+      draw();
+    </script>
+  <% } %>
+
+
+</div>
+<div>
+    <div class="table-responsive table-borderless">
+        <table class="table table-bordered table-sm">
+            <thead>
+                <tr class="text-center d-table-row">
+                    <th class="text-center"></th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+              <tr>
+                <!-- <h5 class="card-title"><center><%= guild.name %></center></h5> -->
+              </tr>
+                <tr>
+
+                    <td class="text-left">Date Created:<br></td>
+                    <td><span id="guildCreate"><%= guild.createdTimestamp %></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Region:<br></td>
+                    <td><span class="badge badge-info text-capitalize"><%= `${guild.region}` %></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Members:<br></td>
+                    <td><span class="badge badge-info"><%= `${guild.memberCount}` %></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Bots:<br></td>
+                    <td><span class="badge badge-info"><%= `${guild.members.cache.filter(m => m.user.bot).size}` %></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Text Channels:<br></td>
+                    <td><span class="badge badge-info"><%= `${guild.channels.cache.filter(c => c.type === 'text').size}`%></span></td>
+                </tr>
+                <tr>
+                    <td class="text-left">Voice Channels:<br></td>
+                    <td><span class="badge badge-info"><%= `${guild.channels.cache.filter(c => c.type === 'voice').size}`%></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Used for the date desplayed for when the guild was made -->
+<script type="text/javascript">
+  var ts = parseInt($('#guildCreate').text());
+  $('#guildCreate').html(`${moment(ts).format('MMMM Do YYYY')}`);
+</script>
