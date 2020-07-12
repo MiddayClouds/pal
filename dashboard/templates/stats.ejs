@@ -1,12 +1,70 @@
 <%- include('blocks/header', {bot, user, path}) %>
-<title>Dashboard | <%= bot.user.username %></title>
-<div class="jumbotron">
+<title>About Us | <%= bot.user.username %></title>
+<script>
+  const copyToClipboard = str => {
+    const el = document.createElement('textarea');
+    el.value = str;
+    el.setAttribute('readonly', '');
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    document.body.appendChild(el);
+    const selected =
+      document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    if (selected) {
+      document.getSelection().removeAllRanges();
+      document.getSelection().addRange(selected);
+    }
+  };
+</script>
+
+<div class="row">
+  <div class="col-lg-7 col-xl-8">
+    <div class="card shadow mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h6 class="text-white font-weight-bold m-0">Contributors</h6>
+      </div>
+      <!-- Member #1 -->
+      <div class="card-body">
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <div class="image-flip" >
+            <div class="mainflip flip-0">
+              <div class="frontside">
+                <div class="card bg-secondary text-white">
+                  <div class="card-body text-center">
+                    <p><img class="rounded-circle img-fluid" src="https://images-ext-1.discordapp.net/external/g_Hk9XQMgU8SJfcZbshvgeFousnlfCuFcEOSTFz0o48/https/cdn.discordapp.com/avatars/134919543691804672/a_0e367d8c237e0cba7bcf8c4f5674a2ce.webp" alt="card image"></p>
+                    <h4 class="card-title">Biagio</h4>
+                    <p class="card-text">Main Developer behind Pal.</p>
+                    <button id="discord" onclick="copyToClipboard('Biagio#5555');$('#discord').tooltip(options)" data-toggle="tooltip" data-placement="bottom" title="Tooltip on top" class="btn btn-primary btn-sm"><i class="fab fa-discord"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- END Member #1 -->
+        <!-- Member #2 -->
+
+        <!-- END Member #2 -->
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-lg-5 col-xl-4">
+    <div class="card shadow mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h6 class="text-white font-weight-bold m-0">Statistics</h6>
+      </div>
+      <div class="card-body">
         <div class="row justify-content-md-center">
           <div class="col-5 text-nowrap"><i class="fa fa-fw fa-server" aria-hidden="true"></i> Servers:</div>
           <div class="col-5 text-nowrap"><strong><%= stats.servers %></strong></div>
         </div>
         <div class="row justify-content-md-center">
-          <div class="col-5 text-nowrap"><i class="fa fa-fw fa-clock-o" aria-hidden="true"></i> Uptime:</div>
+          <div class="col-5 text-nowrap"><i class="fas fa-fw fa-clock" aria-hidden="true"></i> Uptime:</div>
           <div class="col-5 text-nowrap"><strong><%= stats.uptime %></strong></div>
         </div>
         <div class="row justify-content-md-center">
@@ -33,5 +91,10 @@
           <div class="col-5 text-nowrap"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> Node.js Version:</div>
           <div class="col-5 text-nowrap"><strong><%= stats.nVersion %></strong></div>
         </div>
+      </div>
     </div>
-    <%- include('./blocks/footer') %>
+
+  </div>
+</div>
+
+<%- include('./blocks/footer') %>

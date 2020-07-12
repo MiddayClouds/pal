@@ -253,40 +253,34 @@ module.exports = (client) => {
     return res.redirect(`/dashboard/${req.params.guildID}/manage`);
   });
 
-  // function checkPerms(userPerms,adminSession, res) {
-  //   console.log("USER"+userPerms);
-  //   console.log("ADMIN SESH?"+adminSession);
-  //   if (!userPerms && !adminSession) return res.redirect("/");
-  // }
-  //
-  //
-  // function hasPerm(guild, id) {
-  //   let isManaged;
-  //   guild.members.fetch(id).then((member) => {
-  //     if (member.hasPermission("MANAGE_GUILD") === false ) {isManaged = false;}
-  //     //const isManaged = member.hasPermission("MANAGE_GUILD");
-  //     console.log(isManaged);
-  //   });
-  //   //return isManaged;
-  // }
 
 
-  // YOU
-  // WERE
-  // HERE
-  // IDIOT
-
+  // Check perms thing
+  function checkPerms(guild, req, res) {
+    guild.members.fetch(req.user.id).then(member => {
+      if (member.hasPermission("MANAGE_GUILD") === true) {
+        return renderTemplate(res, req, "guild/manage.ejs", {guild});
+      } else {
+        if (req.session.isAdmin === false) {
+          return res.redirect("/");
+        } else if (req.session.isAdmin === true) {
+          return renderTemplate(res, req, "guild/manage.ejs", {guild});
+        }
+        return res.redirect("/");
+      }
+    });
+  }
 
   // Settings page to change the guild configuration. Definitely more fancy than using
   // the `set` command!
   app.get("/dashboard/:guildID/manage", checkAuth, (req, res) => {
     const guild = client.guilds.cache.get(req.params.guildID);
-    // const guild = client.guilds.resolve(req.params.guildID);
     if (!guild) return res.status(404);
-    // const isManaged = guild.members.fetch(req.user.id).then(member => member.hasPermission("MANAGE_GUILD"));
-    const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) return res.redirect("/");
-    renderTemplate(res, req, "guild/manage.ejs", {guild});
+    checkPerms(guild, req, res);
+    // OLD WAY FOR BACKUP
+    //const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
+    // if (isManaged === false && !req.session.isAdmin) return res.redirect("/");
+    //renderTemplate(res, req, "guild/manage.ejs", {guild});
   });
 
   // When a setting is changed, a POST occurs and this code runs
@@ -295,11 +289,27 @@ module.exports = (client) => {
     const guild = client.guilds.cache.get(req.params.guildID);
     // const guild = client.guilds.resolve(req.params.guildID);
     if (!guild) return res.status(404);
+    guild.members.fetch(req.user.id).then(member => {
+      if (member.hasPermission("MANAGE_GUILD") === true) {
+        client.writeSettings(guild.id, req.body);
+        res.redirect("/dashboard/"+req.params.guildID+"/manage");
+      } else {
+        if (req.session.isAdmin === false) {
+          return res.redirect("/");
+        } else if (req.session.isAdmin === true) {
+          client.writeSettings(guild.id, req.body);
+          res.redirect("/dashboard/"+req.params.guildID+"/manage");
+        }
+        return res.redirect("/");
+      }
+    });
+
+    // Old way as backup
     // const isManaged = guild.members.fetch(req.user.id).then(member => member.hasPermission("MANAGE_GUILD"));
-    const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) return res.redirect("/");
-    client.writeSettings(guild.id, req.body);
-    res.redirect("/dashboard/"+req.params.guildID+"/manage");
+    // const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
+    // if (!isManaged && !req.session.isAdmin) return res.redirect("/");
+    // client.writeSettings(guild.id, req.body);
+    // res.redirect("/dashboard/"+req.params.guildID+"/manage");
   });
 
   // Displays the list of members on the guild (paginated).
@@ -379,26 +389,59 @@ module.exports = (client) => {
   // Leaves the guild (this is triggered from the manage page, and only
   // from the modal dialog)
   app.get("/dashboard/:guildID/leave", checkAuth, async (req, res) => {
-    // const guild = client.guilds.cache.get(req.params.guildID);
-    const guild = client.guilds.resolve(req.params.guildID);
+    const guild = client.guilds.cache.get(req.params.guildID);
     if (!guild) return res.status(404);
-    const isManaged = guild.members.fetch(req.user.id).then(member => member.hasPermission("MANAGE_GUILD"));
-    // const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) res.redirect("/");
-    await guild.leave();
-    res.redirect("/dashboard");
+
+    guild.members.fetch(req.user.id).then(member => {
+      if (member.hasPermission("MANAGE_GUILD") === true) {
+        // await guild.leave();
+        guild.leave();
+        res.redirect("/dashboard");
+      } else {
+        if (req.session.isAdmin === false) {
+          return res.redirect("/");
+        } else if (req.session.isAdmin === true) {
+          // await guild.leave();
+          guild.leave();
+          res.redirect("/dashboard");
+        }
+        return res.redirect("/");
+      }
+    });
+
+
+    // OLD WAY
+    // const isManaged = guild.members.fetch(req.user.id).then(member => member.hasPermission("MANAGE_GUILD"));
+    // // const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
+    // if (!isManaged && !req.session.isAdmin) res.redirect("/");
+    // await guild.leave();
+    // res.redirect("/dashboard");
   });
 
   // Resets the guild's settings to the defaults, by simply deleting them.
   app.get("/dashboard/:guildID/reset", checkAuth, async (req, res) => {
-    // const guild = client.guilds.cache.get(req.params.guildID);
-    const guild = client.guilds.resolve(req.params.guildID);
+    const guild = client.guilds.cache.get(req.params.guildID);
     if (!guild) return res.status(404);
-    const isManaged = guild.members.fetch(req.user.id).then(member => member.hasPermission("MANAGE_GUILD"));
-    // const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
-    if (!isManaged && !req.session.isAdmin) res.redirect("/");
-    client.settings.delete(guild.id);
-    res.redirect("/dashboard/"+req.params.guildID);
+
+    guild.members.fetch(req.user.id).then(member => {
+      if (member.hasPermission("MANAGE_GUILD") === true) {
+        client.settings.delete(guild.id);
+        return res.redirect("/dashboard/"+req.params.guildID);
+      } else {
+        if (req.session.isAdmin === false) {
+          return res.redirect("/");
+        } else if (req.session.isAdmin === true) {
+          client.settings.delete(guild.id);
+          return res.redirect("/dashboard/"+req.params.guildID);
+        }
+        return res.redirect("/");
+      }
+    });
+    // const isManaged = guild.members.fetch(req.user.id).then(member => member.hasPermission("MANAGE_GUILD"));
+    // // const isManaged = guild && !!guild.member(req.user.id) ? guild.member(req.user.id).permissions.has("MANAGE_GUILD") : false;
+    // if (!isManaged && !req.session.isAdmin) res.redirect("/");
+    // client.settings.delete(guild.id);
+    // res.redirect("/dashboard/"+req.params.guildID);
   });
 
   client.site = app.listen(client.config.dashboard.port);
