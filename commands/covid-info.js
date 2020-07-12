@@ -3,7 +3,7 @@ exports.run = async (client, message, args, level) => { // eslint-disable-line n
   const api = require("novelcovid");
   // Define the embed.
   const countryInfo = new Discord.MessageEmbed();
-  console.log(args);
+  //console.log(args);
 
   // If no specific country is called, show global stats.
   if (!args[0]) {
