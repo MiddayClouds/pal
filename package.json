@@ -28,20 +28,20 @@
   },
   "homepage": "https://github.com/MiddayClouds/pal#readme",
   "dependencies": {
-    "@octokit/rest": "^18.0.0",
+    "@octokit/rest": "^18.0.12",
     "better-sqlite3": "^7.1.0",
     "chalk": "^4.1.0",
-    "chrono-node": "^2.0.2",
-    "dblapi.js": "^2.4.0",
-    "discord.js": "^12.2.0",
-    "enmap": "^5.3.2",
-    "eslint": "^7.4.0",
-    "got": "^11.5.0",
-    "inquirer": "^7.3.1",
-    "moment": "^2.27.0",
+    "chrono-node": "^2.1.10",
+    "dblapi.js": "^2.4.1",
+    "discord.js": "^12.5.1",
+    "enmap": "^5.8.2",
+    "eslint": "^7.16.0",
+    "got": "^11.8.1",
+    "inquirer": "^7.3.3",
+    "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "novelcovid": "^3.0.0",
     "request": "^2.88.2",
-    "steamapi": "^2.1.1"
+    "steamapi": "^2.1.2"
   }
 }
