@@ -1,23 +1,8 @@
 <%- include('blocks/header', {bot, user, path}) %>
 <title>About Us | <%= bot.user.username %></title>
-<script>
-  const copyToClipboard = str => {
-    const el = document.createElement('textarea');
-    el.value = str;
-    el.setAttribute('readonly', '');
-    el.style.position = 'absolute';
-    el.style.left = '-9999px';
-    document.body.appendChild(el);
-    const selected =
-      document.getSelection().rangeCount > 0 ? document.getSelection().getRangeAt(0) : false;
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    if (selected) {
-      document.getSelection().removeAllRanges();
-      document.getSelection().addRange(selected);
-    }
-  };
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+<script type="text/javascript">
+  new ClipboardJS('.btn');
 </script>
 
 <div class="row">
@@ -36,8 +21,15 @@
                   <div class="card-body text-center">
                     <p><img class="rounded-circle img-fluid" src="https://images-ext-1.discordapp.net/external/g_Hk9XQMgU8SJfcZbshvgeFousnlfCuFcEOSTFz0o48/https/cdn.discordapp.com/avatars/134919543691804672/a_0e367d8c237e0cba7bcf8c4f5674a2ce.webp" alt="card image"></p>
                     <h4 class="card-title">Biagio</h4>
-                    <p class="card-text">Main Developer behind Pal.</p>
-                    <button id="discord" onclick="copyToClipboard('Biagio#5555');$('#discord').tooltip(options)" data-toggle="tooltip" data-placement="bottom" title="Tooltip on top" class="btn btn-primary btn-sm"><i class="fab fa-discord"></i></button>
+                    <p class="card-text">Developer</p>
+                    <!-- Trigger -->
+                    <button class="btn btn-primary btn-sm" data-clipboard-text="Biagio#0882">
+                      <i class="fab fa-discord"></i>
+                    </button>
+                    <a class="btn btn-primary btn-sm" href="https://twitter.com/biagiosantori">
+                      <i class="fab fa-twitter-square"></i>
+                    </a>
+                    <!-- <button id="copy-button" onclick="" data-toggle="tooltip" data-placement="bottom" title="Tooltip on top" class="btn btn-primary btn-sm"><i class="fab fa-discord"></i></button> -->
                   </div>
                 </div>
               </div>
@@ -46,7 +38,28 @@
         </div>
         <!-- END Member #1 -->
         <!-- Member #2 -->
-
+        <div class="col-xs-12 col-sm-6 col-md-4">
+          <div class="image-flip">
+            <div class="mainflip flip-0">
+              <div class="frontside">
+                <div class="card bg-secondary text-white">
+                  <div class="card-body text-center">
+                    <p><img class="rounded-circle img-fluid" src="https://cdn.discordapp.com/avatars/140806844053454848/8c555cb555ed21d026cafa23f40d2edd.png" alt="card image"></p>
+                    <h4 class="card-title">Ben</h4>
+                    <p class="card-text">Developer</p>
+                    <!-- Trigger -->
+                    <button class="btn btn-primary btn-sm" data-clipboard-text="benno#8751">
+                      <i class="fab fa-discord"></i>
+                    </button>
+                    <a class="btn btn-primary btn-sm" href="https://twitter.com/BenMillsCo">
+                      <i class="fab fa-twitter-square"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- END Member #2 -->
       </div>
     </div>
