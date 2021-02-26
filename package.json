@@ -37,7 +37,7 @@
     "enmap": "^5.8.2",
     "eslint": "^7.16.0",
     "got": "^11.8.1",
-    "inquirer": "^7.3.3",
+    "inquirer": "^8.0.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "novelcovid": "^3.0.0",
