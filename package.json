@@ -30,7 +30,7 @@
   "dependencies": {
     "@octokit/rest": "^18.5.3",
     "better-sqlite3": "^7.1.0",
-    "chalk": "^4.1.1",
+    "chalk": "^5.0.0",
     "chrono-node": "^2.2.6",
     "dblapi.js": "^2.4.1",
     "discord.js": "^12.5.3",
