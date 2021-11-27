@@ -1,6 +1,6 @@
 {
   "name": "pal",
-  "version": "2.6.0",
+  "version": "2.9.0",
   "description": "Pal is a fun discord bot with many different commands.",
   "main": "bot.js",
   "keywords": [
