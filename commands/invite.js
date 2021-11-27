@@ -5,7 +5,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
       fields: [
         {
           name: "Bot Invite: ",
-          value: "[Click here](https://discordapp.com/oauth2/authorize?&client_id="+ client.user.id +"&scope=bot&permissions=805694544) to add the bot to your server.",
+          value: "[Clock here](https://discord.com/oauth2/authorize?client_id="+ client.user.id +"&scope=bot%20applications.commands&permissions=805694544) to add the bot to your server.",
         },
       ],
     },
