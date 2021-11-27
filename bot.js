@@ -18,7 +18,6 @@ const Enmap = require("enmap");
 
 // Defining the client.
 const client = new Client({ ws: { intents: botIntents } });
-//ONLYUSEWHENNEEDEDINDEBUGPLS const client = new Client()
 
 // Here we load the config file that contains our token and our prefix values
 client.config = require("./config.js");
