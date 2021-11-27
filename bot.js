@@ -1,23 +1,25 @@
 // This is just a failsafe that checks that the node version isnt the problem
-if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 12.0.0 or higher is required. Update Node on your system.");
+if (Number(process.version.slice(1).split(".")[0]) < 12)
+  throw new Error(
+      "Node 12.0.0 or higher is required. Update Node on your system.");
 
 // Load up the discord.js library
 const Discord = require("discord.js");
 
 // Load up the API permissions the bot needs
-const { Client, Intents } = require("discord.js");
+const {Client, Intents} = require("discord.js");
 
 // Save the API permissions the bot needs
 const botIntents = new Intents(Intents.NON_PRIVILEGED);
-botIntents.remove(["GUILD_PRESENCES"]);
+botIntents.remove([ "GUILD_PRESENCES" ]);
 
 // Load other modules that are needed
-const { promisify } = require("util");
+const {promisify} = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
 // Defining the client.
-const client = new Client({ ws: { intents: botIntents } });
+const client = new Client({ws : {intents : botIntents}});
 
 // Here we load the config file that contains our token and our prefix values
 client.config = require("./config.js");
@@ -37,13 +39,14 @@ client.cooldowns = new Discord.Collection();
 client.commands = new Enmap();
 client.aliases = new Enmap();
 
-// Now we integrate the use of Evie's awesome EnMap module, which essentially saves a collection to disk
-client.settings = new Enmap({name: "settings"});
+// Now we integrate the use of Evie's awesome EnMap module, which essentially
+// saves a collection to disk
+client.settings = new Enmap({name : "settings"});
 
 // Create the "initializer" for the bot
 const init = async () => {
-
-  // Here we load the commands into memory, as a collection, so they're accessible everywhere
+  // Here we load the commands into memory, as a collection, so they're
+  // accessible everywhere
   const cmdFiles = await readdir("./commands/");
 
   // Log the loading of commands.
@@ -54,10 +57,12 @@ const init = async () => {
   // Complete the following actions for every file in commands folder
   cmdFiles.forEach(f => {
     // Check if it ends with .js otherwise ignore it
-    if (!f.endsWith(".js")) return;
+    if (!f.endsWith(".js"))
+      return;
     // Actually load the command
-    const response = client.loadCommand(f,loadedCommands);
-    if (response) console.log(response);
+    const response = client.loadCommand(f, loadedCommands);
+    if (response)
+      console.log(response);
   });
 
   client.logger.log(`Commands Loaded: ${loadedCommands}`);
@@ -77,7 +82,8 @@ const init = async () => {
     loadedEvents.push(` ${eventName}`);
     // Require the event
     const event = require(`./events/${file}`);
-    // Bind the client to any event, before the existing arguments provided by the discord.js event.
+    // Bind the client to any event, before the existing arguments provided by
+    // the discord.js event.
     client.on(eventName, event.bind(null, client));
   });
 
@@ -93,7 +99,6 @@ const init = async () => {
 
   // Here we login the client.
   client.login(client.config.token);
-
 };
 
 // Start the bot.
