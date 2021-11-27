@@ -45,7 +45,7 @@ This project is [MIT](https://github.com/MiddayClouds/pal/blob/master/LICENSE) l
 
 **Midday (Biagio Santoro, Ben Mills)**
 
-* Website: [@Biagio](biagios.github.io) | [@Ben](benmills-co.github.io)
+* Website: [@Biagio](https://biagios.github.io) | [@Ben](https://benmills-co.github.io)
 * Twitter: [@Biagio](https://twitter.com/biagiosantori) | [@Ben](https://twitter.com/BenMillsco)
 * Github: [@Midday](https://github.com/MiddayClouds) | [@Biagio](https://github.com/biagios) | [@Ben](https://github.com/benmills-co)
 
