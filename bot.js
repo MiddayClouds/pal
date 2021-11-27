@@ -1,25 +1,26 @@
 // This is just a failsafe that checks that the node version isnt the problem
 if (Number(process.version.slice(1).split(".")[0]) < 12)
   throw new Error(
-      "Node 12.0.0 or higher is required. Update Node on your system.");
+    "Node 12.0.0 or higher is required. Update Node on your system."
+  );
 
 // Load up the discord.js library
 const Discord = require("discord.js");
 
 // Load up the API permissions the bot needs
-const {Client, Intents} = require("discord.js");
+const { Client, Intents } = require("discord.js");
 
 // Save the API permissions the bot needs
 const botIntents = new Intents(Intents.NON_PRIVILEGED);
-botIntents.remove([ "GUILD_PRESENCES" ]);
+botIntents.remove(["GUILD_PRESENCES"]);
 
 // Load other modules that are needed
-const {promisify} = require("util");
+const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const Enmap = require("enmap");
 
 // Defining the client.
-const client = new Client({ws : {intents : botIntents}});
+const client = new Client({ ws: { intents: botIntents } });
 
 // Here we load the config file that contains our token and our prefix values
 client.config = require("./config.js");
@@ -41,7 +42,7 @@ client.aliases = new Enmap();
 
 // Now we integrate the use of Evie's awesome EnMap module, which essentially
 // saves a collection to disk
-client.settings = new Enmap({name : "settings"});
+client.settings = new Enmap({ name: "settings" });
 
 // Create the "initializer" for the bot
 const init = async () => {
@@ -55,14 +56,12 @@ const init = async () => {
   const loadedCommands = [];
 
   // Complete the following actions for every file in commands folder
-  cmdFiles.forEach(f => {
+  cmdFiles.forEach((f) => {
     // Check if it ends with .js otherwise ignore it
-    if (!f.endsWith(".js"))
-      return;
+    if (!f.endsWith(".js")) return;
     // Actually load the command
     const response = client.loadCommand(f, loadedCommands);
-    if (response)
-      console.log(response);
+    if (response) console.log(response);
   });
 
   client.logger.log(`Commands Loaded: ${loadedCommands}`);
@@ -76,7 +75,7 @@ const init = async () => {
   const loadedEvents = [];
 
   // Complete the following for each event
-  evtFiles.forEach(file => {
+  evtFiles.forEach((file) => {
     // Define the name
     const eventName = file.split(".")[0];
     loadedEvents.push(` ${eventName}`);
