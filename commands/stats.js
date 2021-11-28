@@ -1,15 +1,13 @@
 const Discord = require("discord.js");
 const { version } = require("discord.js");
 const { Octokit } = require("@octokit/rest");
-//const package = require("./../package.json");
-const { Timestamp } = require("@sapphire/time-utilities");
+const { DurationFormatter } = require("@sapphire/time-utilities");
+const durationFormatter = new DurationFormatter();
 
 exports.run = (client, message, args, level) => { // eslint-disable-line no-unused-vars
   const octokit = new Octokit();
-  const timestap = new Timestamp("YYYY-MM-DD HH:mm:ss (Z)")
-
-  //const duration = Timestamp.duration(client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
   const botInfo = new Discord.MessageEmbed();
+  const duration = durationFormatter.format(client.uptime);
   octokit.pulls.list({
     owner: "MiddayClouds",
     repo: "pal",
@@ -29,7 +27,7 @@ exports.run = (client, message, args, level) => { // eslint-disable-line no-unus
     botInfo.addField("Node Version:", process.version, true);
     botInfo.addField("\u200B", "\u200B", false);
     botInfo.addField("Memory Usage:", (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2) + "MB", true);
-    //botInfo.addField("Uptime since restart:", duration, true);
+    botInfo.addField("Uptime since restart:", duration, true);
     message.channel.send(botInfo);
   });
 };
