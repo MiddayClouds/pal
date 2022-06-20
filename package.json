@@ -35,7 +35,7 @@
     "chrono-node": "^2.2.6",
     "dblapi.js": "^2.4.1",
     "enmap": "^5.8.5",
-    "eslint": "8.3.0",
+    "eslint": "8.18.0",
     "got": "^11.8.2",
     "inquirer": "^8.0.0",
     "novelcovid": "^3.0.0",
